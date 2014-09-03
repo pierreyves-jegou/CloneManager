@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:context="http://www.springframework.org/schema/context"
+ xmlns:aop="http://www.springframework.org/schema/aop"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+ http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+    
+        
+    <context:annotation-config />
+    <context:component-scan base-package="caillou.company.clonemanager.gui.customComponent.**" />
+    <context:component-scan base-package="caillou.company.clonemanager.gui.service.impl.**" />
+    <context:component-scan base-package="caillou.company.clonemanager.gui.service.task.impl.**" />
+    <context:component-scan base-package="caillou.company.clonemanager.gui.handler.**" />
+    <context:component-scan base-package="caillou.company.clonemanager.background.util.impl"/>
+    
+    <aop:aspectj-autoproxy />
+    
+    <bean id="statisticToCompute" class="caillou.company.clonemanager.gui.customComponent.statistic.StatisticToCompute"/>
+    
+    <bean class="caillou.company.clonemanager.gui.customComponent.statistic.StatisticAdvice" factory-method="aspectOf">
+        <property name="statisticToCompute" ref="statisticToCompute" />        
+    </bean>
+    
+    <!--   <bean id="critereControllerId" class="fileOrganizer.customComponents.criteres.CritereController" >
+       
+   </bean>
+    
+   <bean id="locationControllerId" class="fileOrganizer.customComponents.location.LocationController" scope="prototype">
+       
+   </bean>
+
+   <bean id="locationContainerControllerId" class="fileOrganizer.customComponents.locationContainer.LocationContainerController" >
+       
+   </bean>
+
+   <bean id="resultControllerId" class="fileOrganizer.customComponents.results.ResultController" >
+       
+   </bean>
+
+   <bean id="searchControllerId" class="fileOrganizer.customComponents.search.SearchController" >
+       <property name="resultController" ref="resultControllerId"/>
+   </bean>
+   
+   <bean id="taskChoiceControllerId" class="fileOrganizer.customComponents.taskchoice.TaskChoiceController" >
+       
+    </bean>-->
+
+</beans>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import fileOrganizer.customComponents.results.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox id="mainPanel" alignment="CENTER" spacing="15.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fileOrganizer.customComponents.results.ResultController">
+    <children>
+        <TitledPane>
+            <content>
+                <HBox fx:id="mainHbox" VBox.vgrow="ALWAYS">
+                    <children>
+                        <VBox spacing="15.0">
+                            <children>
+                                <HBox>
+                                    <children>
+                                        <CheckBox fx:id="hideSingleFileId" mnemonicParsing="false" selected="true" text="Masquer les fichiers seuls" />
+                                    </children>
+                                </HBox>
+                                <TableView fx:id="resultViewId" HBox.hgrow="ALWAYS">
+                                    <columns>
+                                        <TableColumn fx:id="columnFile" maxWidth="-1.0" minWidth="300" text="Fichier">
+                                            <cellValueFactory>
+                                                <PropertyValueFactory property="absolutePath" />
+                                            </cellValueFactory>
+                                        </TableColumn>
+                                        <TableColumn fx:id="columnGroup" maxWidth="-1.0" minWidth="100" text="Group">
+                                            <cellValueFactory>
+                                                <PropertyValueFactory property="group" />
+                                            </cellValueFactory>
+                                        </TableColumn>
+                                        <TableColumn id="md5PrintId" fx:id="md5PrintId" maxWidth="-1.0" minWidth="200.0" text="Empreinte MD5">
+                                            <cellValueFactory>
+                                                <PropertyValueFactory property="md5Print" />
+                                            </cellValueFactory>
+                                        </TableColumn>
+                                    </columns>
+                                    <sortOrder>
+                                        <fx:reference source="md5PrintId" />
+                                    </sortOrder>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                                </TableView>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+            </content>
+            <graphic>
+                <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="52.0" styleClass="myBoxHeader" stylesheets="@../../../styles/main.css">
+                    <children>
+                        <ImageView id="cartouche_emplacements48x48.png">
+                            <image>
+                                <Image url="@../../../img/cartouche_emplacements48x48.png" />
+                            </image>
+                            <HBox.margin>
+                                <Insets left="5.0" right="10.0" />
+                            </HBox.margin>
+                        </ImageView>
+                        <Label minWidth="231.0" styleClass="myBoxTitle" stylesheets="@../../../styles/main.css" text="Resultats" />
+                    </children>
+                </HBox>
+            </graphic>
+        </TitledPane>
+        <TitledPane animated="false">
+            <content>
+                <HBox spacing="15.0">
+                    <children>
+                        <HBox spacing="15.0">
+                            <children>
+                                <VBox alignment="CENTER" prefHeight="53.0" prefWidth="100.0" styleClass="informationBox" stylesheets="@../../../styles/main.css">
+                                    <children>
+                                        <StackPane>
+                                            <children>
+                                                <ImageView fitHeight="74.0" fitWidth="103.0" opacity="0.18" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../../../img/filesScanned.png" />
+                                                    </image>
+                                                </ImageView>
+                                                <Label fx:id="nbScannedFilesId" rotate="-41.6" styleClass="myLabel" text="88">
+                                                    <font>
+                                                        <Font size="32.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </StackPane>
+                                        <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
+                                            <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de fichiers scannés" />
+                                            </children>
+                                        </TextFlow>
+                                    </children>
+                                    <padding>
+                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                    </padding>
+                                </VBox>
+                                <VBox alignment="CENTER" prefHeight="53.0" prefWidth="100.0" styleClass="informationBox" stylesheets="@../../../styles/main.css">
+                                    <children>
+                                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                                            <children>
+                                                <ImageView fitHeight="74.0" fitWidth="103.0" opacity="0.18" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../../../img/wastedSpace.png" />
+                                                    </image>
+                                                </ImageView>
+                                                <Label fx:id="wastedSpaceId" rotate="-41.6" styleClass="myLabel" text="88">
+                                                    <font>
+                                                        <Font size="32.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </StackPane>
+                                        <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
+                                            <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Espace dupliqué" />
+                                            </children>
+                                        </TextFlow>
+                                    </children>
+                                    <padding>
+                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                    </padding>
+                                </VBox>
+                                <VBox alignment="CENTER" prefHeight="53.0" prefWidth="100.0" styleClass="informationBox" stylesheets="@../../../styles/main.css">
+                                    <children>
+                                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                                            <children>
+                                                <ImageView fitHeight="74.0" fitWidth="103.0" opacity="0.18" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../../../img/sheep-icon.png" />
+                                                    </image>
+                                                </ImageView>
+                                                <Label fx:id="nbDuplicateFilesId" rotate="-41.6" styleClass="myLabel" text="88">
+                                                    <font>
+                                                        <Font size="32.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </StackPane>
+                                        <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
+                                            <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de fichiers dupliqués " />
+                                            </children>
+                                        </TextFlow>
+                                    </children>
+                                    <padding>
+                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                    </padding>
+                                </VBox>
+                            </children>
+                        </HBox>
+                    </children>
+                </HBox>
+            </content>
+            <graphic>
+                <HBox alignment="CENTER_LEFT" prefHeight="52.0" styleClass="myBoxHeader">
+                    <children>
+                        <ImageView fitHeight="52.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../img/cartouche_emplacements48x48.png" />
+                            </image>
+                            <HBox.margin>
+                                <Insets left="5.0" right="10.0" />
+                            </HBox.margin>
+                        </ImageView>
+                        <Label styleClass="myBoxTitle" text="Informations" />
+                    </children>
+                </HBox>
+            </graphic>
+        </TitledPane>
+        <HBox alignment="CENTER_RIGHT">
+            <children>
+                <Button minHeight="27.0" minWidth="140.0" mnemonicParsing="false" onAction="#backAction" styleClass="backButton" text="Précédent" />
+            </children>
+        </HBox>
+    </children>
+    <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+    </padding>
+    <stylesheets>
+        <URL value="@../../../styles/main.css" />
+        <URL value="@../../../styles/results.css" />
+    </stylesheets>
+</VBox>

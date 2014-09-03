@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox id="MainPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="true" spacing="35.0" styleClass="essai" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caillou.company.clonemanager.gui.customComponent.taskchoice.TaskChoiceController">
+  <children>
+      <HBox styleClass="myBox" VBox.vgrow="NEVER">
+         <children>
+            <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="myBoxHeader">
+                     <children>
+                        <HBox>
+                           <children>
+                              <ImageView id="left_double64x64.png" fitHeight="48.0" fitWidth="44.0">
+                                 <image>
+                                    <Image preserveRatio="true" smooth="true" url="@/img/left_double64x64.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <Label prefWidth="387.0" styleClass="myBoxTitle" text="Fichiers identiques" textFill="#682929" />
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox spacing="10.0" styleClass="myBoxContent">
+                     <children>
+                        <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <TextFlow maxWidth="390.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Permet d'identifier tous les fichiers identiques entre deux répertoires ou deux volumes logiques (groupes) meme si les fichiers ne sont pas nommés de la meme manière." wrappingWidth="743.6279296875" />
+                                 </children>
+                              </TextFlow>
+                              <VBox alignment="BOTTOM_RIGHT">
+                                 <children>
+                                    <Button defaultButton="true" minHeight="25.0" minWidth="127.0" mnemonicParsing="false" onAction="#handleDoublons" styleClass="validerButton" text="Suivant" />
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox prefWidth="800.0" styleClass="myBox" VBox.vgrow="NEVER">
+         <children>
+            <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="myBoxHeader" VBox.vgrow="NEVER">
+                     <children>
+                        <HBox>
+                           <children>
+                              <ImageView id="missing48x48.png" fitHeight="37.0" fitWidth="44.0">
+                                 <image>
+                                    <Image preserveRatio="true" smooth="true" url="@/img/missing48x48.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <Label prefWidth="387.0" styleClass="myBoxTitle" text="Fichiers manquants" />
+                     </children>
+                  </HBox>
+                  <HBox VBox.vgrow="SOMETIMES">
+                     <children>
+                        <VBox fx:id="locationBox1" spacing="10.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <TextFlow maxWidth="390.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Permet d'identifier tous les fichiers manquants entre deux répertoires ou deux volumes logiques (groupes)." wrappingWidth="746.8779296875" />
+                                 </children>
+                              </TextFlow>
+                              <VBox alignment="BOTTOM_RIGHT">
+                                 <children>
+                                    <Button defaultButton="true" minHeight="25.0" minWidth="127.0" mnemonicParsing="false" onAction="#handleMissings" styleClass="validerButton" text="Suivant" />
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+  </children>
+  <padding>
+    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+  </padding>
+  <stylesheets>
+    <URL value="@/styles/main.css" />
+  </stylesheets>
+</VBox>

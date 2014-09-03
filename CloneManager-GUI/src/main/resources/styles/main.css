@@ -1,0 +1,171 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 14 mars 2014, 14:52:13
+    Author     : pc
+*/
+
+/*@font-face {
+    font-family: Spoutnik;
+    src: url('/fonts/Spoutnik.ttf');
+}
+
+@font-face {
+    font-family: "Assassin$";
+    src: url('/fonts/Assassin$.ttf');
+}
+
+@font-face {
+    font-family: "Fluid Christmas";
+    src: url('/fonts/FluidChristmas.ttf');
+}*/
+
+@font-face {
+    font-family: "Shoes center";
+    src: url('/fonts/Shoescenter.ttf');
+}
+
+
+
+.label {
+    -fx-text-fill: #333333;
+}
+
+.section{
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.error {
+    -fx-text-fill: red;
+}
+
+.warning {
+    -fx-text-fill: orange;
+}
+
+.buttonFileChooser {
+    -fx-background-color: transparent;
+    -fx-background-image: url("../img/selectDirectory48x48.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: cover, auto;
+}
+
+.buttonFileChooser:hover {
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,1) , 7, 0.0 , 0 , 1 );
+}
+
+.buttonFilter {
+    -fx-background-color: transparent;
+    -fx-background-image: url("../img/filter_data.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: cover, auto;
+}
+
+.buttonFilter:hover {
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,1) , 7, 0.0 , 0 , 1 );
+}
+
+
+.validerButton {
+    -fx-background-image: url('../img/Action-arrow-blue-double-right-icon.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 95%;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 30 0 0;
+}
+
+.backButton {
+    -fx-background-image: url('../img/Action-arrow-blue-double-left-icon.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 5%;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 0 30;
+}
+
+.standardButton {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+.myBox {
+    -fx-background-color: radial-gradient(center 50% -40%, radius 200%, rgb(255, 255, 255) 0%, rgb(211, 214, 219) 100%);
+    -fx-border-color: rgb(168, 184, 209);
+    -fx-border-width: 0px;
+    -fx-border-radius: 8 8 8 8;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,1) , 7, 0.0 , 0 , 1 );
+    -fx-padding: 10 10 10 10;
+    -fx-font-family: "Spoutnik,Helvetica,sans-serif";
+
+    -fx-background-image: url("../img/cartouche_bg4.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 100% 50%;
+    -fx-background-size: 500 200%;
+}
+
+.myBox:hover {
+    -fx-background-color: radial-gradient(center 50% -40%, radius 200%, rgb(255, 255, 255) 0%, rgb(161, 191, 230) 100%);
+}
+
+.myBoxTitle {
+    -fx-font-size: 25px;
+    -fx-text-fill: #333333;
+    -fx-font-family: "Shoes center";
+}
+
+.myBoxLittleTitle {
+    -fx-font-size: 13px;
+    -fx-text-fill: #333333;
+    -fx-font-family: "Shoes center";
+}
+
+.transitionBoxTitle {
+    -fx-font-size: 25px;
+    -fx-text-fill: #333333;
+    -fx-font-family: "Shoes center";
+}
+
+.myBoxContent {
+    -fx-font-size: 13px;
+}
+
+.myBoxFooter {
+    -fx-padding: 0 5 5 0;
+}
+
+.myButton{
+    -fx-background-color : transparent;
+    -fx-focus-color: transparent;
+}
+
+.myLink{
+    -fx-underline: false;
+}
+
+.myLink:visited{
+    -fx-text-fill:-fx-focus-color;
+    -fx-underline: false;
+}
+
+.informationBox {
+      -fx-border-width: 2px 0px 0px 0px;
+      -fx-padding: 20 0 20 0;
+      -fx-border-color: #89dffe;
+/*      -fx-border-radius: 8 8 8 8;*/
+      -fx-text-fill: #ea8284;
+      
+}
+
+.informationBox .myLabel {
+      -fx-font-size: 26px;
+      -fx-text-fill: #ea8284;
+}
+
+

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>com.mycompany</groupId>
+        <artifactId>CloneManager</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+
+    <groupId>caillou.company</groupId>
+    <artifactId>CloneManager-GUI</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <mainClass>caillou.company.clonemanager.gui.MainApp</mainClass>
+        <packageTargetDirectoryName>CloneManager</packageTargetDirectoryName>
+        
+        <org.controlsfx.version>8.0.6</org.controlsfx.version>
+        <com.mycompany.version>1.0-SNAPSHOT</com.mycompany.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>caillou.company</groupId>
+            <artifactId>CloneManager-Background</artifactId>
+            <version>${com.mycompany.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.controlsfx</groupId>
+            <artifactId>controlsfx</artifactId>
+            <version>${org.controlsfx.version}</version>
+        </dependency>
+    </dependencies>
+
+         <build>
+        <plugins>                    
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                   
+                    <!-- Test -->
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <excludeGroupIds>junit,org.mockito,org.hamcrest</excludeGroupIds>
+                            <outputDirectory>${project.build.directory}/${packageTargetDirectoryName}</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                        </configuration>
+                    </execution> 
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <id>unpack-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>${java.home}/../bin/javafxpackager</executable>
+                            <arguments>
+                                <argument>-createjar</argument>
+                                <argument>-nocss2bin</argument>
+                                <argument>-appclass</argument>
+                                <argument>${mainClass}</argument>
+                                <argument>-srcdir</argument>
+                                <argument>${project.build.directory}/classes</argument>
+                                <argument>-outdir</argument>
+                                <argument>${project.build.directory}/${packageTargetDirectoryName}</argument>
+                                <argument>-outfile</argument>
+                                <argument>${project.build.finalName}.jar</argument>
+                                <argument>-classpath</argument>
+                                <argument>CloneManager-Background-${com.mycompany.version}.jar aspectjrt-1.8.2.jar aspectjweaver-1.8.2.jar controlsfx-8.0.6.jar guava-14.0.1.jar junit-4.11.jar spring-beans-4.0.6.RELEASE.jar spring-context-4.0.6.RELEASE.jar spring-context-support-4.0.6.RELEASE.jar spring-core-4.0.6.RELEASE.jar aopalliance-1.0.jar commons-logging-1.1.3.jar hamcrest-core-1.3.jar spring-aop-4.0.6.RELEASE.jar spring-expression-4.0.6.RELEASE.jar</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>default-cli</id>
+                        <goals>
+                            <goal>exec</goal>                            
+                        </goals>
+                        <configuration>
+                            <executable>${java.home}/bin/java</executable>
+                            <commandlineArgs>${runfx.args}</commandlineArgs>
+                        </configuration>
+                    </execution>
+                </executions>  
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                    <debug>true</debug>                           
+                    <compilerArguments>
+                        <bootclasspath>${sun.boot.class.path}${path.separator}${java.home}/lib/jfxrt.jar</bootclasspath>
+                    </compilerArguments>
+                </configuration>  
+            </plugin>
+            
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>aspectj-maven-plugin</artifactId>
+                <version>1.7-SNAPSHOT</version>
+                <configuration>
+                    <complianceLevel>1.7</complianceLevel>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                    <bootclasspath>${sun.boot.class.path}${path.separator}${java.home}/lib/jfxrt.jar</bootclasspath>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>test-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                            <groupId>org.aspectj</groupId>
+                            <artifactId>aspectjweaver</artifactId>
+                            <version>1.8.2</version>
+                    </dependency>
+                    <dependency>
+                            <groupId>org.aspectj</groupId>
+                            <artifactId>aspectjtools</artifactId>
+                            <version>1.8.2</version>
+                    </dependency>
+                    <dependency>
+                            <groupId>org.codehaus.plexus</groupId>
+                            <artifactId>plexus-utils</artifactId>
+                            <version>3.0.17</version>
+                    </dependency>                    
+                </dependencies>  
+            </plugin>    
+            
+            <!--            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>default-cli</id>
+                                               <phase>package</phase>
+                        <configuration>
+                            
+                            <target>
+                                
+                                <ant target="-post-jar" antfile="build.xml" >  
+                                   <property name="main.class" value="${main.class}"/>
+                                    <property name="classes.dir" value="${classes.dir}"/>
+                                    <property name="application.vendor" value="${application.vendor}"/>
+                                    <property name="application.title" value="${application.title}"/>
+                                    <property name="build.classes.dir" value="${build.classes.dir}"/>
+                                    <property name="basedir" value="${basedir}"/>
+                                    <property name="dist.dir" value="${dist.dir}"/>
+                                </ant>
+                                <echoproperties/>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.16</version>
+                <configuration>
+                    <additionalClasspathElements>
+                        <additionalClasspathElement>${java.home}/lib/jfxrt.jar</additionalClasspathElement>
+                    </additionalClasspathElements>
+                </configuration>
+            </plugin>           
+        </plugins>
+    </build>
+
+
+</project>

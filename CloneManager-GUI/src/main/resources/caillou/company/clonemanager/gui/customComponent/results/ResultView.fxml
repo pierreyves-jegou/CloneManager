@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="576.0" prefWidth="812.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caillou.company.clonemanager.gui.customComponent.results.ResultController">
+    <children>
+        <VBox fx:id="mainPanelId" VBox.vgrow="ALWAYS">
+            <children>
+                <SplitPane fx:id="splittedPanelId" dividerPositions="0.2518518518518518" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" VBox.vgrow="ALWAYS">
+                    <items>
+                        <Accordion fx:id="accordionPaneId" prefWidth="200.0">
+                            <panes>
+                                <TitledPane fx:id="informationPaneId" expanded="true">
+                                    <graphic>
+                                        <Label styleClass="myBoxTitle" text="Informations" />
+                                    </graphic>
+                           <content>
+                              <VBox fx:id="staticContainer" prefHeight="200.0" prefWidth="100.0" spacing="10.0" />
+                           </content>
+                                </TitledPane>
+                                <TitledPane expanded="false">
+                                    <content>
+                              <VBox>
+                                 <children>
+                                    <HBox style="-fx-border-width: 0 0 0 0;" styleClass="informationBox">
+                                       <children>
+                                                      <CheckBox fx:id="hideSingleFileId" mnemonicParsing="false" selected="true" text="Masquer les fichiers sans doublons" />
+                                       </children>
+                                    </HBox>
+                                    <HBox spacing="10.0" styleClass="informationBox">
+                                       <children>
+                                                      <ComboBox fx:id="pathFilterTypeId">
+                                                          <items>
+                                                              <FXCollections fx:factory="observableArrayList">
+                                                                  <String fx:id="startWithValueId" fx:value="Start with" />
+                                                                  <String fx:id="containsValueId" fx:value="Contains" />
+                                                                  <String fx:id="endWithValueId" fx:value="End with" />
+                                                              </FXCollections>
+                                                          </items>
+                                                          <value>
+                                                              <fx:reference source="startWithValueId" />
+                                                          </value>
+                                                      </ComboBox>
+                                                      <TextField fx:id="filterTextFieldId" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                                    </content>
+                                    <graphic>
+                                        <Label styleClass="myBoxTitle" text="Filtres" />
+                                    </graphic>
+                                </TitledPane>
+                                <TitledPane expanded="false">
+                                    <graphic>
+                                        <Label styleClass="myBoxTitle" text="Actions" />
+                                    </graphic>
+                                    <content>
+                                        <VBox alignment="TOP_CENTER" spacing="10.0">
+                                            <children>
+                                                <VBox fx:id="deleteDoublonsActionBoxId">
+                                                    <children>
+                                                        <VBox style="-fx-border-width: 0px 0px 0px 0px;" styleClass="informationBox">
+                                                            <children>
+                                                                <HBox alignment="CENTER" prefHeight="4.0" prefWidth="260.0">
+                                                                    <children>
+                                                                        <Label styleClass="myBoxLittleTitle" text="Suppression de tous les doublons" />
+                                                                    </children>
+                                                                    <VBox.margin>
+                                                                        <Insets bottom="10.0" />
+                                                                    </VBox.margin>
+                                                                </HBox>
+                                                                <TextFlow prefHeight="63.0" prefWidth="260.0">
+                                                                    <children>
+                                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cette action effacera tous les fichiers en doublons tout en gardant une version originale. Les fichiers en doublons peuvent etre supprimés aléatoirement depuis le &quot;groupe 1&quot; ou le &quot;groupe 2&quot;." wrappingWidth="247.39990234375" />
+                                                                    </children>
+                                                                </TextFlow>
+                                                                <HBox alignment="BOTTOM_RIGHT" prefHeight="37.0" prefWidth="250.0">
+                                                                    <children>
+                                                                        <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" onAction="#deleteAllDoublonsAction" styleClass="standardButton" text="Go" />
+                                                                    </children>
+                                                                </HBox>
+                                                            </children>
+                                                            <VBox.margin>
+                                                                <Insets />
+                                                            </VBox.margin>
+                                                            <padding>
+                                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                            </padding>
+                                                        </VBox>
+                                                    </children>
+                                                </VBox>
+                                                <VBox styleClass="informationBox">
+                                                    <children>
+                                                        <HBox alignment="CENTER" prefHeight="4.0" prefWidth="260.0">
+                                                            <children>
+                                                                <Label styleClass="myBoxLittleTitle" text="Suppression des doublons d'un groupe" />
+                                                            </children>
+                                                            <VBox.margin>
+                                                                <Insets bottom="10.0" />
+                                                            </VBox.margin>
+                                                        </HBox>
+                                                        <TextFlow prefHeight="63.0" prefWidth="260.0">
+                                                            <children>
+                                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cette action effacera tous les fichiers en doublons du groupe séléctionné dont une copie existe dans l'autre groupe." wrappingWidth="247.39990234375" />
+                                                            </children>
+                                                        </TextFlow>
+                                                        <HBox alignment="BOTTOM_RIGHT" prefHeight="37.0" prefWidth="250.0" spacing="10.0">
+                                                            <children>
+                                                                <ComboBox fx:id="groupId">
+                                                                    <items>
+                                                                        <FXCollections fx:factory="observableArrayList">
+                                                                            <String fx:id="firstComboBoxValueId" fx:value="Groupe 1" />
+                                                                            <String fx:value="Groupe 2" />
+                                                                        </FXCollections>
+                                                                    </items>
+                                                                    <value>
+                                                                        <fx:reference source="firstComboBoxValueId" />
+                                                                    </value>
+                                                                    <HBox.margin>
+                                                                        <Insets />
+                                                                    </HBox.margin>
+                                                                </ComboBox>
+                                                                <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" onAction="#deleteDoublonsFromGroupAction" styleClass="standardButton" text="Go" />
+                                                            </children>
+                                                        </HBox>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </VBox>
+                                    </content>
+                                </TitledPane>
+                            </panes>
+                        </Accordion>
+                        <HBox fx:id="mainHbox">
+                            <children>
+                                <VBox spacing="15.0" HBox.hgrow="ALWAYS">
+                                    <children>
+                                        <TableView fx:id="resultViewId" HBox.hgrow="ALWAYS">
+                                            <columns>
+                                                <TableColumn fx:id="columnFile" editable="false" text="Fichier">
+                                                    <cellValueFactory>
+                                                        <PropertyValueFactory property="absolutePath" />
+                                                    </cellValueFactory>
+                                                </TableColumn>
+                                                <TableColumn fx:id="columnGroup" editable="false" text="Group">
+                                                    <cellValueFactory>
+                                                        <PropertyValueFactory property="group" />
+                                                    </cellValueFactory>
+                                                </TableColumn>
+                                                <TableColumn id="md5PrintId" fx:id="md5PrintId" editable="false" text="Empreinte MD5">
+                                                    <cellValueFactory>
+                                                        <PropertyValueFactory property="MD5Print" />
+                                                    </cellValueFactory>
+                                                </TableColumn>
+                                            </columns>
+                                            <sortOrder>
+                                                <fx:reference source="md5PrintId" />
+                                            </sortOrder>
+                                        </TableView>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+                    </items>
+                </SplitPane>
+            </children>
+        </VBox>
+        <HBox alignment="CENTER_RIGHT" prefHeight="40.0" VBox.vgrow="NEVER">
+            <children>
+                <Button minHeight="27.0" minWidth="140.0" mnemonicParsing="false" onAction="#backAction" styleClass="backButton" text="Précédent" />
+            </children>
+        </HBox>
+    </children>
+    <stylesheets>
+        <URL value="@/styles/main.css" />
+        <URL value="@/styles/results.css" />
+    </stylesheets>
+</VBox>

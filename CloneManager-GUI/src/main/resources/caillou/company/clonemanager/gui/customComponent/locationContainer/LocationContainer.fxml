@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+
+<VBox alignment="TOP_CENTER" spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caillou.company.clonemanager.gui.customComponent.locationContainer.LocationContainerController">
+   <children>
+      <VBox fx:id="locationContainerId" spacing="5.0">
+         <padding>
+            <Insets left="5.0" />
+         </padding></VBox>
+       <HBox fx:id="boutonContainer">
+           <children>
+               <Hyperlink onAction="#addLocationFromLink" text="Ajouter">
+                   <HBox.margin>
+                       <javafx.geometry.Insets />
+                   </HBox.margin>
+               </Hyperlink>
+               <ImageView id="addLocation48x48.png" fitHeight="21.0" fitWidth="22.0" onMouseClicked="#addLocationFromButton">
+                   <image>
+                       <javafx.scene.image.Image preserveRatio="true" smooth="true" url="@/img/addLocation48x48.png" />
+                   </image>
+               </ImageView>
+           </children>
+       </HBox>
+      <HBox alignment="BOTTOM_LEFT" prefHeight="50.0">
+         <children>
+            <Hyperlink fx:id="advancedOptionId" alignment="TOP_LEFT" onAction="#toogleAdvancedOptions" styleClass="myLink" text="Options avancées">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin></Hyperlink>
+         </children>
+      </HBox>
+      <VBox spacing="5.0">
+         <children>
+            <CheckBox fx:id="enableGroupingId" mnemonicParsing="false" text="Utiliser des groupes">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></CheckBox>
+            <CheckBox fx:id="detectDoublonsWithinSameLocationId" mnemonicParsing="false" selected="true" text="Détecter les fichiers identiques à l'intérieur d'un meme emplacement">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></CheckBox>
+         </children>
+         <padding>
+            <Insets left="5.0" />
+         </padding>
+      </VBox>
+   </children>
+</VBox>

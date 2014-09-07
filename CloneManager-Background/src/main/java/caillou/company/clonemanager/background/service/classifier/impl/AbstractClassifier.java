@@ -50,7 +50,6 @@ public abstract class AbstractClassifier<T, V extends ApplicationFile> implement
 
             // Cancelling
             if (this.callingThread.isCancelled()) {
-                System.out.println("Jarrete dans AbstractHashClassifier 1");
                 return this.getFilterStrategy().filter(this.getResults());
             }
 

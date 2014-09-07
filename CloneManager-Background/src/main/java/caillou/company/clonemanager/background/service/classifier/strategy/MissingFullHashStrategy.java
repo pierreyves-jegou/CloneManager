@@ -7,12 +7,14 @@ package caillou.company.clonemanager.background.service.classifier.strategy;
 
 import caillou.company.clonemanager.background.bean.applicationFile.contract.ApplicationFile;
 import caillou.company.clonemanager.background.service.classifier.impl.Analyse;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 /**
  *
  * @author pierre
+ * @param <T>
  */
 public class MissingFullHashStrategy<T extends ApplicationFile> implements FilterStrategy<String, T> {
 
@@ -24,11 +26,17 @@ public class MissingFullHashStrategy<T extends ApplicationFile> implements Filte
             return null;
         }
         for (Map.Entry<String, Set<T>> entry : unFilteredValues.entrySet()) {
-            if (entry.getValue() != null && entry.getValue().size() == 1) {
-                analyse.addEntryThatDoMatch(entry);
-            } else {
-                analyse.addEntryThatDoNotMatch(entry);
-            }
+            if (entry.getValue() != null){
+                Set<String> groups = new HashSet<>();
+                for(T applicationFile : entry.getValue()){
+                    groups.add(applicationFile.getGroup());
+                }
+                if(groups.size() == 1){
+                    analyse.addEntryThatDoMatch(entry);
+                }else{
+                    analyse.addEntryThatDoNotMatch(entry);
+                }
+            } 
         }
         return analyse;
     }

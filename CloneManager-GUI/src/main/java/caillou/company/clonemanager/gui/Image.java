@@ -16,4 +16,8 @@ public class Image {
     public static String WASTED_SPACE = "/img/wastedSpace.png";
     public static String FILES_DUPLICATED = "/img/sheep-icon.png";
     public static String GARBAGE = "/img/trash.png";
+    
+    public static String COPY_ICON = "/img/copy.png";
+    public static String GARBAGE_ICON = "/img/garbage.png";
+    public static String HIDE_ICON = "/img/hide.png";
 }

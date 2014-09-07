@@ -70,7 +70,7 @@
                                                     <children>
                                                         <VBox style="-fx-border-width: 0px 0px 0px 0px;" styleClass="informationBox">
                                                             <children>
-                                                                <HBox alignment="CENTER" prefHeight="4.0" prefWidth="260.0">
+                                                                <HBox alignment="CENTER_LEFT" prefHeight="4.0" prefWidth="260.0">
                                                                     <children>
                                                                         <Label styleClass="myBoxLittleTitle" text="Suppression de tous les doublons" />
                                                                     </children>
@@ -78,12 +78,12 @@
                                                                         <Insets bottom="10.0" />
                                                                     </VBox.margin>
                                                                 </HBox>
-                                                                <TextFlow prefHeight="63.0" prefWidth="260.0">
+                                                                <TextFlow prefWidth="100.0">
                                                                     <children>
                                                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cette action effacera tous les fichiers en doublons tout en gardant une version originale. Les fichiers en doublons peuvent etre supprimés aléatoirement depuis le &quot;groupe 1&quot; ou le &quot;groupe 2&quot;." wrappingWidth="247.39990234375" />
                                                                     </children>
                                                                 </TextFlow>
-                                                                <HBox alignment="BOTTOM_RIGHT" prefHeight="37.0" prefWidth="250.0">
+                                                                <HBox alignment="BOTTOM_RIGHT">
                                                                     <children>
                                                                         <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" onAction="#deleteAllDoublonsAction" styleClass="standardButton" text="Go" />
                                                                     </children>
@@ -100,7 +100,7 @@
                                                 </VBox>
                                                 <VBox styleClass="informationBox">
                                                     <children>
-                                                        <HBox alignment="CENTER" prefHeight="4.0" prefWidth="260.0">
+                                                        <HBox alignment="CENTER_LEFT" prefHeight="4.0" prefWidth="260.0">
                                                             <children>
                                                                 <Label styleClass="myBoxLittleTitle" text="Suppression des doublons d'un groupe" />
                                                             </children>
@@ -108,12 +108,12 @@
                                                                 <Insets bottom="10.0" />
                                                             </VBox.margin>
                                                         </HBox>
-                                                        <TextFlow prefHeight="63.0" prefWidth="260.0">
+                                                        <TextFlow prefWidth="100.0">
                                                             <children>
                                                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cette action effacera tous les fichiers en doublons du groupe séléctionné dont une copie existe dans l'autre groupe." wrappingWidth="247.39990234375" />
                                                             </children>
                                                         </TextFlow>
-                                                        <HBox alignment="BOTTOM_RIGHT" prefHeight="37.0" prefWidth="250.0" spacing="10.0">
+                                                        <HBox alignment="BOTTOM_RIGHT" spacing="10.0">
                                                             <children>
                                                                 <ComboBox fx:id="groupId">
                                                                     <items>

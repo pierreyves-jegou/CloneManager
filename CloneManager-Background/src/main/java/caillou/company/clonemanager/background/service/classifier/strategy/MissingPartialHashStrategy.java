@@ -7,6 +7,7 @@ package caillou.company.clonemanager.background.service.classifier.strategy;
 
 import caillou.company.clonemanager.background.bean.applicationFile.contract.ApplicationFile;
 import caillou.company.clonemanager.background.service.classifier.impl.Analyse;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -25,10 +26,22 @@ public class MissingPartialHashStrategy<T extends ApplicationFile> implements Fi
             return null;
         }
         for (Map.Entry<String, Set<T>> entry : unFilteredValues.entrySet()) {
-            if (entry.getValue() != null && entry.getValue().size() == 1) {
-                analyse.addEntryThatDoMatch(entry);
-            } else {
-                analyse.addEntryThatMigthMatch(entry);
+            if (entry.getValue() != null){
+                if(entry.getValue().size() == 1){
+                    analyse.addEntryThatDoMatch(entry);
+                }
+                // Check that all the files belong to the same group
+                if(entry.getValue().size() > 1){
+                    Set<String> groups = new HashSet<>();
+                    for(T applicationFile : entry.getValue()){
+                        groups.add(applicationFile.getGroup());
+                    }
+                    if(groups.size() == 1){
+                        analyse.addEntryThatDoMatch(entry);
+                    }else{
+                        analyse.addEntryThatMigthMatch(entry);
+                    }
+                }
             }
         }
         return analyse;

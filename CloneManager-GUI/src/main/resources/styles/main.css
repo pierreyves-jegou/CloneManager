@@ -121,9 +121,10 @@ and open the template in the editor.
 }
 
 .myBoxLittleTitle {
-    -fx-font-size: 13px;
+    -fx-font-size: 16px;
     -fx-text-fill: #333333;
-    -fx-font-family: "Shoes center";
+    /**-fx-font-family: "Shoes center";**/
+    -fx-font-weight: bold;
 }
 
 .transitionBoxTitle {

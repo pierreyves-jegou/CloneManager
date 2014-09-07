@@ -24,6 +24,8 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.util.Callback;
@@ -86,9 +88,14 @@ public class MyRowFactory implements Callback<TableView<GUIApplicationFile>, Tab
         };
 
         final ContextMenu rowMenu = new ContextMenu();
-        MenuItem removeItem = new MenuItem("Supprimer");
-        MenuItem clearItem = new MenuItem("Effacer de la vue");
-        MenuItem copyTo = new MenuItem("Copier vers ...");
+        ImageView garbageImageView = new ImageView(new Image(caillou.company.clonemanager.gui.Image.GARBAGE_ICON));
+        garbageImageView.setFitHeight(16);
+        garbageImageView.setFitWidth(16);
+        MenuItem removeItem = new MenuItem("Supprimer", garbageImageView);
+        ImageView hideImageView = new ImageView(new Image(caillou.company.clonemanager.gui.Image.HIDE_ICON));
+        MenuItem clearItem = new MenuItem("Effacer de la vue", hideImageView);
+        ImageView copyImageView = new ImageView(new Image(caillou.company.clonemanager.gui.Image.COPY_ICON));
+        MenuItem copyTo = new MenuItem("Copier vers ...", copyImageView);
         removeItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {

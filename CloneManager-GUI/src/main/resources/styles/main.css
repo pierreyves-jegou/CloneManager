@@ -158,7 +158,8 @@ and open the template in the editor.
 .informationBox {
       -fx-border-width: 2px 0px 0px 0px;
       -fx-padding: 20 0 20 0;
-      -fx-border-color: #89dffe;
+      -fx-border-color: #ECECEC;
+      /*-fx-border-style: dashed;*/
 /*      -fx-border-radius: 8 8 8 8;*/
       -fx-text-fill: #ea8284;
       

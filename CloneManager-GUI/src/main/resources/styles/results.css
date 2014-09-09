@@ -1,10 +1,12 @@
+/* old : fbf1f1*/
+
 .higthtedTableLigthed {
-    -fx-background-color: -fx-table-cell-border-color, #fbe2e2;
+    -fx-background-color: -fx-table-cell-border-color, #fbf1f1;
     -fx-background-insets: 0, 0 0 1 0;
 }
 
 .higthtedTableLigthed:odd {
-    -fx-background-color: -fx-table-cell-border-color, #fbe2e2;
+    -fx-background-color: -fx-table-cell-border-color, #fbf1f1;
     -fx-background-insets: 0, 0 0 1 0;
 }
 

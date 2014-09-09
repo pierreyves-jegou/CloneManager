@@ -1,6 +1,6 @@
 Goal
 ============
-Two goals : Allow to find duplicate files on computer / find files which haven't been backuped
+Two goals : Allow to find duplicate files on computer / find files which haven't been backed up
 
 Installation
 ============

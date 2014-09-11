@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<MenuBar prefHeight="33.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caillou.company.clonemanager.gui.customComponent.menubar.MenuBarController">
+    <stylesheets>
+        <URL value="@/styles/main.css" />
+    </stylesheets>
+    <menus>
+        <Menu mnemonicParsing="false" text="%menu.text.general">
+            <Menu mnemonicParsing="false" text="%menu.item.general.language">
+                <graphic>
+                    <javafx.scene.image.ImageView fitWidth="16" fitHeight="12"  >
+                        <image>
+                            <javafx.scene.image.Image url="/img/flag.jpeg"></javafx.scene.image.Image>
+                        </image>
+                    </javafx.scene.image.ImageView>
+                </graphic>
+                <items>
+                    <MenuItem mnemonicParsing="false" onAction="#changeToEnglish" text="%menu.item.general.language.english">
+                        <graphic>
+                            <javafx.scene.image.ImageView fitWidth="16" fitHeight="12"  >
+                                <image>
+                                    <javafx.scene.image.Image url="/img/englishFlag.jpeg"></javafx.scene.image.Image>
+                                </image>
+                            </javafx.scene.image.ImageView>
+                        </graphic>
+                    </MenuItem>
+                    <MenuItem mnemonicParsing="false" onAction="#changeToFrench" text="%menu.item.general.language.french">
+                        <graphic>
+                            <javafx.scene.image.ImageView fitWidth="16" fitHeight="12"  >
+                                <image>
+                                    <javafx.scene.image.Image url="/img/frenchFlag.jpg"></javafx.scene.image.Image>
+                                </image>
+                            </javafx.scene.image.ImageView>
+                        </graphic>
+                    </MenuItem>   
+                </items>
+            </Menu>
+        </Menu>   
+    </menus>
+</MenuBar>

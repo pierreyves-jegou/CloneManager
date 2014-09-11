@@ -25,15 +25,17 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class SpringFxmlLoader {
 
     private static final ApplicationContext applicationContext = new ClassPathXmlApplicationContext(Navigation.SPRING_APPLICATION_FILE);
-    private static final ResourceBundle resourceBundle;
-    private static Locale currentLocale = Locale.ENGLISH; 
-    
-    static {
+    private static ResourceBundle resourceBundle;
+    private static Locale currentLocale = Locale.ENGLISH;
+    private static String lastLoadedURL = null;
+        
+    public SpringFxmlLoader(){
         resourceBundle = ResourceBundle.getBundle("bundle.Main", SpringFxmlLoader.currentLocale);
         changeLocale(currentLocale);
     }
     
     public static LoadingMojo load(String url) {           
+        lastLoadedURL = url;
         FXMLLoader loader = new FXMLLoader(MainApp.class.getResource(url), resourceBundle);
             loader.setControllerFactory(new Callback<Class<?>, Object>() {
                 @Override
@@ -70,6 +72,7 @@ public class SpringFxmlLoader {
         SpringFxmlLoader.currentLocale = locale;
         Group.GROUP1.setGuiValue(resourceBundle.getString("group1"));
         Group.GROUP2.setGuiValue(resourceBundle.getString("group2"));
+        resourceBundle = ResourceBundle.getBundle("bundle.Main", SpringFxmlLoader.currentLocale);
     }
     
     public static ResourceBundle getResourceBundle(){
@@ -79,5 +82,11 @@ public class SpringFxmlLoader {
     public static Locale getLocale(){
         return currentLocale;
     }
+
+    public static String getLastLoadedURL() {
+        return lastLoadedURL;
+    }
+    
+    
     
 }

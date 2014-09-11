@@ -47,7 +47,7 @@ public class PreSuppressionEventHandler implements EventHandler<WorkerStateEvent
             Logger.getLogger(PreSuppressionEventHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        Dialog dialogConfirmSuppression = new Dialog(MainApp.getInstance().getStage(), "Fichiers à supprimer");
+        Dialog dialogConfirmSuppression = new Dialog(MainApp.getInstance().getStage(), SpringFxmlLoader.getResourceBundle().getString("title.fileToSuppress"));
         LoadingMojo loadingMojo = SpringFxmlLoader.load(Navigation.SUPPRESSION_POPUP);
         ConfirmSuppressionController confirmSuppressionController = (ConfirmSuppressionController) loadingMojo.getController();
         confirmSuppressionController.setDialog(dialogConfirmSuppression);

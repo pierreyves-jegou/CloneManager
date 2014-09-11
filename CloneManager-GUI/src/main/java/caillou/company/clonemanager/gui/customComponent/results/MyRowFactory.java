@@ -91,11 +91,11 @@ public class MyRowFactory implements Callback<TableView<GUIApplicationFile>, Tab
         ImageView garbageImageView = new ImageView(new Image(caillou.company.clonemanager.gui.Image.GARBAGE_ICON));
         garbageImageView.setFitHeight(16);
         garbageImageView.setFitWidth(16);
-        MenuItem removeItem = new MenuItem("Supprimer", garbageImageView);
+        MenuItem removeItem = new MenuItem(SpringFxmlLoader.getResourceBundle().getString("contextual.text.suppress"), garbageImageView);
         ImageView hideImageView = new ImageView(new Image(caillou.company.clonemanager.gui.Image.HIDE_ICON));
-        MenuItem clearItem = new MenuItem("Effacer de la vue", hideImageView);
+        MenuItem clearItem = new MenuItem(SpringFxmlLoader.getResourceBundle().getString("contextual.text.removeFromView"), hideImageView);
         ImageView copyImageView = new ImageView(new Image(caillou.company.clonemanager.gui.Image.COPY_ICON));
-        MenuItem copyTo = new MenuItem("Copier vers ...", copyImageView);
+        MenuItem copyTo = new MenuItem(SpringFxmlLoader.getResourceBundle().getString("contextual.text.copyTo"), copyImageView);
         removeItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {

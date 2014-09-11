@@ -101,10 +101,10 @@ public class LocationsModel implements BeanFactoryAware{
         for(int i=0; i < observableLocations.size(); i++){
             LocationModel locationModel = observableLocations.get(i);
             if(i == 0){
-                locationModel.setGroup(Group.GROUP1);
+                locationModel.setGroupValue(Group.VALUE.GROUP1);
             }
             if(i == 1){
-                locationModel.setGroup(Group.GROUP2);
+                locationModel.setGroupValue(Group.VALUE.GROUP2);
                 return;
             }
         }

@@ -5,6 +5,7 @@
  */
 package caillou.company.clonemanager.gui.customComponent.location;
 
+import caillou.company.clonemanager.background.bean.impl.Group;
 import caillou.company.clonemanager.gui.MainApp;
 import caillou.company.clonemanager.gui.Navigation;
 import caillou.company.clonemanager.gui.bean.impl.LoadingMojo;
@@ -47,7 +48,7 @@ public class LocationController extends Controller<LocationModel> implements Ini
     private TextField path;
 
     @FXML
-    private ComboBox<String> groupId;
+    private ComboBox<Group> groupId;
 
     @FXML
     private Button button;
@@ -55,13 +56,18 @@ public class LocationController extends Controller<LocationModel> implements Ini
     @FXML
     private ListView<caillou.company.clonemanager.gui.bean.error.Error> errorsId;
 
+    @FXML
+    private Button filterButtonId;
+
     private final BooleanProperty disabled = new SimpleBooleanProperty(false);
 
     private final BooleanProperty updated = new SimpleBooleanProperty();
 
     private MainModel mainModel;
 
-    
+    private String bundleForKeySelectDirectoryTitle;
+    private String bundleForKeyExclusionTitle;
+
     public LocationController() {
     }
 
@@ -69,18 +75,24 @@ public class LocationController extends Controller<LocationModel> implements Ini
     public void initializeSpring() {
         LocationModel locationModel = mainModel.getLocationsModel().addLocation();
         this.setModel(locationModel);
-     }
+    }
 
     public String getPath() {
         return path.textProperty().get();
     }
 
-    public String getGroup() {
+    public Group getGroup() {
         return groupId.getValue();
+    }
+
+    public void setGroup(Group group) {
+        this.groupId.setValue(group);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        this.initializeResourceBundle(rb);
 
         this.disabledProperty().bind(getModel().disabledProperty());
         final LocationController thisInstance = this;
@@ -88,7 +100,7 @@ public class LocationController extends Controller<LocationModel> implements Ini
 
             @Override
             public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
-                getModel().updateLocation(thisInstance.getPath(), thisInstance.getGroup());
+                getModel().updateLocation(thisInstance.getPath(), thisInstance.getGroup().getValue());
             }
         });
 
@@ -98,17 +110,27 @@ public class LocationController extends Controller<LocationModel> implements Ini
         LocationsModel locationsModel = mainModel.getLocationsModel();
         groupId.visibleProperty().bind(locationsModel.enableGroupingProperty());
         groupId.managedProperty().bind(locationsModel.enableGroupingProperty());
+        groupId.getItems().add(Group.GROUP1);
+        groupId.getItems().add(Group.GROUP2);
 
         path.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                boolean disableExclusion = true;
+                if (newValue != null && !newValue.equals("")) {
+                    File file = new File(newValue);
+                    if (file.exists() && file.isDirectory()) {
+                        disableExclusion = false;
+                    }
+                }
+                filterButtonId.setDisable(disableExclusion);
                 updated.set(!updated.get());
             }
         });
 
-        groupId.valueProperty().addListener(new ChangeListener<String>() {
+        groupId.valueProperty().addListener(new ChangeListener<Group>() {
             @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            public void changed(ObservableValue<? extends Group> observable, Group oldValue, Group newValue) {
                 updated.set(!updated.get());
             }
         });
@@ -127,12 +149,19 @@ public class LocationController extends Controller<LocationModel> implements Ini
         errorsId.setCellFactory(new ErrorCellFactory());
         errorsId.setVisible(false);
         errorsId.setManaged(false);
+        filterButtonId.setDisable(true);
+
+    }
+
+    private void initializeResourceBundle(ResourceBundle resources) {
+        bundleForKeySelectDirectoryTitle = resources.getString("title.selectDirectory");
+        bundleForKeyExclusionTitle = resources.getString("title.exclusion");
     }
 
     @FXML
     private void handleFilechooserAction(ActionEvent event) {
         DirectoryChooser directoryChooser = new DirectoryChooser();
-        directoryChooser.setTitle("Sélectionner le répertoire");
+        directoryChooser.setTitle(bundleForKeySelectDirectoryTitle);
         File file = directoryChooser.showDialog(null);
         if (file != null) {
             path.setText(file.getAbsolutePath());
@@ -141,16 +170,21 @@ public class LocationController extends Controller<LocationModel> implements Ini
 
     @FXML
     private void handleFilterAction(ActionEvent event) {
-        if (this.getModel().getPath() != null) {
-            Dialog dialogExclude = new Dialog(MainApp.getInstance().getStage(), "Gestion des exclusions");
-            LoadingMojo loadingMojo = SpringFxmlLoader.load(Navigation.EXCLUDE_TREE);
-            ExcludeTreeController excludeTreeController = (ExcludeTreeController) loadingMojo.getController();
-            excludeTreeController.setWrappingDialog(dialogExclude);
-            excludeTreeController.setModel(this.getModel().getExcludeModel());
-            excludeTreeController.initialiseRootDirectory();
-            dialogExclude.setContent(loadingMojo.getParent());
-            dialogExclude.show();
-        }       
+        String currentPath = this.getModel().getPath();
+        if (currentPath != null) {
+            File file = new File(currentPath);
+            if (!file.exists() || !file.isDirectory()) {
+                return;
+            }
+        }
+        Dialog dialogExclude = new Dialog(MainApp.getInstance().getStage(), bundleForKeyExclusionTitle);
+        LoadingMojo loadingMojo = SpringFxmlLoader.load(Navigation.EXCLUDE_TREE);
+        ExcludeTreeController excludeTreeController = (ExcludeTreeController) loadingMojo.getController();
+        excludeTreeController.setWrappingDialog(dialogExclude);
+        excludeTreeController.setModel(this.getModel().getExcludeModel());
+        excludeTreeController.initialiseRootDirectory();
+        dialogExclude.setContent(loadingMojo.getParent());
+        dialogExclude.show();
     }
 
     public void setListListener() {

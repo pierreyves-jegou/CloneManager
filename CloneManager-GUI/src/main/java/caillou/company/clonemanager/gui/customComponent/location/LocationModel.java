@@ -6,6 +6,7 @@
 package caillou.company.clonemanager.gui.customComponent.location;
 
 import caillou.company.clonemanager.background.bean.applicationFile.contract.GroupProvider;
+import caillou.company.clonemanager.background.bean.impl.Group;
 import caillou.company.clonemanager.gui.customComponent.common.MainModel;
 import caillou.company.clonemanager.gui.customComponent.common.Model;
 import caillou.company.clonemanager.gui.customComponent.excludeTree.ExcludeModel;
@@ -33,7 +34,7 @@ import org.springframework.stereotype.Component;
 public class LocationModel implements Model, GroupProvider{
 
     private final StringProperty path = new SimpleStringProperty();
-    private final StringProperty group = new SimpleStringProperty();
+    private Group.VALUE groupValue = null;
     
     private final BooleanProperty disabled = new SimpleBooleanProperty(false);
     private ObservableList<caillou.company.clonemanager.gui.bean.error.Error> errors = FXCollections.observableArrayList(new ArrayList<caillou.company.clonemanager.gui.bean.error.Error>());
@@ -70,26 +71,18 @@ public class LocationModel implements Model, GroupProvider{
     }
 
     @Override
-    public String getGroup() {
-        return group.get();
+    public Group.VALUE getGroup() {
+        return groupValue;
     }
 
-    public void setGroup(String value) {
-        group.set(value);
+    public void setGroupValue(Group.VALUE groupValue) {
+        this.groupValue = groupValue;
     }
 
-    public StringProperty groupProperty() {
-        return group;
-    }
-
-    public String toString() {
-        return getPath() + " - " + getGroup();
-    }
-
-    public void updateLocation(String path, String group) {
+    public void updateLocation(String path, Group.VALUE groupValue) {
         mainModel.getLocationsModel().resetErrors();
         this.setPath(path);
-        this.setGroup(group);
+        this.setGroupValue(groupValue);
         mainModel.getLocationsModel().sanityCheck();
     }
 

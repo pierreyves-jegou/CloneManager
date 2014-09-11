@@ -12,12 +12,9 @@ package caillou.company.clonemanager.gui.bean.error;
  */
 public class IncludedFileError extends Error {
     
-    public IncludedFileError(String message, SEVERITY_LEVEL severityLevel){
-        super(message, severityLevel);
-    }
-
     public IncludedFileError(){
-        super("Cet emplacement est inclus dans un autre emplacement", SEVERITY_LEVEL.WARNING);
+        this.setMessage(this.getI18NMessage("error.locationIncluded"));
+        this.setSeverity(SEVERITY_LEVEL.WARNING);
     }
     
     @Override

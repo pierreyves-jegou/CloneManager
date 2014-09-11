@@ -18,7 +18,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="38.0" prefWidth="284.0">
                <children>
-                         <Label prefHeight="18.0" prefWidth="256.0" text="Analyse des fichiers à traiter : ">
+                         <Label prefHeight="18.0" prefWidth="256.0" text="%text.analysingDataToProcess">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -41,7 +41,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="284.0">
                <children>
-                         <Label prefHeight="18.0" prefWidth="280.0" text="Calcul des empreintes partielles : ">
+                         <Label prefHeight="18.0" prefWidth="280.0" text="%text.processingPartialHash">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -64,7 +64,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="51.0" prefWidth="284.0">
                <children>
-                         <Label prefHeight="18.0" prefWidth="284.0" text="Calcul des empreintes complètes : ">
+                         <Label prefHeight="18.0" prefWidth="284.0" text="%text.processingFullHash">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -85,7 +85,7 @@
       </HBox>
       <HBox alignment="CENTER_RIGHT">
          <children>
-            <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#stopAction" styleClass="standardButton" stylesheets="@/styles/main.css" text="Stop" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#stopAction" styleClass="standardButton" stylesheets="@/styles/main.css" text="%button.stop" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </HBox>
    </children>

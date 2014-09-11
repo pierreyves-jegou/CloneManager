@@ -6,6 +6,7 @@
 package caillou.company.clonemanager.gui.customComponent.results;
 
 import caillou.company.clonemanager.background.bean.applicationFile.contract.ApplicationFile;
+import caillou.company.clonemanager.background.bean.impl.Group;
 import caillou.company.clonemanager.gui.MainApp;
 import caillou.company.clonemanager.gui.Navigation;
 import caillou.company.clonemanager.gui.bean.applicationFileFX.contract.GUIApplicationFile;
@@ -29,7 +30,6 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.ListProperty;
@@ -55,7 +55,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.WindowEvent;
@@ -108,7 +107,7 @@ public class ResultController implements Initializable {
     private VBox deleteDoublonsActionBoxId;
 
     @FXML
-    private ComboBox<String> groupId;
+    private ComboBox<Group> groupId;
 
     @FXML
     private TextField filterTextFieldId;
@@ -158,6 +157,10 @@ public class ResultController implements Initializable {
 
         accordionPaneId.setExpandedPane(informationPaneId);
 
+        groupId.getItems().add(Group.GROUP1);
+        groupId.getItems().add(Group.GROUP2);
+        groupId.setValue(Group.GROUP1);
+        
         /**
          * Due to the bug
          * "https://bitbucket.org/controlsfx/controlsfx/issue/185/nullpointerexception-when-using-popover"
@@ -326,7 +329,7 @@ public class ResultController implements Initializable {
     private void deleteDoublonsFromGroupAction(ActionEvent event) throws Exception {
         FetchDuplicateHavingCopyFromGroupTask fetchDuplicateHavingCopyFromGroupTask = SpringFxmlLoader.getBean(FetchDuplicateHavingCopyFromGroupTask.class);
         fetchDuplicateHavingCopyFromGroupTask.setGuiApplicationFileListToDelete(guiApplicationFileList);
-        fetchDuplicateHavingCopyFromGroupTask.setTargetGroup(this.groupId.getValue());
+        fetchDuplicateHavingCopyFromGroupTask.setTargetGroup(this.groupId.getValue().getValue());
         fetchDuplicateHavingCopyFromGroupTask.checkArguments();
         this.delete(fetchDuplicateHavingCopyFromGroupTask);
     }

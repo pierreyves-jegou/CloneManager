@@ -5,9 +5,11 @@
  */
 package caillou.company.clonemanager.gui.customComponent.locationContainer;
 
+import caillou.company.clonemanager.background.bean.impl.Group;
 import caillou.company.clonemanager.gui.Navigation;
 import caillou.company.clonemanager.gui.bean.impl.LoadingMojo;
 import caillou.company.clonemanager.gui.customComponent.common.MainModel;
+import caillou.company.clonemanager.gui.customComponent.location.LocationController;
 import caillou.company.clonemanager.gui.customComponent.taskchoice.TaskModel;
 import caillou.company.clonemanager.gui.spring.SpringFxmlLoader;
 import java.io.IOException;
@@ -54,12 +56,17 @@ public class LocationContainerController implements Initializable {
     private final BooleanProperty showAdvancedOptions = new SimpleBooleanProperty(true);
     
     private MainModel mainModel;
+    
+    private String advancedOptionsTitle;
 
     public LocationContainerController() {
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        
+        initializeResourceBundle(resources);
+        
         final LocationsModel locationsModel = mainModel.getLocationsModel();
         try {
             // Put two locations into the scene
@@ -105,9 +112,12 @@ public class LocationContainerController implements Initializable {
 
             });
         }
-
     }
 
+    private void initializeResourceBundle(ResourceBundle resources){
+        advancedOptionsTitle = resources.getString("link.advancedOption");
+    }
+    
     @FXML
     private void addLocationFromLink(ActionEvent event) throws IOException {
         this.addLocation();
@@ -135,7 +145,7 @@ public class LocationContainerController implements Initializable {
         showAdvancedOptions.set(true);
         enableGroupingId.setVisible(true);
         enableGroupingId.setManaged(true);
-        advancedOptionId.setText("Options Avancées \u25BC");
+        advancedOptionId.setText(advancedOptionsTitle + " \u25BC");
 
         TaskModel taskModel = mainModel.getTaskModel();
         if (taskModel.getCurrentTask().equals(TaskModel.TASK.DETECT_DOUBLONS)) {
@@ -150,12 +160,18 @@ public class LocationContainerController implements Initializable {
         enableGroupingId.setManaged(false);
         detectDoublonsWithinSameLocationId.setVisible(false);
         detectDoublonsWithinSameLocationId.setManaged(false);
-        advancedOptionId.setText("Options Avancées \u25B6");
+        advancedOptionId.setText(advancedOptionsTitle + " \u25B6");
     }
 
     private void addLocation() throws IOException {
         SpringFxmlLoader springFxmlLoader = new SpringFxmlLoader();
         LoadingMojo loadingMojo = springFxmlLoader.load(Navigation.LOCATION_VIEW);
+        LocationController locationController = (LocationController) loadingMojo.getController();
+        if(locationContainerId.getChildren().size() == 1){
+            locationController.setGroup(Group.GROUP2);
+        }else{
+            locationController.setGroup(Group.GROUP1);
+        }
         locationContainerId.getChildren().add(loadingMojo.getParent());
     }
 

@@ -13,7 +13,8 @@ package caillou.company.clonemanager.gui.bean.error;
 public class NotADirectoryError extends Error{
     
     public NotADirectoryError(){
-        super("Le fichier sélectionné n'est pas un répertoire", SEVERITY_LEVEL.ERROR);
+        this.setMessage(this.getI18NMessage("error.notADirectory"));
+        this.setSeverity(SEVERITY_LEVEL.ERROR);
     }
    
     @Override

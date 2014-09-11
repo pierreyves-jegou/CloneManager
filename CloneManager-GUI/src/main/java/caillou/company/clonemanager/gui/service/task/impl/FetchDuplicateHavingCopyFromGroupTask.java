@@ -6,16 +6,14 @@
 
 package caillou.company.clonemanager.gui.service.task.impl;
 
+import caillou.company.clonemanager.background.bean.impl.Group;
 import caillou.company.clonemanager.background.exception.ArgumentException;
 import caillou.company.clonemanager.background.exception.OrganizerException;
-import caillou.company.clonemanager.background.util.contract.ApplicationFileUtil;
-import caillou.company.clonemanager.background.util.contract.HashUtil;
 import caillou.company.clonemanager.gui.bean.applicationFileFX.contract.GUIApplicationFile;
 import caillou.company.clonemanager.gui.service.task.contract.ArgumentCheckable;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -27,7 +25,7 @@ import org.springframework.stereotype.Component;
 @Scope(value = "prototype")
 public class FetchDuplicateHavingCopyFromGroupTask extends AbstractFetchTask implements ArgumentCheckable{
 
-    private String targetGroup;
+    private Group.VALUE targetGroup;
         
     @Override
     protected Set<GUIApplicationFile> call() throws Exception {
@@ -38,7 +36,7 @@ public class FetchDuplicateHavingCopyFromGroupTask extends AbstractFetchTask imp
         return applicationFileUtil.detectDuplicateFilesHavingACopyInOtherGroup(listMyFilePerHash, this.targetGroup);
     }
 
-    public void setTargetGroup(String targetGroup) {
+    public void setTargetGroup(Group.VALUE targetGroup) {
         this.targetGroup = targetGroup;
     }
 

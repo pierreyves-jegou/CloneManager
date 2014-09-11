@@ -7,6 +7,7 @@
 package caillou.company.clonemanager.background.util.contract;
 
 import caillou.company.clonemanager.background.bean.applicationFile.contract.ApplicationFile;
+import caillou.company.clonemanager.background.bean.impl.Group;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -17,7 +18,7 @@ import java.util.Set;
  */
 public interface ApplicationFileUtil {
     
-    public <T extends ApplicationFile> Set<T> detectDuplicateFilesHavingACopyInOtherGroup(Map<String, List<T>> listHashProviderPerHash, String originalGroup);
+    public <T extends ApplicationFile> Set<T> detectDuplicateFilesHavingACopyInOtherGroup(Map<String, List<T>> listHashProviderPerHash, Group.VALUE originalGroup);
     
     public <T extends ApplicationFile> Set<T> detectAllDuplicateFilesHavingACopy(Map<String, List<T>> listHashProviderPerHash);
 }

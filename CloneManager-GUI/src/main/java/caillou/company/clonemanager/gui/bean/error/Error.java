@@ -6,6 +6,7 @@
 
 package caillou.company.clonemanager.gui.bean.error;
 
+import caillou.company.clonemanager.gui.spring.SpringFxmlLoader;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -22,6 +23,9 @@ public class Error {
     public static enum SEVERITY_LEVEL { NONE, INFO, WARNING, ERROR };
     public static enum TYPE {GENERAL, UNEXISTINGFILE, ALREADYDEFINEDFILEERROR, INCLUDEDFILEERROR, NOTADIRECTORYERROR};
     
+    protected String getI18NMessage(String key){
+        return SpringFxmlLoader.getResourceBundle().getString(key);
+    }
     
     public Error(){   
     }

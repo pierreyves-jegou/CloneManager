@@ -27,7 +27,9 @@ import org.springframework.stereotype.Component;
 public class StatisticHelper {
 
     private static MainModel mainModel;
-
+    
+    
+       
     public static List<Node> createStaticList() {
 
         if (StatisticHelper.mainModel.getTaskModel().getCurrentTask().equals(TaskModel.TASK.DETECT_DOUBLONS)) {
@@ -45,7 +47,7 @@ public class StatisticHelper {
         LoadingMojo loadingMojoFilesScanned = SpringFxmlLoader.load(Navigation.STATISTIC_COMPONENT);
         StatisticController statisticControllerFilesScanned = (StatisticController) loadingMojoFilesScanned.getController();
         statisticControllerFilesScanned.setImage(Image.SCANNED_FILES);
-        statisticControllerFilesScanned.setStaticText("Nombre de fichiers scannés");        
+        statisticControllerFilesScanned.setStaticText(SpringFxmlLoader.getResourceBundle().getString("statistic.text.scannedFileNumber"));        
         statisticControllerFilesScanned.dynamicTextProperty().bind(mainModel.getSearchStatisticsModel().nbScannedFilesProperty().asString());
         results.add(loadingMojoFilesScanned.getParent());
         
@@ -53,7 +55,7 @@ public class StatisticHelper {
         LoadingMojo loadingMojoWastedSpace = SpringFxmlLoader.load(Navigation.STATISTIC_COMPONENT);
         StatisticController statisticControllerWastedSpace = (StatisticController) loadingMojoWastedSpace.getController();
         statisticControllerWastedSpace.setImage(Image.WASTED_SPACE);
-        statisticControllerWastedSpace.setStaticText("Espace dupliqué");
+        statisticControllerWastedSpace.setStaticText(SpringFxmlLoader.getResourceBundle().getString("statistic.text.wastedSpace"));
         Bindings.bindBidirectional(statisticControllerWastedSpace.dynamicTextProperty(), mainModel.getSearchStatisticsModel().spaceWastedProperty(), new ByteStringConverter());
         results.add(loadingMojoWastedSpace.getParent());
         
@@ -61,7 +63,7 @@ public class StatisticHelper {
         LoadingMojo loadingMojoNumberDuplicated = SpringFxmlLoader.load(Navigation.STATISTIC_COMPONENT);
         StatisticController statisticControllerNumberDuplicated = (StatisticController) loadingMojoNumberDuplicated.getController();
         statisticControllerNumberDuplicated.setImage(Image.FILES_DUPLICATED);
-        statisticControllerNumberDuplicated.setStaticText("Nombre de fichiers dupliqués");
+        statisticControllerNumberDuplicated.setStaticText(SpringFxmlLoader.getResourceBundle().getString("statistic.text.duplicatedFileNumber"));
         statisticControllerNumberDuplicated.dynamicTextProperty().bind(mainModel.getSearchStatisticsModel().nbDuplicateFilesProperty().asString());
         results.add(loadingMojoNumberDuplicated.getParent());
         
@@ -69,7 +71,7 @@ public class StatisticHelper {
         LoadingMojo loadingMojoSpaceReleased = SpringFxmlLoader.load(Navigation.STATISTIC_COMPONENT);
         StatisticController statisticControllerSpaceReleased = (StatisticController) loadingMojoSpaceReleased.getController();
         statisticControllerSpaceReleased.setImage(Image.GARBAGE);
-        statisticControllerSpaceReleased.setStaticText("Espace libéré");
+        statisticControllerSpaceReleased.setStaticText(SpringFxmlLoader.getResourceBundle().getString("statistic.text.spaceFreedUp")); 
         Bindings.bindBidirectional(statisticControllerSpaceReleased.dynamicTextProperty(), mainModel.getSearchStatisticsModel().spaceReleasedProperty(), new ByteStringConverter());
         results.add(loadingMojoSpaceReleased.getParent());        
         
@@ -82,7 +84,7 @@ public class StatisticHelper {
         LoadingMojo loadingMojo = SpringFxmlLoader.load(Navigation.STATISTIC_COMPONENT);
         StatisticController statisticController = (StatisticController) loadingMojo.getController();
         statisticController.setImage(Image.SCANNED_FILES);
-        statisticController.setStaticText("Nombre de fichiers scannés");
+        statisticController.setStaticText(SpringFxmlLoader.getResourceBundle().getString("statistic.text.scannedFileNumber"));        
         statisticController.dynamicTextProperty().bind(mainModel.getSearchStatisticsModel().nbScannedFilesProperty().asString());
         results.add(loadingMojo.getParent());
         
@@ -90,7 +92,7 @@ public class StatisticHelper {
         LoadingMojo loadingMojoWastedSpace = SpringFxmlLoader.load(Navigation.STATISTIC_COMPONENT);
         StatisticController statisticControllerWastedSpace = (StatisticController) loadingMojoWastedSpace.getController();
         statisticControllerWastedSpace.setImage(Image.WASTED_SPACE);
-        statisticControllerWastedSpace.setStaticText("Volume à copier");
+        statisticControllerWastedSpace.setStaticText(SpringFxmlLoader.getResourceBundle().getString("statistic.text.spaceToCopy"));         
         Bindings.bindBidirectional(statisticControllerWastedSpace.dynamicTextProperty(), mainModel.getSearchStatisticsModel().spaceToDuplicateProperty(), new ByteStringConverter());
         results.add(loadingMojoWastedSpace.getParent());        
         
@@ -98,7 +100,7 @@ public class StatisticHelper {
         LoadingMojo loadingMojoNumberToDuplicate = SpringFxmlLoader.load(Navigation.STATISTIC_COMPONENT);
         StatisticController statisticControllerNumberToDuplicate = (StatisticController) loadingMojoNumberToDuplicate.getController();
         statisticControllerNumberToDuplicate.setImage(Image.FILES_DUPLICATED);
-        statisticControllerNumberToDuplicate.setStaticText("Nombre de fichiers à dupliquer");
+        statisticControllerNumberToDuplicate.setStaticText(SpringFxmlLoader.getResourceBundle().getString("statistic.text.numberOfFileToDuplicate"));    
         statisticControllerNumberToDuplicate.dynamicTextProperty().bind(mainModel.getSearchStatisticsModel().nbFileToDuplicateProperty().asString());
         results.add(loadingMojoNumberToDuplicate.getParent());
         

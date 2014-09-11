@@ -11,13 +11,10 @@ package caillou.company.clonemanager.gui.bean.error;
  * @author pierre
  */
 public class UnexistingFileError extends Error {
-    
-    public UnexistingFileError(String message, SEVERITY_LEVEL severityLevel){
-        super(message, severityLevel);
-    }
-    
+        
     public UnexistingFileError(){
-        super("Le répertoire n'existe pas", SEVERITY_LEVEL.ERROR);
+        this.setMessage(getI18NMessage("error.directoryDoesntExist"));
+        this.setSeverity(SEVERITY_LEVEL.ERROR);
     }
     
 

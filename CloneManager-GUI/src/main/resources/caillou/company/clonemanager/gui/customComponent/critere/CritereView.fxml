@@ -13,14 +13,14 @@
 
 <GridPane hgap="3.0" prefWidth="375.0" vgap="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caillou.company.clonemanager.gui.customComponent.critere.CritereController">
     <children>
-        <Label styleClass="section" text="Taille mini : " textOverrun="CLIP" GridPane.rowIndex="3" />
+        <Label styleClass="section" text="%criteria.minimalSize" textOverrun="CLIP" GridPane.rowIndex="3" />
         <IntegerField fx:id="sizeMinId" maxHeight="25.0" minHeight="25.0" minWidth="110.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
             <minValue>0</minValue>
             <maxValue>
                 <Integer fx:constant="MAX_VALUE" />
             </maxValue>
         </IntegerField>
-        <Label styleClass="section" text="Taille maxi : " textOverrun="CLIP" GridPane.rowIndex="4" />
+        <Label styleClass="section" text="%criteria.maximalSize" textOverrun="CLIP" GridPane.rowIndex="4" />
         <IntegerField fx:id="sizeMaxId" maxHeight="25.0" minHeight="25.0" minWidth="100.0" prefHeight="25.0" prefWidth="110.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
             <minValue>0</minValue>
             <maxValue>
@@ -39,11 +39,11 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
         </GridPane>
-        <Label styleClass="section" text="Format : " GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <CheckBox fx:id="formatAllId" alignment="CENTER_LEFT" contentDisplay="LEFT" indeterminate="false" mnemonicParsing="false" selected="true" text="Tous" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-        <CheckBox fx:id="formatVideoId" disable="true" indeterminate="false" mnemonicParsing="false" selected="false" text="Vidéos" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-        <CheckBox fx:id="formatAudioId" disable="true" indeterminate="false" mnemonicParsing="false" selected="false" text="Audios" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <CheckBox fx:id="formatImageId" disable="true" indeterminate="false" mnemonicParsing="false" text="Images" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+        <Label styleClass="section" text="%criteria.format" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <CheckBox fx:id="formatAllId" alignment="CENTER_LEFT" contentDisplay="LEFT" indeterminate="false" mnemonicParsing="false" selected="true" text="%criteria.format.all" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <CheckBox fx:id="formatVideoId" disable="true" indeterminate="false" mnemonicParsing="false" selected="false" text="%criteria.format.video" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+        <CheckBox fx:id="formatAudioId" disable="true" indeterminate="false" mnemonicParsing="false" selected="false" text="%criteria.format.audio" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <CheckBox fx:id="formatImageId" disable="true" indeterminate="false" mnemonicParsing="false" text="%criteria.format.image" GridPane.columnIndex="2" GridPane.rowIndex="1" />
         <ComboBox fx:id="minimumSizeFormatId" prefHeight="25.0" prefWidth="81.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
             <items>
                 <FXCollections fx:factory="observableArrayList">
@@ -68,7 +68,7 @@
         </ComboBox>  
     </children>
     <columnConstraints>
-        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="28.0" />
+        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="35.0" />
         <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="30.0" />
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="191.0" minWidth="0.0" prefWidth="0.0" />

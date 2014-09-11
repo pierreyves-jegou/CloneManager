@@ -3,6 +3,7 @@ package caillou.company.clonemanager.background.service.impl;
 import caillou.company.clonemanager.background.bean.applicationFile.contract.ApplicationFile;
 import caillou.company.clonemanager.background.bean.filter.Filter;
 import caillou.company.clonemanager.background.bean.filter.FilterGroup;
+import caillou.company.clonemanager.background.bean.impl.Group;
 import caillou.company.clonemanager.background.bean.impl.MyFile;
 import caillou.company.clonemanager.background.exception.OrganizerException;
 import caillou.company.clonemanager.background.service.contract.Cancellable;
@@ -30,7 +31,7 @@ public class FileVisitor extends SimpleFileVisitor<Path> {
     Set<Path> visitedLink = new HashSet<>();
     Filter<ApplicationFile> filter;
     Set<ApplicationFile> filesToTreat = new HashSet<>();
-    private String currentGroup;
+    private Group.VALUE currentGroup;
     private Long bytesToTreat = new Long(0);
     private Cancellable callingThread;
     
@@ -57,7 +58,7 @@ public class FileVisitor extends SimpleFileVisitor<Path> {
         MyFile myFile = new MyFile(path);
         if (!myFile.isDirectory()) {
             if (filter == null || filter.accept(myFile)) {
-                myFile.setGroup(currentGroup);
+                myFile.setGroupValue(currentGroup);
                 Long fileSize = attrs.size();
                 myFile.setSize(fileSize);
                 bytesToTreat += fileSize;
@@ -68,10 +69,10 @@ public class FileVisitor extends SimpleFileVisitor<Path> {
         return FileVisitResult.CONTINUE;
     }
 
-    public void visit(Cancellable object, Path path, String group)
+    public void visit(Cancellable object, Path path, Group.VALUE groupValue)
             throws OrganizerException, IOException {
 
-        setCurrentGroup(group);
+        setCurrentGroup(groupValue);
         this.callingThread = object;
 
         if (!path.toFile().exists()) {
@@ -109,7 +110,7 @@ public class FileVisitor extends SimpleFileVisitor<Path> {
         filesToTreat = pFilesToTreat;
     }
 
-    public void setCurrentGroup(String currentGroup) {
+    public void setCurrentGroup(Group.VALUE currentGroup) {
         this.currentGroup = currentGroup;
     }
 

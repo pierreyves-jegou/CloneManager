@@ -28,7 +28,7 @@
                               </ImageView>
                            </children>
                         </HBox>
-                        <Label prefWidth="387.0" styleClass="myBoxTitle" text="Fichiers identiques" textFill="#682929" />
+                        <Label prefWidth="387.0" styleClass="myBoxTitle" text="%title.identicalfile" textFill="#682929" />
                      </children>
                      <VBox.margin>
                         <Insets />
@@ -40,12 +40,12 @@
                            <children>
                               <TextFlow maxWidth="390.0">
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Permet d'identifier tous les fichiers identiques entre deux répertoires ou deux volumes logiques (groupes) meme si les fichiers ne sont pas nommés de la meme manière." wrappingWidth="743.6279296875" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%text.taskchoice.identicalfile" wrappingWidth="743.6279296875" />
                                  </children>
                               </TextFlow>
                               <VBox alignment="BOTTOM_RIGHT">
                                  <children>
-                                    <Button defaultButton="true" minHeight="25.0" minWidth="127.0" mnemonicParsing="false" onAction="#handleDoublons" styleClass="validerButton" text="Suivant" />
+                                    <Button defaultButton="true" minHeight="25.0" minWidth="127.0" mnemonicParsing="false" onAction="#handleDoublons" styleClass="validerButton" text="%button.next" />
                                  </children>
                               </VBox>
                            </children>
@@ -80,7 +80,7 @@
                               </ImageView>
                            </children>
                         </HBox>
-                        <Label prefWidth="387.0" styleClass="myBoxTitle" text="Fichiers manquants" />
+                        <Label prefWidth="387.0" styleClass="myBoxTitle" text="%title.missingfile" />
                      </children>
                   </HBox>
                   <HBox VBox.vgrow="SOMETIMES">
@@ -89,12 +89,12 @@
                            <children>
                               <TextFlow maxWidth="390.0">
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Permet d'identifier tous les fichiers manquants entre deux répertoires ou deux volumes logiques (groupes)." wrappingWidth="746.8779296875" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%text.taskchoice.missingfile" wrappingWidth="746.8779296875" />
                                  </children>
                               </TextFlow>
                               <VBox alignment="BOTTOM_RIGHT">
                                  <children>
-                                    <Button defaultButton="true" minHeight="25.0" minWidth="127.0" mnemonicParsing="false" onAction="#handleMissings" styleClass="validerButton" text="Suivant" />
+                                    <Button defaultButton="true" minHeight="25.0" minWidth="127.0" mnemonicParsing="false" onAction="#handleMissings" styleClass="validerButton" text="%button.next" />
                                  </children>
                               </VBox>
                            </children>

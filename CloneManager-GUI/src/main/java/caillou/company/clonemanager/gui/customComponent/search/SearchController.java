@@ -76,6 +76,8 @@ public class SearchController implements Initializable {
     private TransitionController transitionController;
 
     private Parent transitionFxml;
+    
+    private String bundleForKeyTitleProcessingData;
 
     public EnqueueService getEnqueueService() {
         return enqueueService;
@@ -84,10 +86,6 @@ public class SearchController implements Initializable {
     @Autowired
     public void setEnqueueService(EnqueueService enqueueService) {
         this.enqueueService = enqueueService;
-    }
-
-    public SearchController() {
-
     }
 
     @Override
@@ -103,11 +101,15 @@ public class SearchController implements Initializable {
         mainModel.setSearchStatisticsModel(searchStatisticsModel);
     }
 
+    private void initializeResourceBundle(ResourceBundle resources){
+       bundleForKeyTitleProcessingData = resources.getString("title.processingData");
+    }
+    
     private void buildTransitionPopup() {
         LoadingMojo loadingMojo = SpringFxmlLoader.load(Navigation.TRANSITION_POPUP);
         transitionController = (TransitionController) loadingMojo.getController();
         transitionFxml = loadingMojo.getParent();
-        final Dialog dialogTransition = new Dialog(MainApp.getInstance().getStage(), "Traitement des données");
+        final Dialog dialogTransition = new Dialog(MainApp.getInstance().getStage(), bundleForKeyTitleProcessingData);
         transitionController.setWrappingDialog(dialogTransition);
         dialogTransition.setContent(transitionFxml);
     }

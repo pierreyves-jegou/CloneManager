@@ -29,7 +29,7 @@
                                                 <Insets right="10.0" />
                                             </HBox.margin>
                                         </ImageView>
-                                        <Label prefWidth="387.0" styleClass="myBoxTitle" text="Repertoires" />
+                                        <Label prefWidth="387.0" styleClass="myBoxTitle" text="%title.locations" />
                                     </children>
                                     <VBox.margin>
                                         <Insets bottom="20.0" />
@@ -55,7 +55,7 @@
                                                 <Insets right="10.0" />
                                             </HBox.margin>
                                         </ImageView>
-                                        <Label prefWidth="387.0" styleClass="myBoxTitle" text="Criteres de recherche" />
+                                        <Label prefWidth="387.0" styleClass="myBoxTitle" text="%tilte.constraints" />
                                     </children>
                                 </HBox>
                                 <HBox alignment="CENTER_LEFT" minHeight="199.0" prefHeight="199.0" prefWidth="582.0" styleClass="myBoxContent">
@@ -72,8 +72,8 @@
                 </HBox>
                 <HBox alignment="CENTER_RIGHT" spacing="10.0">
                     <children>
-                        <Button minHeight="27.0" minWidth="140.0" mnemonicParsing="false" onAction="#mainMenuAction" styleClass="backButton" text="Précédent" />
-                        <Button fx:id="validerButton" defaultButton="true" minHeight="27.0" minWidth="123.0" mnemonicParsing="false" onAction="#searchAction" styleClass="validerButton" text="Suivant" textOverrun="CLIP">
+                        <Button minHeight="27.0" minWidth="140.0" mnemonicParsing="false" onAction="#mainMenuAction" styleClass="backButton" text="%button.previous" />
+                        <Button fx:id="validerButton" defaultButton="true" minHeight="27.0" minWidth="123.0" mnemonicParsing="false" onAction="#searchAction" styleClass="validerButton" text="%button.next" textOverrun="CLIP">
                      <padding>
                         <Insets right="13.0" />
                      </padding></Button>

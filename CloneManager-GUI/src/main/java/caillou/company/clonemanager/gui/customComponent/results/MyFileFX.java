@@ -7,6 +7,7 @@
 package caillou.company.clonemanager.gui.customComponent.results;
 
 import caillou.company.clonemanager.background.bean.applicationFile.contract.ApplicationFile;
+import caillou.company.clonemanager.background.bean.impl.Group;
 import caillou.company.clonemanager.gui.bean.applicationFileFX.contract.GUIApplicationFile;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -21,7 +22,7 @@ public class MyFileFX implements GUIApplicationFile{
     
     private final StringProperty md5Print = new SimpleStringProperty();
     private final StringProperty absolutePath = new SimpleStringProperty();
-    private final StringProperty group = new SimpleStringProperty();
+    private Group.VALUE groupValue = null;
     private final BooleanProperty higthLigth = new SimpleBooleanProperty(true);
     private final StringProperty cssColor = new SimpleStringProperty();
     private final ApplicationFile myFile;
@@ -30,7 +31,7 @@ public class MyFileFX implements GUIApplicationFile{
     public MyFileFX(ApplicationFile myFile){
         this.md5Print.set(myFile.getMD5Print());
         this.absolutePath.set(myFile.getAbsolutePath());
-        this.group.set(myFile.getGroup());
+        this.groupValue = myFile.getGroup();
         this.myFile = myFile;
     }
     
@@ -61,16 +62,12 @@ public class MyFileFX implements GUIApplicationFile{
     }
     
     @Override    
-    public String getGroup() {
-        return group.get();
+    public Group.VALUE getGroup() {
+        return groupValue;
     }
 
-    public void setGroup(String value) {
-        group.set(value);
-    }
-
-    public StringProperty groupProperty() {
-        return group;
+    public void setGroup(Group.VALUE value) {
+        this.groupValue = value;
     }
     
     public boolean isHigthLigth() {

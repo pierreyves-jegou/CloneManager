@@ -12,16 +12,11 @@ package caillou.company.clonemanager.gui.bean.error;
  */
 public class AlreadyDefinedFileError extends Error {
     
-    
-    
     public AlreadyDefinedFileError(){
-        super("Cet emplacement à déjà été spécifié", SEVERITY_LEVEL.ERROR);
+        this.setMessage(this.getI18NMessage("error.locationAlreadyDefined"));
+        this.setSeverity(SEVERITY_LEVEL.ERROR);
     }
-            
-    public AlreadyDefinedFileError(String message, SEVERITY_LEVEL severityLevel){
-        super(message, severityLevel);
-    }
-
+           
     @Override
     public TYPE getType() {
         return Error.TYPE.ALREADYDEFINEDFILEERROR;

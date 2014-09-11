@@ -6,6 +6,7 @@
 
 package caillou.company.clonemanager.gui.service.impl;
 
+import caillou.company.clonemanager.background.bean.impl.Group;
 import caillou.company.clonemanager.gui.bean.error.AlreadyDefinedFileError;
 import caillou.company.clonemanager.gui.bean.error.IncludedFileError;
 import caillou.company.clonemanager.gui.bean.error.NotADirectoryError;
@@ -110,7 +111,7 @@ public class LocationsValidationServiceImpl implements LocationsValidationServic
     public boolean validLocations(List<LocationModel> locationModels, boolean enableGrouping, boolean detectsIdentiqueFilesWithinALocation){
         boolean valid = true;
         int nbLocation = 0;
-        Set<String> groupsPresent = new HashSet<>();
+        Set<Group.VALUE> groupsPresent = new HashSet<>();
 
         for (LocationModel locationModel : locationModels) {
 

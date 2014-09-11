@@ -14,7 +14,7 @@ public class MyFile extends File implements ApplicationFile{
      */
     private static final long serialVersionUID = -8255870717251417044L;
 
-    private String group = null;
+    private Group.VALUE groupValue = null;
 
     private String filteredName = null;
 
@@ -32,12 +32,12 @@ public class MyFile extends File implements ApplicationFile{
     }
     
     @Override
-    public String getGroup() {
-        return group;
+    public Group.VALUE getGroup() {
+        return groupValue;
     }
 
-    public void setGroup(String group) {
-        this.group = group;
+    public void setGroupValue(Group.VALUE group) {
+        this.groupValue = group;
     }
 
     public String getFilteredName() {
@@ -87,15 +87,17 @@ public class MyFile extends File implements ApplicationFile{
 
     /**
      * ** Constructors / Getters / Setters **
+     * @param pathname
+     * @param groupValue
      */
-    public MyFile(String pathname, String group) {
+    public MyFile(String pathname, Group.VALUE groupValue) {
         super(pathname);
-        this.group = group;
+        this.groupValue = groupValue;
     }
 
-    public MyFile(Path path, String group) {
+    public MyFile(Path path, Group.VALUE groupValue) {
         super(path.toAbsolutePath().toUri());
-        this.group = group;
+        this.groupValue = groupValue;
     }
 
     public MyFile(Path path) {

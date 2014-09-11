@@ -17,14 +17,8 @@
         <Button fx:id="filterButtonId" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" onAction="#handleFilterAction" prefHeight="25.0" prefWidth="25.0" styleClass="buttonFilter" />
         <ComboBox fx:id="groupId" maxWidth="115.0" minWidth="100.0" prefHeight="26.0" prefWidth="115.0">
             <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:id="firstComboBoxValueId" fx:value="Groupe 1" />
-                    <String fx:value="Groupe 2" />
-                </FXCollections>
+                <FXCollections fx:factory="observableArrayList" />
             </items>
-            <value>
-                <fx:reference source="firstComboBoxValueId" />
-            </value>
         </ComboBox>
         <ListView fx:id="errorsId" maxHeight="35.0" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="80.0" opacity="0.56" prefWidth="500.0" visible="false" HBox.hgrow="ALWAYS" />
     </children>

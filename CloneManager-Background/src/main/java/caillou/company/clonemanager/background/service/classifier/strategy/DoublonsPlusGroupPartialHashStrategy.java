@@ -6,8 +6,8 @@
 package caillou.company.clonemanager.background.service.classifier.strategy;
 
 import caillou.company.clonemanager.background.bean.applicationFile.contract.ApplicationFile;
-import caillou.company.clonemanager.background.bean.impl.Group;
 import caillou.company.clonemanager.background.service.classifier.impl.Analyse;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -26,17 +26,14 @@ public class DoublonsPlusGroupPartialHashStrategy<T extends ApplicationFile> imp
             return null;
         }
         for (Map.Entry<String, Set<T>> entry : unFilteredValues.entrySet()) {
-            boolean group1Found = false;
-            boolean group2Found = false;
+            Set<Object> groups = new HashSet<>();
             for(ApplicationFile myFile : entry.getValue()){
-                if(myFile.getGroup().equals(Group.GROUP1)){
-                    group1Found = true;
-                }else if(myFile.getGroup().equals(Group.GROUP2)){
-                    group2Found = true;
+                if(myFile.getGroup() != null){
+                    groups.add(myFile.getGroup());
                 }
             }
             
-            if (entry.getValue() != null && entry.getValue().size() > 1 && group1Found && group2Found) {
+            if (entry.getValue() != null && entry.getValue().size() > 1 && groups.size() == 1) {
                 analyse.addEntryThatMigthMatch(entry);
             } else {
                 analyse.addEntryThatDoNotMatch(entry);

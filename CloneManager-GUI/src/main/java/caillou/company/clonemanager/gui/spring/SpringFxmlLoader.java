@@ -5,11 +5,13 @@
  */
 package caillou.company.clonemanager.gui.spring;
 
+import caillou.company.clonemanager.background.bean.impl.Group;
 import caillou.company.clonemanager.gui.MainApp;
 import caillou.company.clonemanager.gui.Navigation;
 import caillou.company.clonemanager.gui.bean.impl.LoadingMojo;
 import java.io.IOException;
-import java.io.InputStream;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,11 +25,16 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class SpringFxmlLoader {
 
     private static final ApplicationContext applicationContext = new ClassPathXmlApplicationContext(Navigation.SPRING_APPLICATION_FILE);
-
-    public static LoadingMojo load(String url) {
-        InputStream fxmlStream = SpringFxmlLoader.class
-                .getResourceAsStream(url);
-        FXMLLoader loader = new FXMLLoader(MainApp.class.getResource(url));
+    private static final ResourceBundle resourceBundle;
+    private static Locale currentLocale = Locale.ENGLISH; 
+    
+    static {
+        resourceBundle = ResourceBundle.getBundle("bundle.Main", SpringFxmlLoader.currentLocale);
+        changeLocale(currentLocale);
+    }
+    
+    public static LoadingMojo load(String url) {           
+        FXMLLoader loader = new FXMLLoader(MainApp.class.getResource(url), resourceBundle);
             loader.setControllerFactory(new Callback<Class<?>, Object>() {
                 @Override
                 public Object call(Class<?> clazz) {
@@ -58,4 +65,19 @@ public class SpringFxmlLoader {
             return applicationContext.getBean(name, requiredType);
         }
     }
+    
+    public static void changeLocale(Locale locale){
+        SpringFxmlLoader.currentLocale = locale;
+        Group.GROUP1.setGuiValue(resourceBundle.getString("group1"));
+        Group.GROUP2.setGuiValue(resourceBundle.getString("group2"));
+    }
+    
+    public static ResourceBundle getResourceBundle(){
+        return resourceBundle;
+    }
+    
+    public static Locale getLocale(){
+        return currentLocale;
+    }
+    
 }

@@ -26,16 +26,16 @@ import org.springframework.stereotype.Component;
 public class ApplicationFileUtilImpl implements ApplicationFileUtil {
         
     @Override
-    public <T extends ApplicationFile> Set<T> detectDuplicateFilesHavingACopyInOtherGroup(Map<String, List<T>> listHashProviderPerHash, String originalGroup){
+    public <T extends ApplicationFile> Set<T> detectDuplicateFilesHavingACopyInOtherGroup(Map<String, List<T>> listHashProviderPerHash, Group.VALUE originalGroupValue){
         Set<T> results = new HashSet<>();      
-        String groupToCheck = Group.getTheOtherGroup(originalGroup);
+        Group.VALUE groupToCheck = Group.getTheOtherGroup(originalGroupValue);
         
         for(Map.Entry<String, List<T>> entry : listHashProviderPerHash.entrySet()){
             List<T> tmp = new ArrayList<>();
             boolean copyFound = false;
             if(entry.getValue().size() > 1){
                 for(T myFileFX : entry.getValue()){
-                    if(myFileFX.getGroup().equals(originalGroup)){
+                    if(myFileFX.getGroup().equals(originalGroupValue)){
                        tmp.add(myFileFX); 
                     }
                     if(myFileFX.getGroup().equals(groupToCheck)){

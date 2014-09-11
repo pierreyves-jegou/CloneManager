@@ -6,11 +6,13 @@
 
 package caillou.company.clonemanager.background.bean.applicationFile.contract;
 
+import caillou.company.clonemanager.background.bean.impl.Group;
+
 /**
  *
  * @author pierre
  */
 public interface GroupProvider {
     
-    public String getGroup();
+    public Group.VALUE getGroup();
 }

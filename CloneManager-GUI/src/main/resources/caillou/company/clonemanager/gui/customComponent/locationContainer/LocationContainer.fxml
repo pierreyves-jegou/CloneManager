@@ -16,9 +16,9 @@
          </padding></VBox>
        <HBox fx:id="boutonContainer">
            <children>
-               <Hyperlink onAction="#addLocationFromLink" text="Ajouter">
+               <Hyperlink onAction="#addLocationFromLink" text="%button.add">
                    <HBox.margin>
-                       <javafx.geometry.Insets />
+                       <javafx.geometry.Insets bottom="10.0" />
                    </HBox.margin>
                </Hyperlink>
                <ImageView id="addLocation48x48.png" fitHeight="21.0" fitWidth="22.0" onMouseClicked="#addLocationFromButton">
@@ -30,7 +30,7 @@
        </HBox>
       <HBox alignment="BOTTOM_LEFT" prefHeight="50.0">
          <children>
-            <Hyperlink fx:id="advancedOptionId" alignment="TOP_LEFT" onAction="#toogleAdvancedOptions" styleClass="myLink" text="Options avancées">
+            <Hyperlink fx:id="advancedOptionId" alignment="TOP_LEFT" onAction="#toogleAdvancedOptions" styleClass="myLink" text="%link.advancedOption">
                <HBox.margin>
                   <Insets />
                </HBox.margin></Hyperlink>
@@ -38,11 +38,11 @@
       </HBox>
       <VBox spacing="5.0">
          <children>
-            <CheckBox fx:id="enableGroupingId" mnemonicParsing="false" text="Utiliser des groupes">
+            <CheckBox fx:id="enableGroupingId" mnemonicParsing="false" text="%locationContainer.useGroup">
                <VBox.margin>
                   <Insets />
                </VBox.margin></CheckBox>
-            <CheckBox fx:id="detectDoublonsWithinSameLocationId" mnemonicParsing="false" selected="true" text="Détecter les fichiers identiques à l'intérieur d'un meme emplacement">
+            <CheckBox fx:id="detectDoublonsWithinSameLocationId" mnemonicParsing="false" selected="true" text="%locationContainer.detectDuplicateWithinALocation">
                <VBox.margin>
                   <Insets />
                </VBox.margin></CheckBox>

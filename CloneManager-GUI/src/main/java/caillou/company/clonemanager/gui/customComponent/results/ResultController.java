@@ -81,6 +81,9 @@ public class ResultController implements Initializable {
 
     @FXML
     private TableColumn<GUIApplicationFile, String> md5PrintId;
+    
+    @FXML
+    private TableColumn<GUIApplicationFile, Long> columnSize;
 
     @FXML
     private TableView<GUIApplicationFile> resultViewId;
@@ -269,11 +272,13 @@ public class ResultController implements Initializable {
         resultViewId.heightProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                Double columnFileWidth = (resultViewId.getWidth() * 0.5) - 1;
+                Double columnFileWidth = (resultViewId.getWidth() * 0.4) - 1;
+                Double columnSizeWidth = (resultViewId.getWidth() * 0.2) - 1;
                 Double columnGroupWidth = resultViewId.getWidth() * 0.15;
-                Double md5PrintIdWidth = (resultViewId.getWidth() * 0.35) - 1;
+                Double md5PrintIdWidth = (resultViewId.getWidth() * 0.25) - 1;
 
                 columnFile.setPrefWidth(columnFileWidth);
+                columnSize.setPrefWidth(columnSizeWidth);
                 columnGroup.setPrefWidth(columnGroupWidth);
                 md5PrintId.setPrefWidth(md5PrintIdWidth);
             }

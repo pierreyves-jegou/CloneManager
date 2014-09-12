@@ -145,6 +145,11 @@
                                                         <PropertyValueFactory property="absolutePath" />
                                                     </cellValueFactory>
                                                 </TableColumn>
+                                                <TableColumn fx:id="columnSize" editable="false" text="%title.column.size">
+                                                    <cellValueFactory>
+                                                        <PropertyValueFactory property="size" />
+                                                    </cellValueFactory>                                                    
+                                                </TableColumn>
                                                 <TableColumn fx:id="columnGroup" editable="false" text="%title.column.group">
                                                     <cellValueFactory>
                                                         <PropertyValueFactory property="group" />

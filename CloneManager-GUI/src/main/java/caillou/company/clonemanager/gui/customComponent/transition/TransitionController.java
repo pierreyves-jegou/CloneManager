@@ -9,6 +9,7 @@ package caillou.company.clonemanager.gui.customComponent.transition;
 import caillou.company.clonemanager.background.bean.contract.EventBusProvider;
 import caillou.company.clonemanager.gui.MainApp;
 import caillou.company.clonemanager.gui.Navigation;
+import caillou.company.clonemanager.gui.WindowsPreferredDimensions;
 import caillou.company.clonemanager.gui.customComponent.common.contract.DialogWrapper;
 import caillou.company.clonemanager.gui.event.CancelTaskEvent;
 import com.google.common.eventbus.EventBus;
@@ -59,7 +60,7 @@ public class TransitionController implements Initializable, EventBusProvider, Di
                     try {
                         wrappingDialog.hide();
                         MainApp app = MainApp.getInstance();
-                        app.replaceSceneContent(Navigation.RESULTS_VIEW, 800.0, 600.0);
+                        app.replaceSceneContent(Navigation.RESULTS_VIEW, WindowsPreferredDimensions.RESULT_VIEW_WIDTH, WindowsPreferredDimensions.RESULT_VIEW_HEIGHT);
                     } catch (Exception ex) {
                         Logger.getLogger(TransitionController.class.getName()).log(Level.SEVERE, null, ex);
                     }

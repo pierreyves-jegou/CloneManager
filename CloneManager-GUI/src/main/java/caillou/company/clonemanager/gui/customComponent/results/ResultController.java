@@ -9,6 +9,7 @@ import caillou.company.clonemanager.background.bean.applicationFile.contract.App
 import caillou.company.clonemanager.background.bean.impl.Group;
 import caillou.company.clonemanager.gui.MainApp;
 import caillou.company.clonemanager.gui.Navigation;
+import caillou.company.clonemanager.gui.WindowsPreferredDimensions;
 import caillou.company.clonemanager.gui.bean.applicationFileFX.contract.GUIApplicationFile;
 import caillou.company.clonemanager.gui.customComponent.common.MainModel;
 import caillou.company.clonemanager.gui.customComponent.statistic.StatisticHelper;
@@ -57,6 +58,8 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import org.controlsfx.control.PopOver;
@@ -86,8 +89,11 @@ public class ResultController implements Initializable {
     private TableColumn<GUIApplicationFile, Long> columnSize;
 
     @FXML
+    private TableColumn<GUIApplicationFile, String> columnHashPosition;
+    
+    @FXML
     private TableView<GUIApplicationFile> resultViewId;
-
+    
     @FXML
     private CheckBox hideSingleFileId;
 
@@ -127,6 +133,9 @@ public class ResultController implements Initializable {
     @FXML
     private String endWithValueId;
 
+    @FXML
+    private VBox mainContainerPanelID;
+    
     private final ListProperty<GUIApplicationFile> guiApplicationFileList = new SimpleListProperty<>();
 
     private FilteredList<GUIApplicationFile> guiApplicationFileListFiltered;
@@ -138,7 +147,13 @@ public class ResultController implements Initializable {
     private PopOver popOver;
 
     private final GroupPredicate mainPredicate = new GroupPredicate();
-
+    
+    @FXML
+    private Text textId;
+    
+    @FXML
+    private TextFlow textFlowId;
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.guiApplicationFileListFiltered = new FilteredList<>(guiApplicationFileList);
@@ -179,11 +194,20 @@ public class ResultController implements Initializable {
         /**
          * End *
          */
+        
+        for(String ee : this.textFlowId.getStyleClass()){
+            System.out.println("Style de TextFlow:" +ee);
+        }
+        
+        for(String ee : this.textId.getStyleClass()){
+            System.out.println("Style de Text:" +ee);
+        }
     }
 
     private void initializeRowFactory() {
         myRowFactory = new MyRowFactory(resultViewId, guiApplicationFileList);
         myRowFactory.getEventBus().register(this);
+        myRowFactory.setHigthLigthMode(this.mainModel.getTaskModel().getCurrentTask().equals(TaskModel.TASK.DETECT_DOUBLONS));
         resultViewId.setRowFactory(myRowFactory);
     }
 
@@ -265,22 +289,24 @@ public class ResultController implements Initializable {
     }
 
     private void initializePhaseAutomaticResizing() {
-        splittedPanelId.prefHeightProperty().bind(mainPanelId.heightProperty().subtract(2));
-        splittedPanelId.prefWidthProperty().bind(mainPanelId.widthProperty().subtract(2));
+        splittedPanelId.prefHeightProperty().bind(mainContainerPanelID.heightProperty());
+        splittedPanelId.prefWidthProperty().bind(mainContainerPanelID.widthProperty());
         resultViewId.prefHeightProperty().bind(splittedPanelId.heightProperty().subtract(2));
 
         resultViewId.heightProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                Double columnHashPositionWidth = 45.0;
                 Double columnFileWidth = (resultViewId.getWidth() * 0.4) - 1;
-                Double columnSizeWidth = (resultViewId.getWidth() * 0.2) - 1;
-                Double columnGroupWidth = resultViewId.getWidth() * 0.15;
+                Double columnSizeWidth = (resultViewId.getWidth() * 0.2) - 23 - 1;
+                Double columnGroupWidth = resultViewId.getWidth() * 0.15 - 22;
                 Double md5PrintIdWidth = (resultViewId.getWidth() * 0.25) - 1;
 
                 columnFile.setPrefWidth(columnFileWidth);
                 columnSize.setPrefWidth(columnSizeWidth);
                 columnGroup.setPrefWidth(columnGroupWidth);
                 md5PrintId.setPrefWidth(md5PrintIdWidth);
+                columnHashPosition.setPrefWidth(columnHashPositionWidth);
             }
         });
 
@@ -319,7 +345,7 @@ public class ResultController implements Initializable {
         MainApp app = MainApp.getInstance();
         mainModel.resetLocationsModel();
         mainModel.resetCritereModel();
-        app.replaceSceneContent(Navigation.SEARCH_VIEW, MainApp.LARGE_WINDOWS_WIDTH, MainApp.LARGE_WINDOWS_HEIGTH);
+        app.replaceSceneContent(Navigation.SEARCH_VIEW, WindowsPreferredDimensions.SEARCH_VIEW_WIDTH, WindowsPreferredDimensions.SEARCH_VIEW_HEIGHT);
     }
 
     @FXML

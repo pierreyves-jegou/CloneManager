@@ -20,6 +20,7 @@ import com.google.common.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -96,18 +97,28 @@ public class FullHashTask extends Task<List<GUIApplicationFile>> implements Canc
 
     private void doCssStuff(List<GUIApplicationFile> results){
         Collections.sort(results, new MD5Comparator());
-        String lastMD5Print = null;
-        String lastCssStyle = null;
+        Map<String, List<GUIApplicationFile>> guiApplicationFilesPerHash = new HashMap<>();
         for (GUIApplicationFile myFileFX : results) {
-            if (lastMD5Print == null) {
-                lastCssStyle = MyRowFactory.DEFAULT_STYLE;
-            } else {
-                if (!myFileFX.getMD5Print().equals(lastMD5Print)) {
-                    lastCssStyle = lastCssStyle.equals(MyRowFactory.HIGTHLIGHTED_STYLE) ? MyRowFactory.DEFAULT_STYLE : MyRowFactory.HIGTHLIGHTED_STYLE;
+            if(!guiApplicationFilesPerHash.containsKey(myFileFX.getMD5Print())){
+                guiApplicationFilesPerHash.put(myFileFX.getMD5Print(), new ArrayList<GUIApplicationFile>());
+            }
+            guiApplicationFilesPerHash.get(myFileFX.getMD5Print()).add(myFileFX);
+        }
+        
+        for(Map.Entry<String, List<GUIApplicationFile>> entry : guiApplicationFilesPerHash.entrySet()){
+           List<GUIApplicationFile> applicationFiles = entry.getValue();
+            for(int i=0; i < applicationFiles.size(); i++){
+                GUIApplicationFile guiApplicationFile = applicationFiles.get(i);
+                if(i == 0){
+                    guiApplicationFile.setCurrentPostion(GUIApplicationFile.POSITION.FIRST);
+                    continue;
+                }
+                if(i == applicationFiles.size() - 1){
+                    guiApplicationFile.setCurrentPostion(GUIApplicationFile.POSITION.LAST);
+                }else{
+                    guiApplicationFile.setCurrentPostion(GUIApplicationFile.POSITION.MIDDLE);
                 }
             }
-            myFileFX.setCssColor(lastCssStyle);
-            lastMD5Print = myFileFX.getMD5Print();
         }
     }
     

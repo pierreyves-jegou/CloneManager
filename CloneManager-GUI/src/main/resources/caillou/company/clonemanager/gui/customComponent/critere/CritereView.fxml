@@ -13,14 +13,14 @@
 
 <GridPane hgap="3.0" prefWidth="375.0" vgap="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caillou.company.clonemanager.gui.customComponent.critere.CritereController">
     <children>
-        <Label styleClass="section" text="%criteria.minimalSize" textOverrun="CLIP" GridPane.rowIndex="3" />
+        <Label text="%criteria.minimalSize" textOverrun="CLIP" GridPane.rowIndex="3" />
         <IntegerField fx:id="sizeMinId" maxHeight="25.0" minHeight="25.0" minWidth="110.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
             <minValue>0</minValue>
             <maxValue>
                 <Integer fx:constant="MAX_VALUE" />
             </maxValue>
         </IntegerField>
-        <Label styleClass="section" text="%criteria.maximalSize" textOverrun="CLIP" GridPane.rowIndex="4" />
+        <Label text="%criteria.maximalSize" textOverrun="CLIP" GridPane.rowIndex="4" />
         <IntegerField fx:id="sizeMaxId" maxHeight="25.0" minHeight="25.0" minWidth="100.0" prefHeight="25.0" prefWidth="110.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
             <minValue>0</minValue>
             <maxValue>
@@ -39,7 +39,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
         </GridPane>
-        <Label styleClass="section" text="%criteria.format" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label text="%criteria.format" GridPane.columnIndex="0" GridPane.rowIndex="0" />
         <CheckBox fx:id="formatAllId" alignment="CENTER_LEFT" contentDisplay="LEFT" indeterminate="false" mnemonicParsing="false" selected="true" text="%criteria.format.all" GridPane.columnIndex="1" GridPane.rowIndex="0" />
         <CheckBox fx:id="formatVideoId" disable="true" indeterminate="false" mnemonicParsing="false" selected="false" text="%criteria.format.video" GridPane.columnIndex="2" GridPane.rowIndex="0" />
         <CheckBox fx:id="formatAudioId" disable="true" indeterminate="false" mnemonicParsing="false" selected="false" text="%criteria.format.audio" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -81,7 +81,6 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <stylesheets>
-        <URL value="@/styles/criteres.css" />
         <URL value="@/styles/main.css" />
     </stylesheets>
 </GridPane>

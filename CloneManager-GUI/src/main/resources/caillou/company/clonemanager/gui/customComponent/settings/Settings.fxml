@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.net.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="TOP_CENTER" prefHeight="246.0" prefWidth="600.0" spacing="10.0" styleClass="dialog" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caillou.company.clonemanager.gui.customComponent.settings.SettingsController">
+   <stylesheets>
+      <URL value="@../../../../../../styles/main.css" />
+      <URL value="@../../../../../../styles/dialog.css" />
+      <URL value="@../../../../../../styles/settings.css" />
+   </stylesheets>
+   <children>
+      <VBox styleClass="mainBox">
+         <children>
+            <HBox>
+               <children>
+                  <ImageView fitHeight="39.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../img/loupe.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="%title.language">
+                     <styleClass>
+                        <String fx:value="btext" />
+                        <String fx:value="boxTitle" />
+                     </styleClass>
+                  </Label>
+               </children>
+            </HBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" styleClass="boxText" stylesheets="@../../../../../../styles/main.css">
+               <children>
+                  <HBox alignment="CENTER" spacing="50.0">
+                     <children>
+                        <Label text="%text.settings.chooseLanguage" />
+                        <ComboBox fx:id="languageComboBoxId" prefHeight="36.0" prefWidth="36.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER_RIGHT" styleClass="boxButton">
+         <children>
+            <Button minHeight="27.0" minWidth="140.0" mnemonicParsing="false" onAction="#onCloseAction" prefHeight="27.0" prefWidth="140.0" styleClass="commonButton" text="%button.close" />
+         </children>
+      </HBox>
+   </children>
+</VBox>

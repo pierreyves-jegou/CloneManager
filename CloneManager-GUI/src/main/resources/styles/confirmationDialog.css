@@ -1,0 +1,16 @@
+.list-view {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0, 1;
+
+     /* There is some oddness if padding is in em values rather than pixels,
+        in particular, the left border of the control doesn't show. */
+    -fx-padding: 1; /* 0.083333em; */
+}
+
+
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 0.25em; /* 3 */
+    -fx-text-fill: #eaa319;
+    -fx-opacity: 1;
+}

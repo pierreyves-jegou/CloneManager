@@ -8,6 +8,7 @@ package caillou.company.clonemanager.gui.customComponent.location;
 import caillou.company.clonemanager.background.bean.impl.Group;
 import caillou.company.clonemanager.gui.MainApp;
 import caillou.company.clonemanager.gui.Navigation;
+import caillou.company.clonemanager.gui.StyleSheet;
 import caillou.company.clonemanager.gui.bean.impl.LoadingMojo;
 import caillou.company.clonemanager.gui.customComponent.common.Controller;
 import caillou.company.clonemanager.gui.customComponent.common.MainModel;
@@ -32,6 +33,7 @@ import javafx.scene.control.ListView;
 import javafx.stage.DirectoryChooser;
 import javax.annotation.PostConstruct;
 import org.controlsfx.dialog.Dialog;
+import org.controlsfx.dialog.DialogStyle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -178,6 +180,8 @@ public class LocationController extends Controller<LocationModel> implements Ini
             }
         }
         Dialog dialogExclude = new Dialog(MainApp.getInstance().getStage(), bundleForKeyExclusionTitle);
+        dialogExclude.getStylesheets().add(StyleSheet.DIALOG_CSS);
+        
         LoadingMojo loadingMojo = SpringFxmlLoader.load(Navigation.EXCLUDE_TREE);
         ExcludeTreeController excludeTreeController = (ExcludeTreeController) loadingMojo.getController();
         excludeTreeController.setWrappingDialog(dialogExclude);

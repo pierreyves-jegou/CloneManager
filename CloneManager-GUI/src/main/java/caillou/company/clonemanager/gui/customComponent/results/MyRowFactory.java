@@ -40,9 +40,10 @@ import org.controlsfx.dialog.Dialogs;
 public class MyRowFactory implements Callback<TableView<GUIApplicationFile>, TableRow<GUIApplicationFile>>, EventBusProvider {
 
     private boolean higthLigthMode = false;
-    public static final String HIGTHLIGHTED_STYLE = "higthtedTableLigthed";
-    public static final String DEFAULT_STYLE = "defaultTableStyle";
-    public static final String ALONE_STYLE = "aloneTableStyle";
+    public static final String FIRST_POSITION_STYLE = "firstPosition";
+    public static final String MIDDLE_POSITION_STYLE = "middlePosition";
+    public static final String LAST_POSITION_STYLE = "lastPosition";
+    public static final String ALONE_POSITION_STYLE = "alonePosition";
 
     private TableView<GUIApplicationFile> resultView;
     private final ObservableList<GUIApplicationFile> guiApplicationFileList;
@@ -69,18 +70,26 @@ public class MyRowFactory implements Callback<TableView<GUIApplicationFile>, Tab
             @Override
             protected void updateItem(final GUIApplicationFile myFileFX, boolean empty) {
                 super.updateItem(myFileFX, empty);
-                String cssStyle = DEFAULT_STYLE;
-                getStyleClass().remove(HIGTHLIGHTED_STYLE);
-                getStyleClass().remove(DEFAULT_STYLE);
-                getStyleClass().remove(ALONE_STYLE);
+                String cssStyle = null;
+                getStyleClass().remove(FIRST_POSITION_STYLE);
+                getStyleClass().remove(MIDDLE_POSITION_STYLE);
+                getStyleClass().remove(LAST_POSITION_STYLE);
+                getStyleClass().remove(ALONE_POSITION_STYLE);
 
-                if (myFileFX != null) {
-                    if (myFileFX.isAlone() != null && myFileFX.isAlone()) {
-                        cssStyle = ALONE_STYLE;
-                    } else if (higthLigthMode) {
-                        cssStyle = myFileFX.getCssColor();
-                    } else {
-                        cssStyle = DEFAULT_STYLE;
+                if (myFileFX != null && higthLigthMode) {
+                    switch (myFileFX.getCurrentPostion()) {
+                        case FIRST:
+                            cssStyle = FIRST_POSITION_STYLE;
+                            break;
+                        case MIDDLE:
+                            cssStyle = MIDDLE_POSITION_STYLE;
+                            break;
+                        case LAST:
+                            cssStyle = LAST_POSITION_STYLE;
+                            break;
+                        case ALONE:
+                            cssStyle = ALONE_POSITION_STYLE;
+                            break;
                     }
                 }
                 getStyleClass().add(cssStyle);

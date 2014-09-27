@@ -8,6 +8,7 @@ package caillou.company.clonemanager.gui.handler;
 import caillou.company.clonemanager.background.exception.ArgumentException;
 import caillou.company.clonemanager.gui.MainApp;
 import caillou.company.clonemanager.gui.Navigation;
+import caillou.company.clonemanager.gui.StyleSheet;
 import caillou.company.clonemanager.gui.bean.applicationFileFX.contract.GUIApplicationFile;
 import caillou.company.clonemanager.gui.bean.impl.LoadingMojo;
 import caillou.company.clonemanager.gui.customComponent.results.ConfirmSuppressionController;
@@ -48,6 +49,7 @@ public class PreSuppressionEventHandler implements EventHandler<WorkerStateEvent
         }
         
         Dialog dialogConfirmSuppression = new Dialog(MainApp.getInstance().getStage(), SpringFxmlLoader.getResourceBundle().getString("title.fileToSuppress"));
+        dialogConfirmSuppression.getStylesheets().add(StyleSheet.DIALOG_CSS);
         LoadingMojo loadingMojo = SpringFxmlLoader.load(Navigation.SUPPRESSION_POPUP);
         ConfirmSuppressionController confirmSuppressionController = (ConfirmSuppressionController) loadingMojo.getController();
         confirmSuppressionController.setDialog(dialogConfirmSuppression);

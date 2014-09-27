@@ -1,0 +1,5 @@
+.dialog > * > .content-pane {
+    -fx-background-color: black;
+    -fx-font-size: 1.083333em; /*13px;*/
+    -fx-text-fill: #292929;
+}

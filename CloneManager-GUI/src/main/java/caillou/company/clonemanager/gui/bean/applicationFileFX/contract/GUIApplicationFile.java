@@ -14,6 +14,8 @@ import caillou.company.clonemanager.background.bean.applicationFile.contract.App
  */
 public interface GUIApplicationFile extends ApplicationFile {
     
+    public enum POSITION {ALONE, FIRST, MIDDLE, LAST};
+    
     public Boolean isAlone();
     
     public void setAlone(Boolean isAlone);
@@ -22,4 +24,7 @@ public interface GUIApplicationFile extends ApplicationFile {
     
     public void setCssColor(String cssColor);
     
+    public POSITION getCurrentPostion();
+
+    public void setCurrentPostion(POSITION currentPostion);
 }

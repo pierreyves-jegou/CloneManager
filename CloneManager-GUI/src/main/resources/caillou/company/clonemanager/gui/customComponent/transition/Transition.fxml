@@ -9,25 +9,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" prefHeight="299.0" prefWidth="417.0" spacing="15.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caillou.company.clonemanager.gui.customComponent.transition.TransitionController">
-    <stylesheets>
-        <URL value="@/styles/main.css" />
-    </stylesheets>
+<VBox alignment="CENTER" prefHeight="299.0" prefWidth="395.0" styleClass="dialog" stylesheets="@../../../../../../styles/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caillou.company.clonemanager.gui.customComponent.transition.TransitionController">
    <children>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="200.0">
          <children>
             <HBox alignment="CENTER" prefHeight="38.0" prefWidth="284.0">
                <children>
-                         <Label prefHeight="18.0" prefWidth="256.0" text="%text.analysingDataToProcess">
+                         <Label alignment="CENTER" prefHeight="18.0" prefWidth="256.0" text="%text.analysingDataToProcess">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="38.0" prefWidth="116.0">
+            <HBox alignment="CENTER" prefHeight="38.0" prefWidth="116.0" style="-fx-padding: 13 0 0 0;">
                <children>
-                         <ProgressIndicator fx:id="progressScanningFiles" prefHeight="38.0" prefWidth="39.0" />
+                         <ProgressIndicator fx:id="progressScanningFiles" prefHeight="27.0" prefWidth="35.0" />
                </children>
             </HBox>
          </children>
@@ -37,20 +34,20 @@
             <Separator prefHeight="6.0" prefWidth="348.0" />
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="200.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="284.0">
+            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="284.0">
                <children>
-                         <Label prefHeight="18.0" prefWidth="280.0" text="%text.processingPartialHash">
+                         <Label alignment="CENTER" prefHeight="18.0" prefWidth="280.0" text="%text.processingPartialHash">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="38.0" prefWidth="116.0">
+            <HBox alignment="CENTER" prefHeight="38.0" prefWidth="116.0" style="-fx-padding: 23 0 0 0;">
                <children>
-                  <ProgressIndicator fx:id="progressBarPartialHashId" progress="0.0" />
+                  <ProgressIndicator fx:id="progressBarPartialHashId" prefHeight="27.0" prefWidth="35.0" progress="0.0" />
                </children>
             </HBox>
          </children>
@@ -60,20 +57,20 @@
             <Separator prefHeight="6.0" prefWidth="348.0" />
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox prefHeight="150.0" prefWidth="200.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="51.0" prefWidth="284.0">
+            <HBox alignment="CENTER" prefHeight="69.0" prefWidth="284.0" VBox.vgrow="NEVER">
                <children>
-                         <Label prefHeight="18.0" prefWidth="284.0" text="%text.processingFullHash">
+                         <Label alignment="CENTER" prefHeight="18.0" prefWidth="252.0" text="%text.processingFullHash">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="38.0" prefWidth="116.0">
+            <HBox alignment="CENTER" prefHeight="38.0" prefWidth="116.0" style="-fx-padding: 20 0 0 0;">
                <children>
-                  <ProgressIndicator fx:id="progressBarFullHashId" progress="0.0" />
+                  <ProgressIndicator fx:id="progressBarFullHashId" prefWidth="35.0" progress="0.0" />
                </children>
             </HBox>
          </children>
@@ -83,13 +80,10 @@
             <Separator prefHeight="6.0" prefWidth="348.0" />
          </children>
       </HBox>
-      <HBox alignment="CENTER_RIGHT">
+      <HBox alignment="CENTER_RIGHT" style="-fx-padding: 10 20 10 0;">
          <children>
-            <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#stopAction" styleClass="standardButton" stylesheets="@/styles/main.css" text="%button.stop" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#stopAction" styleClass="commonButton" stylesheets="@/styles/main.css" text="%button.stop" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </HBox>
    </children>
-   <padding>
-      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-   </padding>
 </VBox>

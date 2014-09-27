@@ -1,52 +1,147 @@
-/* old : fbf1f1*/
-
-.higthtedTableLigthed {
-    -fx-background-color: -fx-table-cell-border-color, #fbf1f1;
-    -fx-background-insets: 0, 0 0 1 0;
+.boxDashed{
+   -fx-border-color: #eaa319;
+   -fx-border-style: dashed;
+   -fx-border-width: 1;
+   -fx-padding : 8;
 }
 
-.higthtedTableLigthed:odd {
-    -fx-background-color: -fx-table-cell-border-color, #fbf1f1;
-    -fx-background-insets: 0, 0 0 1 0;
+.accordionTitle{
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
 }
 
-.higthtedTableLigthed:filled:selected:focused, 
-.higthtedTableLigthed:filled:selected {
+.firstPosition {
+    -fx-background-image: url("/img/firstPostion.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 1% 50%;
+    -fx-background-size: 10 100%;
+}
+
+.middlePosition {
+    -fx-background-image: url("/img/middlePosition.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 1% 50%;
+    -fx-background-size: 10 100%;
+}
+
+.lastPosition {
+    -fx-background-image: url("/img/lastPostion.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 1% 50%;
+    -fx-background-size: 10 100%;    
+}
+
+.alonePosition {
+    -fx-border-color: transparent purple transparent transparent;
+}
+
+#resultViewId {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 10;
+}
+
+/* =============== TABLE-VIEW ================================================= */
+
+.table-view, .table-view:focused  {
+    -fx-background-color: null;
+}
+.table-row-cell {
+    -fx-background-color: null;
+}
+
+.table-row-cell:focused {
+    -fx-background-color: #0093ff, #85b9de, white;
+    -fx-background-insets: 0, 1, 2;
+}
+
+.table-row-cell:focused:odd {
+    -fx-background-color: #0093ff, #85b9de, white;
+    -fx-background-insets: 0, 1, 2;
+}
+
+/* When the table-row-cell is selected and focused */
+.table-view:focused > .virtual-flow > .clipped-container > .sheet > .table-row-cell:filled:focused:selected {
     -fx-background-color: -fx-focus-color, -fx-cell-focus-inner-border, -fx-selection-bar;
     -fx-background-insets: 0, 1, 2;
     -fx-background: -fx-accent;
     -fx-text-fill: -fx-selection-bar-text;
 }
 
-.defaultTableStyle {
-    -fx-background-color: -fx-table-cell-border-color, whitesmoke;
-    -fx-background-insets: 0, 0 0 1 0;
+.table-view:focused > .virtual-flow > .clipped-container > .sheet > .table-row-cell:filled:selected > .table-cell {
+    -fx-text-fill: -fx-selection-bar-text;
 }
 
-.defaultTableStyle:odd {
-    -fx-background-color: -fx-table-cell-border-color, whitesmoke;
-    -fx-background-insets: 0, 0 0 1 0;
+.table-view:focused > .virtual-flow > .clipped-container > .sheet > .table-row-cell:filled:selected {
+    -fx-background: -fx-accent;
+    -fx-background-color: -fx-selection-bar;
+    -fx-text-fill: -fx-selection-bar-text;
 }
 
-.defaultTableStyle:filled:selected:focused, 
-.defaultTableStyle:filled:selected {
+.table-view:row-selection:focused > .virtual-flow > .clipped-container > .sheet > .table-row-cell:filled:focused:selected:hover {
+    -fx-background: -fx-accent;
     -fx-background-color: -fx-focus-color, -fx-cell-focus-inner-border, -fx-selection-bar;
     -fx-background-insets: 0, 1, 2;
-    -fx-background: -fx-accent;
     -fx-text-fill: -fx-selection-bar-text;
 }
 
 
-.aloneTableStyle {
-    -fx-background-color: -fx-table-cell-border-color,  #E0EBEB;
-    -fx-background-insets: 0, 0 0 1 0;
+.table-view {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 10;
 }
 
-.aloneTableStyle:filled:selected:focused, 
-.aloneTableStyle:filled:selected {
-    -fx-background-color: -fx-focus-color, -fx-cell-focus-inner-border, -fx-selection-bar;
-    -fx-background-insets: 0, 1, 2;
-    -fx-background: -fx-accent;
-    -fx-text-fill: -fx-selection-bar-text;
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent rgba(255,255,255,0.3) transparent;
+    -fx-border-width: 1;
+    -fx-background-insets: 0;
+    -fx-padding: 0 10 0 0;
 }
-    
+
+.table-view .column-header, .table-view .filler {
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+}
+
+.table-view .table-cell {
+    -fx-border-color: transparent;
+    -fx-text-fill: #eaa319;
+}
+
+.table-column {
+    -fx-border-color: transparent;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+}
+
+
+/* =============== TitledPane ================================================= */
+
+.titled-pane > *.content {
+    -fx-background-color: black;
+    -fx-background-insets: 0, 0 1 1 1;
+    -fx-padding: 0.167em;
+}
+
+.titled-pane > .title {
+    -fx-background-color: black, black, black;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 5 5 0 0, 4 4 0 0, 3 3 0 0;
+    -fx-padding: 0.166667em 0.833333em 0.25em 0.833333em; /* 2 10 3 10 */
+}
+
+/* ===============  SplitPane ================================================= */
+
+/* horizontal the two nodes are placed to the left/right of each other. */
+.split-pane:horizontal > .split-pane-divider {
+   -fx-border-color: transparent #fea904 transparent #eaa319;
+   -fx-background-color: transparent, #eaa319;
+   -fx-background-insets: 0, 0 2 0 2;
+}

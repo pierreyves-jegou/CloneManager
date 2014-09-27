@@ -21,10 +21,13 @@
                        <javafx.geometry.Insets bottom="10.0" />
                    </HBox.margin>
                </Hyperlink>
-               <ImageView id="addLocation48x48.png" fitHeight="21.0" fitWidth="22.0" onMouseClicked="#addLocationFromButton">
+               <ImageView id="addLocation48x48.png" fitHeight="16.0" fitWidth="16.0" onMouseClicked="#addLocationFromButton">
                    <image>
-                       <javafx.scene.image.Image preserveRatio="true" smooth="true" url="@/img/addLocation48x48.png" />
+                       <javafx.scene.image.Image preserveRatio="true" smooth="true" url="@/img/addLocation48x48Orange.png" />
                    </image>
+               <HBox.margin>
+                  <Insets top="3.0" />
+               </HBox.margin>
                </ImageView>
            </children>
        </HBox>

@@ -28,10 +28,159 @@ and open the template in the editor.
     src: url('/fonts/Shoescenter.ttf');
 }
 
+.main {
+    -fx-background-image: url("../img/background.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 100% 50%;
+    -fx-background-size: 100% 100%;
+}
+
+.dialog {
+    -fx-background-color: black;
+}
+
+.mainBox {
+    -fx-background-color: rgba(0,0,0,0.6);
+    -fx-background-insets: 15;
+    -fx-padding : 10;
+    
+    -fx-border-insets: 15;
+    -fx-border-color: #eaa319;
+    -fx-border-width: 3;
+}
+
+.boxLabel { 
+    -fx-text-fill: #fea904;
+    -fx-fill: #fea904;
+}
+
+.boxTitle {
+    -fx-font-size: 25px;
+    -fx-padding : 0 0 25 10;
+}
+
+.boxMiddleTitle {
+    -fx-font-size: 16px;
+    -fx-padding : 0 0 25 10;
+}
+
+.boxText {
+    -fx-padding : 0 0 15 0;
+}
+
+.btext {
+    -fx-text-fill: #fea904;
+    -fx-fill: #fea904;
+}
+
+.boxButton {
+    -fx-padding : 0 15 15 0;
+}
+
+.commonButton {
+    -fx-background-color: #211805, #211805, #f1ab25, #eaa319;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 5, 5, 4, 3;    
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+.commonButton:hover {
+    -fx-background-color: #211805, #211805, #f1ab25, #fea904;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 5, 5, 4, 3;
+    -fx-text-fill: white;   
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+.nextButton {
+    -fx-background-image: url('../img/rigthArrowOrange.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 108% 25%;
+    -fx-padding: 0 30 0 0;
+}
+
+.nextButton:hover {
+    -fx-background-image: url('../img/rigthArrowOrange.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 108% 25%;
+    -fx-padding: 0 30 0 0;
+}
+
+.previousButton {
+    -fx-background-image: url('../img/leftArrowOrange.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: -8 25%;
+    -fx-padding: 0 0 0 25;  
+}
+
+.previousButton:hover {
+    -fx-background-image: url('../img/leftArrowOrange.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: -8 25%;
+    -fx-padding: 0 0 0 25;  
+}
 
 
-.label {
-    -fx-text-fill: #333333;
+
+/*******************************************************************************
+ *                                                                             *
+ * Hyperlink                                                                   *
+ *                                                                             *
+ ******************************************************************************/
+
+.hyperlink {
+    -fx-padding: 0.166667em; /* 2 */
+    -fx-cursor: hand;
+    -fx-content-display: LEFT;
+    -fx-text-fill: #fea904;
+    -fx-border-color: transparent;
+    -fx-border-width: 1px;
+}
+
+.hyperlink:visited {
+    -fx-text-fill: #fea904;
+}
+
+.hyperlink:focused {
+    -fx-color: #fea904;
+    -fx-border-color: transparent;
+}
+
+.hyperlink:hover {
+    -fx-underline: false;
+}
+
+.hyperlink:show-mnemonics > .mnemonic-underline {
+    -fx-stroke: #fea904;
+} 
+
+/*******************************************************************************
+ *                                                                             *
+ * Ovveride the focus color                                                    *
+ *                                                                             *
+ ******************************************************************************/
+
+.root{
+    -fx-focus-color:#fea904;
+    -fx-text-background-color:#fea904;
+    -fx-text-base-color:#fea904;
+}
+
+.label{
+    -fx-text-fill: #fea904;
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * CheckBox                                                                    *
+ *                                                                             *
+ ******************************************************************************/
+
+.check-box {
+    -fx-text-fill: #fea904;
 }
 
 .section{
@@ -45,18 +194,6 @@ and open the template in the editor.
 
 .warning {
     -fx-text-fill: orange;
-}
-
-.buttonFileChooser {
-    -fx-background-color: transparent;
-    -fx-background-image: url("../img/selectDirectory48x48.png");
-    -fx-background-repeat: no-repeat;
-    -fx-background-position: center;
-    -fx-background-size: cover, auto;
-}
-
-.buttonFileChooser:hover {
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,1) , 7, 0.0 , 0 , 1 );
 }
 
 .buttonFilter {
@@ -158,12 +295,13 @@ and open the template in the editor.
 .informationBox {
       -fx-border-width: 2px 0px 0px 0px;
       -fx-padding: 20 0 20 0;
-      -fx-border-color: #ECECEC;
-      /*-fx-border-style: dashed;*/
-/*      -fx-border-radius: 8 8 8 8;*/
+      -fx-border-color: #eaa319;
       -fx-text-fill: #ea8284;
-      
+      /*-fx-border-style: dashed;
+      -fx-border-radius: 8 8 8 8;
+      -fx-text-fill: #ea8284;*/
 }
+
 
 .informationBox .myLabel {
       -fx-font-size: 26px;
@@ -171,3 +309,42 @@ and open the template in the editor.
 }
 
 
+
+.progress-indicator > .percentage {
+    -fx-font-size: 0.0em; /* 11pt - 1 less than the default font */
+    -fx-fill: -fx-text-background-color;
+}
+
+/* =============== STYLE ALL SCROLL BARS ================================================= */
+.scroll-bar {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 5;
+}
+.scroll-bar .thumb {
+    -fx-background-color: white;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0.5em;
+}
+.scroll-bar .track  {
+    -fx-background-color: transparent;
+    -fx-background-insets:  0;
+    -fx-border-color: rgba(255,255,255,0.5);
+    -fx-border-radius: 0.5em;
+}
+.scroll-bar .increment-button {
+    -fx-background-color: null;
+}
+.scroll-bar:horizontal .increment-button {
+    -fx-padding: 0.5em 0 0.5em 0;
+}
+.scroll-bar:vertical .increment-button {
+    -fx-padding: 0 0.5em 0 0.5em;
+}
+.scroll-bar .decrement-button, .scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
+    -fx-background-color: null;
+    -fx-padding: 0;
+}
+.corner {
+    -fx-background-color: transparent;
+}

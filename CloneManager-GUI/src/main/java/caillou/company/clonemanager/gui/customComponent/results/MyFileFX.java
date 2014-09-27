@@ -19,7 +19,7 @@ import javafx.beans.property.StringProperty;
  * @author pierre
  */
 public class MyFileFX implements GUIApplicationFile{
-    
+   
     private final StringProperty md5Print = new SimpleStringProperty();
     private final StringProperty absolutePath = new SimpleStringProperty();
     private Group.VALUE groupValue = null;
@@ -27,6 +27,7 @@ public class MyFileFX implements GUIApplicationFile{
     private final StringProperty cssColor = new SimpleStringProperty();
     private final ApplicationFile myFile;
     private Boolean isAlone = null;
+    private POSITION currentPostion;
     
     public MyFileFX(ApplicationFile myFile){
         this.md5Print.set(myFile.getMD5Print());
@@ -82,10 +83,12 @@ public class MyFileFX implements GUIApplicationFile{
         return higthLigth;
     }
     
+    @Override
     public String getCssColor() {
         return cssColor.get();
     }
 
+    @Override
     public void setCssColor(String value) {
         cssColor.set(value);
     }
@@ -132,4 +135,16 @@ public class MyFileFX implements GUIApplicationFile{
     public void setAlone(Boolean isAlone) {
         this.isAlone = isAlone;
     }
+
+    @Override
+    public POSITION getCurrentPostion() {
+        return currentPostion;
+    }
+
+    @Override
+    public void setCurrentPostion(POSITION currentPostion) {
+        this.currentPostion = currentPostion;
+    }
+    
+    
 }

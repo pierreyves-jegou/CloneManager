@@ -1,0 +1,7 @@
+#languageComboBoxId {
+    -fx-background-color: transparent;
+}
+
+#settingsLink {
+    -fx-underline: true;
+}

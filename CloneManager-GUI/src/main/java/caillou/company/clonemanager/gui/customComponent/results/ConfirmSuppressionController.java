@@ -23,6 +23,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import org.controlsfx.dialog.Dialog;
 import org.springframework.context.annotation.Scope;
@@ -39,6 +40,9 @@ public class ConfirmSuppressionController implements Initializable, ArgumentChec
     @FXML
     private ListView<GUIApplicationFile> filesToDeleteViewId;
 
+    @FXML
+    private VBox listViewContainerId;
+    
     private boolean suppressionAction = false;
 
     private Dialog dialog;
@@ -51,6 +55,9 @@ public class ConfirmSuppressionController implements Initializable, ArgumentChec
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        
+        initializePhaseAutomaticResizing();
+        
         filesToDeleteViewId.setCellFactory(new Callback<ListView<GUIApplicationFile>, ListCell<GUIApplicationFile>>() {
             @Override
             public ListCell<GUIApplicationFile> call(ListView<GUIApplicationFile> list) {
@@ -60,6 +67,11 @@ public class ConfirmSuppressionController implements Initializable, ArgumentChec
         );
     }
 
+    private void initializePhaseAutomaticResizing() {
+        filesToDeleteViewId.prefHeightProperty().bind(listViewContainerId.heightProperty());
+        filesToDeleteViewId.prefWidthProperty().bind(listViewContainerId.widthProperty());
+    }
+    
     @Override
     public void checkArguments() throws ArgumentException {
         if(this.dialog == null || guiApplicationFileList == null || tableView == null || suppressOnlyOnSelected == null){

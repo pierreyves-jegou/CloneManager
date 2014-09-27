@@ -16,6 +16,8 @@ import caillou.company.clonemanager.background.service.classifier.strategy.Missi
 import caillou.company.clonemanager.background.service.classifier.strategy.MissingPartialHashStrategy;
 import caillou.company.clonemanager.gui.MainApp;
 import caillou.company.clonemanager.gui.Navigation;
+import caillou.company.clonemanager.gui.StyleSheet;
+import caillou.company.clonemanager.gui.WindowsPreferredDimensions;
 import caillou.company.clonemanager.gui.bean.applicationFileFX.contract.GUIApplicationFile;
 import caillou.company.clonemanager.gui.bean.impl.LoadingMojo;
 import caillou.company.clonemanager.gui.bean.impl.StatisticsPojo;
@@ -110,6 +112,7 @@ public class SearchController implements Initializable {
         transitionController = (TransitionController) loadingMojo.getController();
         transitionFxml = loadingMojo.getParent();
         final Dialog dialogTransition = new Dialog(MainApp.getInstance().getStage(), bundleForKeyTitleProcessingData);
+        dialogTransition.getStylesheets().add(StyleSheet.DIALOG_CSS);
         transitionController.setWrappingDialog(dialogTransition);
         dialogTransition.setContent(transitionFxml);
     }
@@ -129,7 +132,7 @@ public class SearchController implements Initializable {
     private void mainMenuAction(ActionEvent event) throws Exception {
         mainModel.resetLocationsModel();
         MainApp app = MainApp.getInstance();
-        app.replaceSceneContent(Navigation.TASK_CHOICE_VIEW, null, null);
+        app.replaceSceneContent(Navigation.TASK_CHOICE_VIEW, WindowsPreferredDimensions.TASKCHOICE_VIEW_WIDTH, WindowsPreferredDimensions.TASKCHOICE_VIEW_HEIGHT);
     }
 
     @FXML

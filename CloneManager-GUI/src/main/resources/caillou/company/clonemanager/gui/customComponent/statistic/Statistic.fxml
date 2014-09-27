@@ -11,28 +11,32 @@
 <?import javafx.geometry.*?>
 
 
-<VBox alignment="CENTER" prefHeight="53.0" prefWidth="100.0" styleClass="informationBox" stylesheets="@/styles/main.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caillou.company.clonemanager.gui.customComponent.statistic.StatisticController">
-    <children>
-        <StackPane>
-            <children>
-                <ImageView fx:id="imageViewId" fitHeight="74.0" fitWidth="103.0" opacity="0.18" pickOnBounds="true" preserveRatio="true" />
-                <Label fx:id="dynamicTextId" rotate="-41.6" styleClass="myLabel" text="88">
-                    <font>
-                        <Font size="32.0" />
-                    </font>
-                    <tooltip>
-                        <Tooltip fx:id="dynamicTooltipId" />
-                    </tooltip>
-                </Label>
-            </children>
-        </StackPane>
-        <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
-            <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" fx:id="staticTextId"/>
-            </children>
-        </TextFlow>
-    </children>
-    <padding>
-        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-    </padding>
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caillou.company.clonemanager.gui.customComponent.statistic.StatisticController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="53.0" prefWidth="100.0" styleClass="boxDashed" stylesheets="@../../../../../../styles/results.css">
+          <children>
+              <StackPane>
+                  <children>
+                      <ImageView fx:id="imageViewId" fitHeight="74.0" fitWidth="103.0" opacity="0.18" pickOnBounds="true" preserveRatio="true" />
+                      <Label fx:id="dynamicTextId" rotate="-41.6" text="88">
+                          <font>
+                              <Font size="32.0" />
+                          </font>
+                          <tooltip>
+                              <Tooltip fx:id="dynamicTooltipId" />
+                          </tooltip>
+                      </Label>
+                  </children>
+              </StackPane>
+              <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER">
+                  <children>
+                      <Text fx:id="staticTextId" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="boxLabel" />
+                  </children>
+              </TextFlow>
+          </children>
+          <padding>
+              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+          </padding>
+      </VBox>
+   </children>
 </VBox>

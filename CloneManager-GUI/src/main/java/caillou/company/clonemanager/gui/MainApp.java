@@ -53,7 +53,7 @@ public class MainApp extends Application {
             stage = primaryStage;
             stage.setTitle("Clone Manager");
             
-            replaceSceneContent(Navigation.TASK_CHOICE_VIEW, null, null);
+            replaceSceneContent(Navigation.TASK_CHOICE_VIEW, WindowsPreferredDimensions.TASKCHOICE_VIEW_WIDTH, WindowsPreferredDimensions.TASKCHOICE_VIEW_HEIGHT);
             Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
             posX = (primScreenBounds.getWidth() - stage.getWidth()) / 2;
             posY = (primScreenBounds.getHeight() - stage.getHeight()) / 4;

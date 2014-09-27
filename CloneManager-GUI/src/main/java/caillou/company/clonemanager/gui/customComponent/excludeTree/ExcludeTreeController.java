@@ -34,6 +34,9 @@ public class ExcludeTreeController extends Controller<ExcludeModel> implements D
 
     @FXML
     private VBox rootId;
+    
+    @FXML
+    private TreeView<DirectoryLazyCheckableTreeItem> treeView;
 
     private TreeItem<DirectoryLazyCheckableTreeItem> root;
 
@@ -146,12 +149,11 @@ public class ExcludeTreeController extends Controller<ExcludeModel> implements D
         rootItem.setSelected(true);
          
         this.buildTreeLazily(rootItem, 3);
-        TreeView<DirectoryLazyCheckableTreeItem> treeView = new TreeView<>(rootItem);
+        treeView.setRoot(rootItem);
         
         treeView.prefWidthProperty().bind(this.rootId.widthProperty().subtract(10));
         treeView.prefHeightProperty().bind(this.rootId.heightProperty().subtract(10));
         treeView.setCellFactory(CheckBoxTreeCell.<DirectoryLazyCheckableTreeItem>forTreeView());
-        this.rootId.getChildren().add(treeView);
     }
 
     @Autowired

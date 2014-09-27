@@ -10,17 +10,25 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER_LEFT" maxHeight="235.0" prefHeight="235.0" prefWidth="282.0" spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caillou.company.clonemanager.gui.customComponent.results.ConfirmSuppressionController">
+<VBox alignment="CENTER_LEFT" prefHeight="400.0" prefWidth="600.0" spacing="10.0" styleClass="dialog" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caillou.company.clonemanager.gui.customComponent.results.ConfirmSuppressionController">
    <children>
-      <ListView fx:id="filesToDeleteViewId" minHeight="200.0" minWidth="300.0" VBox.vgrow="ALWAYS" />
-      <HBox alignment="TOP_RIGHT" spacing="20.0">
+      <VBox fx:id="listViewContainerId" styleClass="mainBox" VBox.vgrow="ALWAYS">
          <children>
-            <Button mnemonicParsing="false" onAction="#cancelSuppressionAction" text="Cancel" />
-            <Button minHeight="25.0" minWidth="63.0" mnemonicParsing="false" onAction="#confirmSuppressionAction" text="OK" />
+            <ListView fx:id="filesToDeleteViewId" VBox.vgrow="ALWAYS" />
+         </children>
+      </VBox>
+      <HBox alignment="TOP_RIGHT" spacing="20.0" styleClass="boxButton">
+         <children>
+            <Button minHeight="27.0" minWidth="140.0" mnemonicParsing="false" onAction="#cancelSuppressionAction" prefHeight="27.0" prefWidth="140.0" styleClass="commonButton" stylesheets="@../../../../../../styles/main.css" text="%button.cancel" />
+            <Button minHeight="27.0" minWidth="140.0" mnemonicParsing="false" onAction="#confirmSuppressionAction" prefHeight="27.0" prefWidth="140.0" styleClass="commonButton" stylesheets="@../../../../../../styles/main.css" text="OK" />
          </children>
          <VBox.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </VBox.margin>
       </HBox>
    </children>
+   <stylesheets>
+      <URL value="@../../../../../../styles/main.css" />
+      <URL value="@../../../../../../styles/confirmationDialog.css" />
+   </stylesheets>
 </VBox>

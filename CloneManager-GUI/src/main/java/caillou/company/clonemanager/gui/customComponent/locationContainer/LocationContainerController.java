@@ -77,7 +77,7 @@ public class LocationContainerController implements Initializable {
         }
         toogleAdvancedOptions(null);
         boutonContainer.visibleProperty().bind(enableGroupingId.selectedProperty());
-        boutonContainer.managedProperty().bind(enableGroupingId.selectedProperty());
+        //boutonContainer.managedProperty().bind(enableGroupingId.selectedProperty());
 
         if (mainModel.getTaskModel().getCurrentTask().equals(TaskModel.TASK.DETECT_DOUBLONS)) {
             locationsModel.detectsIdentiqueFilesWithinALocationProperty().bind(detectDoublonsWithinSameLocationId.selectedProperty());
@@ -146,6 +146,7 @@ public class LocationContainerController implements Initializable {
         enableGroupingId.setVisible(true);
         enableGroupingId.setManaged(true);
         advancedOptionId.setText(advancedOptionsTitle + " \u25BC");
+        advancedOptionId.setStyle("-fx-text-fill: #fea904");
 
         TaskModel taskModel = mainModel.getTaskModel();
         if (taskModel.getCurrentTask().equals(TaskModel.TASK.DETECT_DOUBLONS)) {
@@ -161,6 +162,7 @@ public class LocationContainerController implements Initializable {
         detectDoublonsWithinSameLocationId.setVisible(false);
         detectDoublonsWithinSameLocationId.setManaged(false);
         advancedOptionId.setText(advancedOptionsTitle + " \u25B6");
+        advancedOptionId.setStyle("-fx-text-fill: #fea904");
     }
 
     private void addLocation() throws IOException {

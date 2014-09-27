@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.*?>
+
+<VBox prefHeight="321.0" prefWidth="800.0" stylesheets="@../../../../../../styles/taskView.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caillou.company.clonemanager.gui.customComponent.taskchoice.TaskChoiceController">
+   <children>
+      <VBox prefHeight="496.0" prefWidth="800.0" styleClass="main" stylesheets="@../../../../../../styles/main.css" VBox.vgrow="SOMETIMES">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" />
+            <VBox prefHeight="114.0" prefWidth="800.0" styleClass="mainBox">
+               <children>
+                  <HBox>
+                     <children>
+                        <ImageView fitHeight="39.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../img/loupe.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="%title.identicalfile">
+                           <styleClass>
+                              <String fx:value="btext" />
+                              <String fx:value="boxTitle" />
+                           </styleClass>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <VBox prefHeight="79.0" prefWidth="744.0" styleClass="boxText">
+                     <children>
+                        <TextFlow prefHeight="200.0" prefWidth="200.0" stylesheets="@../../../../../../styles/main.css">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="btext" text="%text.taskchoice.identicalfile" />
+                           </children>
+                        </TextFlow>
+                     </children>
+                  </VBox>
+                  <VBox alignment="BOTTOM_RIGHT">
+                     <children>
+                        <Button defaultButton="true" minHeight="27.0" minWidth="140.0" mnemonicParsing="false" onAction="#handleDoublons" prefHeight="27.0" prefWidth="140.0" text="%button.next">
+                           <styleClass>
+                              <String fx:value="commonButton" />
+                              <String fx:value="nextButton" />
+                           </styleClass></Button>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="126.0" prefWidth="800.0" styleClass="mainBox">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="box">
+                     <children>
+                        <HBox>
+                           <children>
+                              <ImageView fitHeight="39.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../img/loupe.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="%title.missingfile">
+                                 <styleClass>
+                                    <String fx:value="btext" />
+                                    <String fx:value="boxTitle" />
+                                 </styleClass>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <VBox prefHeight="160.0" prefWidth="744.0" styleClass="boxText">
+                           <children>
+                              <TextFlow prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="btext" text="%text.taskchoice.missingfile" />
+                                 </children>
+                              </TextFlow>
+                           </children>
+                        </VBox>
+                        <VBox alignment="BOTTOM_RIGHT">
+                           <children>
+                              <Button defaultButton="true" minHeight="27.0" minWidth="140.0" mnemonicParsing="false" onAction="#handleMissings" prefHeight="27.0" prefWidth="140.0" text="%button.next">
+                                 <styleClass>
+                                    <String fx:value="commonButton" />
+                                    <String fx:value="nextButton" />
+                                 </styleClass></Button>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" styleClass="boxButton" stylesheets="@../../../../../../styles/main.css">
+               <children>
+                  <Hyperlink fx:id="settingsLink" id="settingsLink" onAction="#onSettingsAction" stylesheets="@../../../../../../styles/taskView.css" text="%link.settings" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</VBox>

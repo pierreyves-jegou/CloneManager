@@ -12,3 +12,14 @@ Requirements : At least Java 1.8 (can be downloaded here 'http://www.oracle.com/
 	unix/linux : /pathToJava/java -jar /pathToExtractedArchive/CloneManager-GUI-1.0-SNAPSHOT.jar
 	windows : \pathToJava\java -jar \pathToExtractedArchive\CloneManager-GUI-1.0-SNAPSHOT.jar
 
+
+
+Developpement
+============
+This project has been developped under netbeans 8.0 using Java Scene builder 2.0.
+
+The maven dependency regarding "aspectj-maven-plugin-1.7-SNAPSHOT.jar" has to be set manually using the following steps : 
+execute the following command (replace pathToAspectJar with the suitable values) 
+	mvn install:install-file -Dfile=pathToAspectJar/aspectj-maven-plugin-1.7-SNAPSHOT.jar -DgroupId=org.codehaus.mojo -DartifactId=aspectj-maven-plugin -Dversion=1.7-SNAPSHOT -Dpackaging=jar
+
+

@@ -137,7 +137,7 @@
                                                   </TitledPane>
                                               </panes>
                                           </Accordion>
-                                          <HBox fx:id="mainHbox" style="-fx-background-color: transparent;">
+                                          <HBox style="-fx-background-color: transparent;">
                                               <children>
                                                   <VBox spacing="15.0" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
                                                       <children>

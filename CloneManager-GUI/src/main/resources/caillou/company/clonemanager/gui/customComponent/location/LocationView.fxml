@@ -20,6 +20,5 @@
                 <FXCollections fx:factory="observableArrayList" />
             </items>
         </ComboBox>
-        <ListView fx:id="errorsId" maxHeight="35.0" maxWidth="1.7976931348623157E308" minHeight="35.0" minWidth="80.0" opacity="0.56" prefWidth="500.0" visible="false" HBox.hgrow="ALWAYS" />
     </children>
 </HBox>

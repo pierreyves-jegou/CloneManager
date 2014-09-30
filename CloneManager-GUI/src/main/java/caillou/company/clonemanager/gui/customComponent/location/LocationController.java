@@ -9,31 +9,38 @@ import caillou.company.clonemanager.background.bean.impl.Group;
 import caillou.company.clonemanager.gui.MainApp;
 import caillou.company.clonemanager.gui.Navigation;
 import caillou.company.clonemanager.gui.StyleSheet;
+import caillou.company.clonemanager.gui.bean.error.Error;
 import caillou.company.clonemanager.gui.bean.impl.LoadingMojo;
 import caillou.company.clonemanager.gui.customComponent.common.Controller;
 import caillou.company.clonemanager.gui.customComponent.common.MainModel;
 import caillou.company.clonemanager.gui.customComponent.excludeTree.ExcludeTreeController;
 import caillou.company.clonemanager.gui.customComponent.locationContainer.LocationsModel;
+import caillou.company.clonemanager.gui.event.ShowErrorsEvent;
 import caillou.company.clonemanager.gui.spring.SpringFxmlLoader;
+import com.google.common.eventbus.Subscribe;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import java.io.*;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ListChangeListener;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.WindowEvent;
+import javafx.util.Duration;
 import javax.annotation.PostConstruct;
+import org.controlsfx.control.PopOver;
 import org.controlsfx.dialog.Dialog;
-import org.controlsfx.dialog.DialogStyle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -56,9 +63,6 @@ public class LocationController extends Controller<LocationModel> implements Ini
     private Button button;
 
     @FXML
-    private ListView<caillou.company.clonemanager.gui.bean.error.Error> errorsId;
-
-    @FXML
     private Button filterButtonId;
 
     private final BooleanProperty disabled = new SimpleBooleanProperty(false);
@@ -67,8 +71,7 @@ public class LocationController extends Controller<LocationModel> implements Ini
 
     private MainModel mainModel;
 
-    private String bundleForKeySelectDirectoryTitle;
-    private String bundleForKeyExclusionTitle;
+    private final PopOver errorPopOver = new PopOver();
 
     public LocationController() {
     }
@@ -94,8 +97,6 @@ public class LocationController extends Controller<LocationModel> implements Ini
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        this.initializeResourceBundle(rb);
-
         this.disabledProperty().bind(getModel().disabledProperty());
         final LocationController thisInstance = this;
         this.updatedProperty().addListener(new ChangeListener<Boolean>() {
@@ -106,14 +107,13 @@ public class LocationController extends Controller<LocationModel> implements Ini
             }
         });
 
-        this.getErrorsId().setItems(getModel().getErrors());
-        this.setListListener();
+        this.getModel().getEventBus().register(this);
 
         LocationsModel locationsModel = mainModel.getLocationsModel();
         groupId.visibleProperty().bind(locationsModel.enableGroupingProperty());
         groupId.managedProperty().bind(locationsModel.enableGroupingProperty());
-        groupId.getItems().add(Group.GROUP1);
-        groupId.getItems().add(Group.GROUP2);
+        groupId.getItems().add(Group.GROUPA);
+        groupId.getItems().add(Group.GROUPB);
 
         path.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -148,22 +148,52 @@ public class LocationController extends Controller<LocationModel> implements Ini
 
         });
 
-        errorsId.setCellFactory(new ErrorCellFactory());
-        errorsId.setVisible(false);
-        errorsId.setManaged(false);
         filterButtonId.setDisable(true);
-
+        
+        /**
+         * Due to the bug
+         * "https://bitbucket.org/controlsfx/controlsfx/issue/185/nullpointerexception-when-using-popover"
+         */
+        MainApp.getInstance().getStage().setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                errorPopOver.hide(Duration.millis(0));
+            }
+        });
+        /**
+         * End *
+         */
+        
     }
 
-    private void initializeResourceBundle(ResourceBundle resources) {
-        bundleForKeySelectDirectoryTitle = resources.getString("title.selectDirectory");
-        bundleForKeyExclusionTitle = resources.getString("title.exclusion");
+    @Subscribe
+    public void showErrors(ShowErrorsEvent showErrorsEvent) {
+        final List<Error> errors = this.getModel().getErrors();
+        if (!errors.isEmpty()) {
+            VBox vbox = new VBox();
+            vbox.setSpacing(5);
+            for (Error error : errors) {
+                Label errorLabel = new Label(error.getMessage());
+                errorLabel.getStylesheets().add(StyleSheet.LOCATION_CSS);
+                if (error.getSeverityLevel().equals(caillou.company.clonemanager.gui.bean.error.Error.SEVERITY_LEVEL.ERROR)) {
+                    errorLabel.getStyleClass().add("error");
+                } else if (error.getSeverityLevel().equals(caillou.company.clonemanager.gui.bean.error.Error.SEVERITY_LEVEL.WARNING)) {
+                    errorLabel.getStyleClass().add("warning");
+                }
+
+                vbox.getChildren().add(new Label(error.getMessage()));
+            }
+            errorPopOver.setContentNode(vbox);
+            errorPopOver.show(path);
+        }else{
+            errorPopOver.hide();
+        }
     }
 
     @FXML
     private void handleFilechooserAction(ActionEvent event) {
         DirectoryChooser directoryChooser = new DirectoryChooser();
-        directoryChooser.setTitle(bundleForKeySelectDirectoryTitle);
+        directoryChooser.setTitle(SpringFxmlLoader.getResourceBundle().getString("title.selectDirectory"));
         File file = directoryChooser.showDialog(null);
         if (file != null) {
             path.setText(file.getAbsolutePath());
@@ -179,9 +209,9 @@ public class LocationController extends Controller<LocationModel> implements Ini
                 return;
             }
         }
-        Dialog dialogExclude = new Dialog(MainApp.getInstance().getStage(), bundleForKeyExclusionTitle);
+        Dialog dialogExclude = new Dialog(MainApp.getInstance().getStage(), SpringFxmlLoader.getResourceBundle().getString("title.exclusion"));
         dialogExclude.getStylesheets().add(StyleSheet.DIALOG_CSS);
-        
+
         LoadingMojo loadingMojo = SpringFxmlLoader.load(Navigation.EXCLUDE_TREE);
         ExcludeTreeController excludeTreeController = (ExcludeTreeController) loadingMojo.getController();
         excludeTreeController.setWrappingDialog(dialogExclude);
@@ -189,22 +219,6 @@ public class LocationController extends Controller<LocationModel> implements Ini
         excludeTreeController.initialiseRootDirectory();
         dialogExclude.setContent(loadingMojo.getParent());
         dialogExclude.show();
-    }
-
-    public void setListListener() {
-        this.errorsId.getItems().addListener(new ListChangeListener<caillou.company.clonemanager.gui.bean.error.Error>() {
-
-            @Override
-            public void onChanged(ListChangeListener.Change<? extends caillou.company.clonemanager.gui.bean.error.Error> c) {
-                if (errorsId.getItems().size() == 0) {
-                    errorsId.setVisible(false);
-                    errorsId.setManaged(false);
-                } else {
-                    errorsId.setVisible(true);
-                    errorsId.setManaged(true);
-                }
-            }
-        });
     }
 
     public boolean isUpdated() {
@@ -229,10 +243,6 @@ public class LocationController extends Controller<LocationModel> implements Ini
 
     public BooleanProperty disabledProperty() {
         return disabled;
-    }
-
-    public ListView<caillou.company.clonemanager.gui.bean.error.Error> getErrorsId() {
-        return errorsId;
     }
 
     @Autowired

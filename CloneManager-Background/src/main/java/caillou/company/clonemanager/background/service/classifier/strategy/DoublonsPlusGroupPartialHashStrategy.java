@@ -32,8 +32,8 @@ public class DoublonsPlusGroupPartialHashStrategy<T extends ApplicationFile> imp
                     groups.add(myFile.getGroup());
                 }
             }
-            
-            if (entry.getValue() != null && entry.getValue().size() > 1 && groups.size() == 1) {
+                        
+            if (entry.getValue() != null && entry.getValue().size() > 1 && groups.size() == 2) {
                 analyse.addEntryThatMigthMatch(entry);
             } else {
                 analyse.addEntryThatDoNotMatch(entry);

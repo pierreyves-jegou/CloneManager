@@ -35,7 +35,7 @@ public class DoublonsPlusGroupFullHashStrategy<T extends ApplicationFile> implem
                 }
             }
             
-            if (entry.getValue() != null && entry.getValue().size() > 1 && groups.size() == 1) {
+            if (entry.getValue() != null && entry.getValue().size() > 1 && groups.size() == 2) {
                 analyse.addEntryThatDoMatch(entry);
             } else {
                 analyse.addEntryThatDoNotMatch(entry);

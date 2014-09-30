@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package caillou.company.clonemanager.gui.customComponent.locationContainer;
 
 import caillou.company.clonemanager.background.bean.impl.Group;
@@ -15,94 +16,43 @@ import caillou.company.clonemanager.gui.spring.SpringFxmlLoader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 /**
  *
  * @author pierre
  */
 @Component
-public class LocationContainerController implements Initializable {
+public class LocationContainerController implements Initializable{
 
     @FXML
-    private VBox locationContainerId;
-
+    private VBox locationContainerGroupA;
+    
+    @FXML
+    private VBox locationContainerGroupB;
+    
     @FXML
     private CheckBox detectDoublonsWithinSameLocationId;
-
-    @FXML
-    private CheckBox enableGroupingId;
-
-    @FXML
-    private HBox boutonContainer;
-
-    @FXML
-    private Hyperlink advancedOptionId;
-
-    private final BooleanProperty showAdvancedOptions = new SimpleBooleanProperty(true);
     
     private MainModel mainModel;
-    
-    private String advancedOptionsTitle;
-
-    public LocationContainerController() {
-    }
-
+        
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
-        initializeResourceBundle(resources);
+        this.addLocationWithinGroupA();
+        this.addLocationWithinGroupB();    
         
         final LocationsModel locationsModel = mainModel.getLocationsModel();
-        try {
-            // Put two locations into the scene
-            this.addLocation();
-            this.addLocation();
-        } catch (IOException ex) {
-            Logger.getLogger(LocationContainerController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        toogleAdvancedOptions(null);
-        boutonContainer.visibleProperty().bind(enableGroupingId.selectedProperty());
-        //boutonContainer.managedProperty().bind(enableGroupingId.selectedProperty());
-
         if (mainModel.getTaskModel().getCurrentTask().equals(TaskModel.TASK.DETECT_DOUBLONS)) {
             locationsModel.detectsIdentiqueFilesWithinALocationProperty().bind(detectDoublonsWithinSameLocationId.selectedProperty());
-        }
-
-        enableGroupingId.selectedProperty().addListener(new ChangeListener<Boolean>() {
-
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                locationsModel.setEnableGrouping(newValue);
-
-                // The maximal number of location in this case is 2
-                if (!newValue) {
-                    locationsModel.disableFromThirdLocation();
-                } else {
-                    locationsModel.enableFromThirdLocation();
-                }
-
-                locationsModel.validLocations();
-            }
-
-        });
-
-        TaskModel taskModel = mainModel.getTaskModel();
-        if (taskModel.getCurrentTask().equals(TaskModel.TASK.DETECT_DOUBLONS)) {
             detectDoublonsWithinSameLocationId.selectedProperty().addListener(new ChangeListener<Boolean>() {
 
                 @Override
@@ -112,86 +62,45 @@ public class LocationContainerController implements Initializable {
 
             });
         }
+        
     }
-
-    private void initializeResourceBundle(ResourceBundle resources){
-        advancedOptionsTitle = resources.getString("link.advancedOption");
+    
+    private void addLocationWithinGroupA(){
+        LoadingMojo loadingMojo = SpringFxmlLoader.load(Navigation.LOCATION_VIEW);
+        LocationController locationController = (LocationController) loadingMojo.getController();
+        locationController.setGroup(Group.GROUPA);
+        locationContainerGroupA.getChildren().add(loadingMojo.getParent());
+    }
+    
+    private void addLocationWithinGroupB(){
+        LoadingMojo loadingMojo = SpringFxmlLoader.load(Navigation.LOCATION_VIEW);
+        LocationController locationController = (LocationController) loadingMojo.getController();
+        locationController.setGroup(Group.GROUPB);
+        locationContainerGroupB.getChildren().add(loadingMojo.getParent());
+    }  
+    
+    @FXML
+    private void addLocationGroupAFromLink(ActionEvent event) throws IOException {
+        this.addLocationWithinGroupA();
     }
     
     @FXML
-    private void addLocationFromLink(ActionEvent event) throws IOException {
-        this.addLocation();
+    private void addLocationGroupBFromLink(ActionEvent event) throws IOException {
+        this.addLocationWithinGroupB();
     }
-
+    
     @FXML
-    private void addLocationFromButton(MouseEvent event) throws IOException {
-        this.addLocation();
+    private void addLocationGroupAFromButton(MouseEvent event) throws IOException {
+        this.addLocationWithinGroupA();
     }
-
+    
     @FXML
-    private void toogleAdvancedOptions(ActionEvent event) {
-        if (event == null) {
-            this.hideAdvancedOptions();
-        } else {
-            if (showAdvancedOptions.get()) {
-                this.hideAdvancedOptions();
-            } else {
-                this.showAdvancedOptions();
-            }
-        }
-    }
-
-    private void showAdvancedOptions() {
-        showAdvancedOptions.set(true);
-        enableGroupingId.setVisible(true);
-        enableGroupingId.setManaged(true);
-        advancedOptionId.setText(advancedOptionsTitle + " \u25BC");
-        advancedOptionId.setStyle("-fx-text-fill: #fea904");
-
-        TaskModel taskModel = mainModel.getTaskModel();
-        if (taskModel.getCurrentTask().equals(TaskModel.TASK.DETECT_DOUBLONS)) {
-            detectDoublonsWithinSameLocationId.setVisible(true);
-            detectDoublonsWithinSameLocationId.setManaged(true);
-        }
-    }
-
-    private void hideAdvancedOptions() {
-        showAdvancedOptions.set(false);
-        enableGroupingId.setVisible(false);
-        enableGroupingId.setManaged(false);
-        detectDoublonsWithinSameLocationId.setVisible(false);
-        detectDoublonsWithinSameLocationId.setManaged(false);
-        advancedOptionId.setText(advancedOptionsTitle + " \u25B6");
-        advancedOptionId.setStyle("-fx-text-fill: #fea904");
-    }
-
-    private void addLocation() throws IOException {
-        SpringFxmlLoader springFxmlLoader = new SpringFxmlLoader();
-        LoadingMojo loadingMojo = springFxmlLoader.load(Navigation.LOCATION_VIEW);
-        LocationController locationController = (LocationController) loadingMojo.getController();
-        if(locationContainerId.getChildren().size() == 1){
-            locationController.setGroup(Group.GROUP2);
-        }else{
-            locationController.setGroup(Group.GROUP1);
-        }
-        locationContainerId.getChildren().add(loadingMojo.getParent());
-    }
-
-    public boolean isShowAdvancedOptions() {
-        return showAdvancedOptions.get();
-    }
-
-    public void setShowAdvancedOptions(boolean value) {
-        showAdvancedOptions.set(value);
-    }
-
-    public BooleanProperty showAdvancedOptionsProperty() {
-        return showAdvancedOptions;
-    }
-
+    private void addLocationGroupBFromButton(MouseEvent event) throws IOException {
+        this.addLocationWithinGroupB();
+    }    
+    
     @Autowired
     public void setMainModel(MainModel mainModel) {
         this.mainModel = mainModel;
     }
-    
 }

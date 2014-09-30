@@ -7,11 +7,11 @@ package caillou.company.clonemanager.background.bean.impl;
 
 public class Group {
 
-    public static Group GROUP1 = new Group(VALUE.GROUP1);
-    public static Group GROUP2 = new Group(VALUE.GROUP2);
+    public static Group GROUPA = new Group(VALUE.GROUPA);
+    public static Group GROUPB = new Group(VALUE.GROUPB);
 
     public enum VALUE {
-        GROUP1, GROUP2
+        GROUPA, GROUPB
     };
 
     private String guiValue;
@@ -47,11 +47,11 @@ public class Group {
     }
     
     public static Group.VALUE getTheOtherGroup(Group.VALUE value) {
-        if (value.equals(Group.VALUE.GROUP1)) {
-            return Group.VALUE.GROUP2;
+        if (value.equals(Group.VALUE.GROUPA)) {
+            return Group.VALUE.GROUPB;
         }
-        if (value.equals(Group.VALUE.GROUP2)) {
-            return Group.VALUE.GROUP1;
+        if (value.equals(Group.VALUE.GROUPB)) {
+            return Group.VALUE.GROUPA;
         }
         return null;
     }

@@ -23,6 +23,8 @@ public class Format {
     private final BooleanProperty video = new SimpleBooleanProperty(false);
     private final BooleanProperty audio = new SimpleBooleanProperty(false);
     private final BooleanProperty image = new SimpleBooleanProperty(false);
+    private final BooleanProperty archive = new SimpleBooleanProperty();
+     
     
     public Format(){
     }
@@ -73,5 +75,17 @@ public class Format {
 
     public BooleanProperty imageProperty() {
         return image;
-    }    
+    }
+    
+    public boolean isArchive() {
+        return archive.get();
+    }
+
+    public void setArchive(boolean value) {
+        archive.set(value);
+    }
+
+    public BooleanProperty archiveProperty() {
+        return archive;
+    }
 }

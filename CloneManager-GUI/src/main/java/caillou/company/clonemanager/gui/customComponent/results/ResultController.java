@@ -76,9 +76,6 @@ import org.springframework.stereotype.Component;
 public class ResultController implements Initializable {
 
     @FXML
-    private HBox mainHbox;
-
-    @FXML
     private TableColumn<GUIApplicationFile, String> columnFile;
 
     @FXML
@@ -174,9 +171,9 @@ public class ResultController implements Initializable {
 
         accordionPaneId.setExpandedPane(informationPaneId);
 
-        groupId.getItems().add(Group.GROUP1);
-        groupId.getItems().add(Group.GROUP2);
-        groupId.setValue(Group.GROUP1);
+        groupId.getItems().add(Group.GROUPA);
+        groupId.getItems().add(Group.GROUPB);
+        groupId.setValue(Group.GROUPA);
         
         /**
          * Due to the bug

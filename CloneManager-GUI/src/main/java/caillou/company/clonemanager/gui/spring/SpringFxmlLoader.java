@@ -70,8 +70,8 @@ public class SpringFxmlLoader {
     
     public static void changeLocale(Locale locale){
         SpringFxmlLoader.currentLocale = locale;
-        Group.GROUP1.setGuiValue(resourceBundle.getString("group1"));
-        Group.GROUP2.setGuiValue(resourceBundle.getString("group2"));
+        Group.GROUPA.setGuiValue(resourceBundle.getString("group1"));
+        Group.GROUPB.setGuiValue(resourceBundle.getString("group2"));
         resourceBundle = ResourceBundle.getBundle("bundle.Main", SpringFxmlLoader.currentLocale);
     }
     

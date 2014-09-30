@@ -39,6 +39,9 @@ public class CritereController extends Controller<MainModel> implements Initiali
 
     @FXML
     private CheckBox formatImageId;
+    
+    @FXML
+    private CheckBox formatArchiveId;
 
     @FXML
     private IntegerField sizeMinId;
@@ -63,6 +66,7 @@ public class CritereController extends Controller<MainModel> implements Initiali
         mainModel.getCritereModel().getFormat().videoProperty().bind(Bindings.and(formatVideoId.selectedProperty(), Bindings.not(formatVideoId.disableProperty())));
         mainModel.getCritereModel().getFormat().audioProperty().bind(Bindings.and(formatAudioId.selectedProperty(), Bindings.not(formatAudioId.disableProperty())));
         mainModel.getCritereModel().getFormat().imageProperty().bind(Bindings.and(formatImageId.selectedProperty(), Bindings.not(formatImageId.disableProperty())));
+        mainModel.getCritereModel().getFormat().archiveProperty().bind(Bindings.and(formatArchiveId.selectedProperty(), Bindings.not(formatArchiveId.disableProperty())));
         
         LongBinding minimumSizeComputationBinding = new LongBinding() {
             {
@@ -123,6 +127,7 @@ public class CritereController extends Controller<MainModel> implements Initiali
                     formatVideoId.setSelected(false);
                     formatAudioId.setSelected(false);
                     formatImageId.setSelected(false);
+                    formatArchiveId.setSelected(false);
                 }
             }
         });
@@ -132,6 +137,7 @@ public class CritereController extends Controller<MainModel> implements Initiali
         formatVideoId.setDisable(value);
         formatAudioId.setDisable(value);
         formatImageId.setDisable(value);
+        formatArchiveId.setDisable(value);
     }
     
     @Override

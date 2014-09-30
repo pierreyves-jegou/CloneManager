@@ -7,6 +7,7 @@
 package caillou.company.clonemanager.gui.customComponent.critere;
 
 import caillou.company.clonemanager.background.bean.applicationFile.contract.ApplicationFile;
+import caillou.company.clonemanager.background.bean.filter.ArchiveExtensionFilter;
 import caillou.company.clonemanager.background.bean.filter.AudioExtensionFilter;
 import caillou.company.clonemanager.background.bean.filter.Filter;
 import caillou.company.clonemanager.background.bean.filter.FilterGroup;
@@ -73,7 +74,10 @@ public class CritereModel{
             }
            if(this.getFormat().isImage()){
                filter.addFilter(new ImageExtensionFilter());
-           } 
+           }
+           if(this.getFormat().isArchive()){
+               filter.addFilter(new ArchiveExtensionFilter());
+           }
         }
         
         if(this.getSize().getMinimalSize() != null && this.getSize().getMinimalSize() > 0){
@@ -101,7 +105,7 @@ public class CritereModel{
 
     @PostConstruct
     public void initialize() {
-        valid.bind(Bindings.or(this.getFormat().allProperty(), Bindings.or(this.getFormat().audioProperty(), this.getFormat().imageProperty()).or(this.getFormat().videoProperty())));
+        valid.bind(Bindings.or(this.getFormat().allProperty(), Bindings.or(this.getFormat().audioProperty(), this.getFormat().imageProperty()).or(this.getFormat().videoProperty())).or(this.getFormat().archiveProperty()));
     }
     
 }

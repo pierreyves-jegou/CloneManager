@@ -58,7 +58,7 @@ public class ApplicationFileUtilImpl implements ApplicationFileUtil {
                 T myFileToKeep = null;
                 for(T myFileFX : entry.getValue()){
                     myFileToKeep = myFileFX;
-                    if(myFileFX.getGroup().equals(Group.GROUP1)){
+                    if(myFileFX.getGroup().equals(Group.GROUPA)){
                         break;
                     }
                 }

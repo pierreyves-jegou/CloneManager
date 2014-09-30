@@ -76,7 +76,13 @@ public class LocationsModel implements BeanFactoryAware{
 
     public void resetErrors() {
         for(LocationModel locationModel : observableLocations){
-            locationModel.getErrors().clear();
+            locationModel.resetErrors();
+        }
+    }
+    
+    public void showErrors(){
+        for(LocationModel locationModel : observableLocations){
+            locationModel.showErrors();
         }
     }
     
@@ -96,28 +102,7 @@ public class LocationsModel implements BeanFactoryAware{
             location.setDisabled(value);
         }
     }
-
-    public void setDefaultGroups(){
-        for(int i=0; i < observableLocations.size(); i++){
-            LocationModel locationModel = observableLocations.get(i);
-            if(i == 0){
-                locationModel.setGroupValue(Group.VALUE.GROUP1);
-            }
-            if(i == 1){
-                locationModel.setGroupValue(Group.VALUE.GROUP2);
-                return;
-            }
-        }
-    }
     
-    public void disableFromThirdLocation() {
-        toogleStateFromThirdLocation(true);
-    }
-
-    public void enableFromThirdLocation() {
-        toogleStateFromThirdLocation(false);
-    }
-
     public boolean isEnableGrouping() {
         return enableGrouping.get();
     }

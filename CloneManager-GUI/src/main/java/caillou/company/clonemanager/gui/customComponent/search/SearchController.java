@@ -79,8 +79,6 @@ public class SearchController implements Initializable {
 
     private Parent transitionFxml;
     
-    private String bundleForKeyTitleProcessingData;
-
     public EnqueueService getEnqueueService() {
         return enqueueService;
     }
@@ -102,16 +100,12 @@ public class SearchController implements Initializable {
         StatisticsModel searchStatisticsModel = SpringFxmlLoader.getBean(StatisticsModel.class);
         mainModel.setSearchStatisticsModel(searchStatisticsModel);
     }
-
-    private void initializeResourceBundle(ResourceBundle resources){
-       bundleForKeyTitleProcessingData = resources.getString("title.processingData");
-    }
     
     private void buildTransitionPopup() {
         LoadingMojo loadingMojo = SpringFxmlLoader.load(Navigation.TRANSITION_POPUP);
         transitionController = (TransitionController) loadingMojo.getController();
         transitionFxml = loadingMojo.getParent();
-        final Dialog dialogTransition = new Dialog(MainApp.getInstance().getStage(), bundleForKeyTitleProcessingData);
+        final Dialog dialogTransition = new Dialog(MainApp.getInstance().getStage(), SpringFxmlLoader.getResourceBundle().getString("title.processingData"));
         dialogTransition.getStylesheets().add(StyleSheet.DIALOG_CSS);
         transitionController.setWrappingDialog(dialogTransition);
         dialogTransition.setContent(transitionFxml);
@@ -140,10 +134,6 @@ public class SearchController implements Initializable {
         showTransition();
         try {
             final LocationsModel locationsModel = mainModel.getLocationsModel();
-            if (!locationsModel.enableGroupingProperty().get()) {
-                locationsModel.setDefaultGroups();
-            }
-
             final TaskModel.TASK currentTask = mainModel.getTaskModel().getCurrentTask();
 
             ProgressIndicator scanningTaskProgress = transitionController.getProgressScanningFiles();

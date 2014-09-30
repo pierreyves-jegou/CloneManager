@@ -11,40 +11,30 @@
 <?import javafx.util.*?>
 <?import caillou.company.clonemanager.gui.bean.impl.*?>
 
-<GridPane hgap="3.0" prefWidth="375.0" vgap="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caillou.company.clonemanager.gui.customComponent.critere.CritereController">
+<GridPane hgap="3.0" minHeight="175.0" minWidth="375.0" prefWidth="375.0" vgap="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caillou.company.clonemanager.gui.customComponent.critere.CritereController">
     <children>
-        <Label text="%criteria.minimalSize" textOverrun="CLIP" GridPane.rowIndex="3" />
-        <IntegerField fx:id="sizeMinId" maxHeight="25.0" minHeight="25.0" minWidth="110.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+        <Label text="%criteria.minimalSize" textOverrun="CLIP" GridPane.rowIndex="4" />
+        <IntegerField fx:id="sizeMinId" maxHeight="25.0" minHeight="25.0" minWidth="110.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
             <minValue>0</minValue>
             <maxValue>
                 <Integer fx:constant="MAX_VALUE" />
             </maxValue>
         </IntegerField>
-        <Label text="%criteria.maximalSize" textOverrun="CLIP" GridPane.rowIndex="4" />
-        <IntegerField fx:id="sizeMaxId" maxHeight="25.0" minHeight="25.0" minWidth="100.0" prefHeight="25.0" prefWidth="110.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+        <Label text="%criteria.maximalSize" textOverrun="CLIP" GridPane.rowIndex="5" />
+        <IntegerField fx:id="sizeMaxId" maxHeight="25.0" minHeight="25.0" minWidth="100.0" prefHeight="25.0" prefWidth="110.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
             <minValue>0</minValue>
             <maxValue>
                 <Integer fx:constant="MAX_VALUE" />
             </maxValue>
         </IntegerField>
-        <Separator prefHeight="0.0" prefWidth="327.0" GridPane.columnSpan="3" GridPane.rowIndex="2" />
-        <GridPane>
-            <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            </rowConstraints>
-        </GridPane>
+        <Separator prefHeight="0.0" prefWidth="327.0" GridPane.columnSpan="3" GridPane.rowIndex="3" />
         <Label text="%criteria.format" GridPane.columnIndex="0" GridPane.rowIndex="0" />
         <CheckBox fx:id="formatAllId" alignment="CENTER_LEFT" contentDisplay="LEFT" indeterminate="false" mnemonicParsing="false" selected="true" text="%criteria.format.all" GridPane.columnIndex="1" GridPane.rowIndex="0" />
         <CheckBox fx:id="formatVideoId" disable="true" indeterminate="false" mnemonicParsing="false" selected="false" text="%criteria.format.video" GridPane.columnIndex="2" GridPane.rowIndex="0" />
         <CheckBox fx:id="formatAudioId" disable="true" indeterminate="false" mnemonicParsing="false" selected="false" text="%criteria.format.audio" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <CheckBox fx:id="formatImageId" disable="true" indeterminate="false" mnemonicParsing="false" text="%criteria.format.image" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-        <ComboBox fx:id="minimumSizeFormatId" prefHeight="25.0" prefWidth="81.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+        <CheckBox fx:id="formatArchiveId" disable="true" indeterminate="false" mnemonicParsing="false" text="%criteria.format.archive" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <ComboBox fx:id="minimumSizeFormatId" prefHeight="25.0" prefWidth="81.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:id="default" fx:value="octet" />
@@ -55,7 +45,7 @@
             </items>
             <value><fx:reference source="default" /></value>
         </ComboBox>
-        <ComboBox fx:id="maximumSizeFormatId" prefHeight="25.0" prefWidth="81.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+        <ComboBox fx:id="maximumSizeFormatId" prefHeight="25.0" prefWidth="81.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="octet" />
@@ -74,6 +64,7 @@
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="191.0" minWidth="0.0" prefWidth="0.0" />
     </columnConstraints>
     <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

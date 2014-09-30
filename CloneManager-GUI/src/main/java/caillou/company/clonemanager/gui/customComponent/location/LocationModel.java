@@ -6,10 +6,13 @@
 package caillou.company.clonemanager.gui.customComponent.location;
 
 import caillou.company.clonemanager.background.bean.applicationFile.contract.GroupProvider;
+import caillou.company.clonemanager.background.bean.contract.EventBusProvider;
 import caillou.company.clonemanager.background.bean.impl.Group;
 import caillou.company.clonemanager.gui.customComponent.common.MainModel;
 import caillou.company.clonemanager.gui.customComponent.common.Model;
 import caillou.company.clonemanager.gui.customComponent.excludeTree.ExcludeModel;
+import caillou.company.clonemanager.gui.event.ShowErrorsEvent;
+import com.google.common.eventbus.EventBus;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -31,7 +34,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Scope(value = "prototype")
-public class LocationModel implements Model, GroupProvider{
+public class LocationModel implements Model, GroupProvider, EventBusProvider{
 
     private final StringProperty path = new SimpleStringProperty();
     private Group.VALUE groupValue = null;
@@ -45,6 +48,8 @@ public class LocationModel implements Model, GroupProvider{
     private MainModel mainModel;
     
     private ExcludeModel excludeModel;
+    
+    protected EventBus errorBus = new EventBus("ERROR_BUS");
     
     public ObservableList<caillou.company.clonemanager.gui.bean.error.Error> getErrors() {
         return errors;
@@ -79,11 +84,20 @@ public class LocationModel implements Model, GroupProvider{
         this.groupValue = groupValue;
     }
 
+    public void resetErrors(){
+        this.getErrors().clear();
+    }
+    
+    public void showErrors(){
+        this.getEventBus().post(new ShowErrorsEvent());
+    }
+    
     public void updateLocation(String path, Group.VALUE groupValue) {
         mainModel.getLocationsModel().resetErrors();
         this.setPath(path);
         this.setGroupValue(groupValue);
         mainModel.getLocationsModel().sanityCheck();
+        mainModel.getLocationsModel().showErrors();
     }
 
     public void addError(caillou.company.clonemanager.gui.bean.error.Error error) {
@@ -114,6 +128,11 @@ public class LocationModel implements Model, GroupProvider{
     @Autowired
     public void setExcludeModel(ExcludeModel excludeModel) {
         this.excludeModel = excludeModel;
+    }
+
+    @Override
+    public EventBus getEventBus() {
+        return errorBus;
     }
     
 }

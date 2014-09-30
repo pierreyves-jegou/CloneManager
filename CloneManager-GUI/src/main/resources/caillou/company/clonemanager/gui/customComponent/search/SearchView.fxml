@@ -7,79 +7,86 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caillou.company.clonemanager.gui.customComponent.search.SearchController">
-    <stylesheets>
-        <URL value="@/styles/main.css" />
-        <URL value="@/styles/search.css" />
-    </stylesheets>
-    <children>
-      <VBox styleClass="main" stylesheets="@../../../../../../styles/main.css" VBox.vgrow="ALWAYS">
-         <children>
-            <VBox styleClass="mainBox">
+
+<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="640.0" prefWidth="800.0" stylesheets="@../../../../../../styles/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caillou.company.clonemanager.gui.customComponent.search.SearchController">
+   <content>
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+          <stylesheets>
+              <URL value="@/styles/main.css" />
+              <URL value="@/styles/search.css" />
+          </stylesheets>
+          <children>
+            <VBox styleClass="main" stylesheets="@../../../../../../styles/main.css" VBox.vgrow="ALWAYS">
                <children>
-                  <HBox>
+                  <VBox styleClass="mainBox">
                      <children>
-                        <ImageView fitHeight="39.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../../img/loupe.png" />
-                           </image>
-                        </ImageView>
-                        <Label text="%title.locations">
-                           <styleClass>
-                              <String fx:value="btext" />
-                              <String fx:value="boxTitle" />
-                           </styleClass>
-                        </Label>
+                        <HBox>
+                           <children>
+                              <ImageView fitHeight="39.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../img/loupe.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="%title.locations">
+                                 <styleClass>
+                                    <String fx:value="btext" />
+                                    <String fx:value="boxTitle" />
+                                 </styleClass>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="25.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <fx:include source="../locationContainer/LocationContainer.fxml" />
                      </children>
-                     <VBox.margin>
-                        <Insets bottom="25.0" />
-                     </VBox.margin>
+                  </VBox>
+                  <VBox styleClass="mainBox">
+                     <children>
+                        <HBox>
+                           <children>
+                              <ImageView fitHeight="39.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../img/loupe.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="%tilte.constraints">
+                                 <styleClass>
+                                    <String fx:value="btext" />
+                                    <String fx:value="boxTitle" />
+                                 </styleClass>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox>
+                           <children>
+                             <fx:include source="../critere/CritereView.fxml" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <HBox alignment="CENTER_RIGHT" spacing="10.0" styleClass="boxButton">
+                          <children>
+                              <Button minHeight="27.0" minWidth="140.0" mnemonicParsing="false" onAction="#mainMenuAction" prefHeight="27.0" prefWidth="140.0" text="%button.previous">
+                           <styleClass>
+                              <String fx:value="commonButton" />
+                              <String fx:value="previousButton" />
+                           </styleClass>
+                        </Button>
+                              <Button fx:id="validerButton" defaultButton="true" minHeight="27.0" minWidth="140.0" mnemonicParsing="false" onAction="#searchAction" prefHeight="27.0" prefWidth="140.0" text="%button.next" textOverrun="CLIP">
+                           <padding>
+                              <Insets right="13.0" />
+                           </padding>
+                           <styleClass>
+                              <String fx:value="commonButton" />
+                              <String fx:value="nextButton" />
+                           </styleClass>
+                        </Button>
+                          </children>
                   </HBox>
-                  <fx:include source="../locationContainer/LocationContainer.fxml" />
                </children>
             </VBox>
-            <VBox styleClass="mainBox">
-               <children>
-                  <HBox>
-                     <children>
-                        <ImageView fitHeight="39.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../../img/loupe.png" />
-                           </image>
-                        </ImageView>
-                        <Label text="%tilte.constraints">
-                           <styleClass>
-                              <String fx:value="btext" />
-                              <String fx:value="boxTitle" />
-                           </styleClass>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox>
-                     <children>
-                       <fx:include source="../critere/CritereView.fxml" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-            <HBox alignment="CENTER_RIGHT" spacing="10.0" styleClass="boxButton">
-                    <children>
-                        <Button minHeight="27.0" minWidth="140.0" mnemonicParsing="false" onAction="#mainMenuAction" prefHeight="27.0" prefWidth="140.0" text="%button.previous">
-                     <styleClass>
-                        <String fx:value="commonButton" />
-                        <String fx:value="previousButton" />
-                     </styleClass></Button>
-                        <Button fx:id="validerButton" defaultButton="true" minHeight="27.0" minWidth="140.0" mnemonicParsing="false" onAction="#searchAction" prefHeight="27.0" prefWidth="140.0" text="%button.next" textOverrun="CLIP">
-                     <padding>
-                        <Insets right="13.0" />
-                     </padding>
-                     <styleClass>
-                        <String fx:value="commonButton" />
-                        <String fx:value="nextButton" />
-                     </styleClass></Button>
-                    </children>
-            </HBox>
          </children>
       </VBox>
-   </children>
-</VBox>
+   </content>
+</ScrollPane>

@@ -1,0 +1,7 @@
+.error {
+    -fx-text-fill: red !important;
+}
+
+.warning {
+    -fx-text-fill: orange !important;
+}

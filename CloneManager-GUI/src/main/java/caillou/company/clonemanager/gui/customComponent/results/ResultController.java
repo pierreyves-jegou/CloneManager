@@ -11,6 +11,7 @@ import caillou.company.clonemanager.gui.MainApp;
 import caillou.company.clonemanager.gui.Navigation;
 import caillou.company.clonemanager.gui.WindowsPreferredDimensions;
 import caillou.company.clonemanager.gui.bean.applicationFileFX.contract.GUIApplicationFile;
+import caillou.company.clonemanager.gui.bean.impl.IntegerField;
 import caillou.company.clonemanager.gui.customComponent.common.MainModel;
 import caillou.company.clonemanager.gui.customComponent.statistic.StatisticHelper;
 import caillou.company.clonemanager.gui.customComponent.taskchoice.TaskModel;
@@ -49,6 +50,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
@@ -98,9 +100,6 @@ public class ResultController implements Initializable {
     private CheckBox hideSingleFileId;
 
     @FXML
-    private VBox mainPanelId;
-
-    @FXML
     private SplitPane splittedPanelId;
 
     @FXML
@@ -113,7 +112,13 @@ public class ResultController implements Initializable {
     private TitledPane informationPaneId;
 
     @FXML
+    private HBox hideSingleFileContainerId;
+    
+    @FXML
     private VBox deleteDoublonsActionBoxId;
+    
+    @FXML
+    private VBox deleteDoublonsActionFromGroupId;
 
     @FXML
     private ComboBox<Group> groupId;
@@ -135,7 +140,7 @@ public class ResultController implements Initializable {
 
     @FXML
     private VBox mainContainerPanelID;
-    
+   
     private final ListProperty<GUIApplicationFile> guiApplicationFileList = new SimpleListProperty<>();
 
     private FilteredList<GUIApplicationFile> guiApplicationFileListFiltered;
@@ -147,12 +152,6 @@ public class ResultController implements Initializable {
     private PopOver popOver;
 
     private final GroupPredicate mainPredicate = new GroupPredicate();
-    
-    @FXML
-    private Text textId;
-    
-    @FXML
-    private TextFlow textFlowId;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -194,14 +193,6 @@ public class ResultController implements Initializable {
         /**
          * End *
          */
-        
-        for(String ee : this.textFlowId.getStyleClass()){
-            System.out.println("Style de TextFlow:" +ee);
-        }
-        
-        for(String ee : this.textId.getStyleClass()){
-            System.out.println("Style de Text:" +ee);
-        }
     }
 
     private void initializeRowFactory() {
@@ -215,9 +206,6 @@ public class ResultController implements Initializable {
         int i=0;
         List<Node> children = StatisticHelper.createStaticList();
         for (Node child : children) {
-            if(i++==0){
-                child.setStyle("-fx-border-width: 0px 0px 0px 0px;");
-            }
             staticContainer.getChildren().add(child);
         }
     }
@@ -282,13 +270,15 @@ public class ResultController implements Initializable {
             case DETECT_MISSING:
                 this.deleteDoublonsActionBoxId.setVisible(false);
                 this.deleteDoublonsActionBoxId.setManaged(false);
-                this.hideSingleFileId.setManaged(false);
-                this.hideSingleFileId.setVisible(false);
+                this.deleteDoublonsActionFromGroupId.setVisible(false);
+                this.deleteDoublonsActionFromGroupId.setManaged(false);
+                this.hideSingleFileContainerId.setManaged(false);
+                this.hideSingleFileContainerId.setVisible(false);
                 break;
         }
     }
 
-    private void initializePhaseAutomaticResizing() {
+    private void initializePhaseAutomaticResizing() {     
         splittedPanelId.prefHeightProperty().bind(mainContainerPanelID.heightProperty());
         splittedPanelId.prefWidthProperty().bind(mainContainerPanelID.widthProperty());
         resultViewId.prefHeightProperty().bind(splittedPanelId.heightProperty().subtract(2));

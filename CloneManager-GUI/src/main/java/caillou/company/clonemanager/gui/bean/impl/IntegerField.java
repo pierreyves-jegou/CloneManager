@@ -53,8 +53,17 @@ public class IntegerField extends TextField {
     }
 
     private void intializeHandlers(){
-                final IntegerField intField = this;
-
+        final IntegerField intField = this;
+        if(value == null){
+            value = new SimpleIntegerProperty(0);
+        }
+        if(this.minValue == null){
+            this.minValue = Integer.MIN_VALUE;
+        }
+        if(this.maxValue == null){
+            this.maxValue = Integer.MAX_VALUE;
+        }
+        
         // make sure the value property is clamped to the required range
         // and update the field's text to be in sync with the value.
         value.addListener(new ChangeListener<Number>() {

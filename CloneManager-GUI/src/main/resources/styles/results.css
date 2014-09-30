@@ -1,3 +1,18 @@
+.scroll-pane{
+    -fx-background-image: url("../img/background.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 100% 50%;
+    -fx-background-size: 100% 100%;
+}
+
+.scroll-pane:focused{
+    
+    -fx-background-image: url("../img/background.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 100% 50%;
+    -fx-background-size: 100% 100%;
+}
+
 .boxDashed{
    -fx-border-color: #eaa319;
    -fx-border-style: dashed;

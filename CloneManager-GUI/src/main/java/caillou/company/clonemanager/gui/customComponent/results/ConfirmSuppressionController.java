@@ -5,8 +5,8 @@
  */
 package caillou.company.clonemanager.gui.customComponent.results;
 
-import caillou.company.clonemanager.background.exception.ArgumentException;
-import caillou.company.clonemanager.background.exception.OrganizerException;
+import caillou.company.clonemanager.background.exception.CloneManagerArgumentException;
+import caillou.company.clonemanager.background.exception.CloneManagerException;
 import caillou.company.clonemanager.gui.bean.applicationFileFX.contract.GUIApplicationFile;
 import caillou.company.clonemanager.gui.handler.RemoveFromViewHandler;
 import caillou.company.clonemanager.gui.service.task.contract.ArgumentCheckable;
@@ -73,9 +73,9 @@ public class ConfirmSuppressionController implements Initializable, ArgumentChec
     }
     
     @Override
-    public void checkArguments() throws ArgumentException {
+    public void checkArguments() throws CloneManagerArgumentException {
         if(this.dialog == null || guiApplicationFileList == null || tableView == null || suppressOnlyOnSelected == null){
-            throw new ArgumentException();
+            throw new CloneManagerArgumentException();
         }
     }
     

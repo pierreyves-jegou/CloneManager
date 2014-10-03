@@ -6,7 +6,7 @@
 
 package caillou.company.clonemanager.gui.service.task.impl;
 
-import caillou.company.clonemanager.background.exception.ArgumentException;
+import caillou.company.clonemanager.background.exception.CloneManagerArgumentException;
 import caillou.company.clonemanager.background.util.contract.ApplicationFileUtil;
 import caillou.company.clonemanager.background.util.contract.HashUtil;
 import caillou.company.clonemanager.gui.bean.applicationFileFX.contract.GUIApplicationFile;
@@ -33,9 +33,9 @@ public class FetchAllDuplicateHavingACopyTask extends AbstractFetchTask implemen
     }
 
     @Override
-    public void checkArguments() throws ArgumentException {
+    public void checkArguments() throws CloneManagerArgumentException {
         if(guiApplicationFileListToDelete == null){
-            throw new ArgumentException();
+            throw new CloneManagerArgumentException();
         }
     }    
 }

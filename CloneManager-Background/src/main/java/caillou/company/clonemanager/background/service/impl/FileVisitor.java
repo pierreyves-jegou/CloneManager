@@ -5,7 +5,7 @@ import caillou.company.clonemanager.background.bean.filter.Filter;
 import caillou.company.clonemanager.background.bean.filter.FilterGroup;
 import caillou.company.clonemanager.background.bean.impl.Group;
 import caillou.company.clonemanager.background.bean.impl.MyFile;
-import caillou.company.clonemanager.background.exception.OrganizerException;
+import caillou.company.clonemanager.background.exception.CloneManagerException;
 import caillou.company.clonemanager.background.service.contract.Cancellable;
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
@@ -70,13 +70,13 @@ public class FileVisitor extends SimpleFileVisitor<Path> {
     }
 
     public void visit(Cancellable object, Path path, Group.VALUE groupValue)
-            throws OrganizerException, IOException {
+            throws CloneManagerException, IOException {
 
         setCurrentGroup(groupValue);
         this.callingThread = object;
 
         if (!path.toFile().exists()) {
-            throw new OrganizerException(
+            throw new CloneManagerException(
                     "The file specified by the given path doesn't exist");
         }
 

@@ -5,7 +5,7 @@
  */
 package caillou.company.clonemanager.gui.handler;
 
-import caillou.company.clonemanager.background.exception.ArgumentException;
+import caillou.company.clonemanager.background.exception.CloneManagerArgumentException;
 import caillou.company.clonemanager.gui.bean.applicationFileFX.contract.GUIApplicationFile;
 import caillou.company.clonemanager.gui.customComponent.results.GUIApplicationFileUtil;
 import caillou.company.clonemanager.gui.customComponent.statistic.StatisticToCompute;
@@ -83,9 +83,9 @@ public class RemoveFromViewHandler implements EventHandler<WorkerStateEvent>, Ar
     }
 
     @Override
-    public void checkArguments() throws ArgumentException {
+    public void checkArguments() throws CloneManagerArgumentException {
         if(this.tableView == null || this.guiApplicationFileList == null ||suppressOnlyOnSelected == null){
-            throw new ArgumentException();
+            throw new CloneManagerArgumentException();
         }
     }
 }

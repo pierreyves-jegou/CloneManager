@@ -6,7 +6,7 @@
 
 package caillou.company.clonemanager.gui.service.task.contract;
 
-import caillou.company.clonemanager.background.exception.ArgumentException;
+import caillou.company.clonemanager.background.exception.CloneManagerArgumentException;
 
 /**
  *
@@ -14,6 +14,6 @@ import caillou.company.clonemanager.background.exception.ArgumentException;
  */
 public interface ArgumentCheckable {
     
-    public void checkArguments() throws ArgumentException;
+    public void checkArguments() throws CloneManagerArgumentException;
     
 }

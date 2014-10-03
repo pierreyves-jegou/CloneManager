@@ -1,9 +1,9 @@
 package caillou.company.clonemanager.background.exception.configuration;
 
-import caillou.company.clonemanager.background.exception.OrganizerException;
+import caillou.company.clonemanager.background.exception.CloneManagerException;
 
 
-public class ConfigurationException extends OrganizerException {
+public class ConfigurationException extends CloneManagerException {
 
 	/**
 	 * Serial

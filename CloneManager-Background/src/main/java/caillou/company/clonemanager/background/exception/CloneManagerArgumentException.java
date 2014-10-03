@@ -6,14 +6,23 @@
 
 package caillou.company.clonemanager.background.exception;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author pierre
  */
-public class ArgumentException extends OrganizerException {
+public class CloneManagerArgumentException extends CloneManagerException {
     
-    public ArgumentException(){
+    private List<String> arguments = new ArrayList<>();
+    
+    public CloneManagerArgumentException(){
         super("Arguments are not set properly");
+    }
+    
+    public void addArgument(String argument){
+        this.arguments.add(argument);
     }
     
 }

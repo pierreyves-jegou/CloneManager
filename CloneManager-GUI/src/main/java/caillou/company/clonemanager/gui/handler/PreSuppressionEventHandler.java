@@ -5,7 +5,7 @@
  */
 package caillou.company.clonemanager.gui.handler;
 
-import caillou.company.clonemanager.background.exception.ArgumentException;
+import caillou.company.clonemanager.background.exception.CloneManagerArgumentException;
 import caillou.company.clonemanager.gui.MainApp;
 import caillou.company.clonemanager.gui.Navigation;
 import caillou.company.clonemanager.gui.StyleSheet;
@@ -44,7 +44,7 @@ public class PreSuppressionEventHandler implements EventHandler<WorkerStateEvent
     private void handleEvent(List<GUIApplicationFile> fileToDelete){
         try {
             checkArguments();
-        } catch (ArgumentException ex) {
+        } catch (CloneManagerArgumentException ex) {
             Logger.getLogger(PreSuppressionEventHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -59,7 +59,7 @@ public class PreSuppressionEventHandler implements EventHandler<WorkerStateEvent
         confirmSuppressionController.setSuppressOnlyOnSelected(suppressOnlyOnSelected);
         try {
             confirmSuppressionController.checkArguments();
-        } catch (ArgumentException ex) {
+        } catch (CloneManagerArgumentException ex) {
             Logger.getLogger(PreSuppressionEventHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
         dialogConfirmSuppression.setContent(loadingMojo.getParent());
@@ -89,9 +89,9 @@ public class PreSuppressionEventHandler implements EventHandler<WorkerStateEvent
     }
 
     @Override
-    public void checkArguments() throws ArgumentException {
+    public void checkArguments() throws CloneManagerArgumentException {
         if(tableView == null || guiApplicationFileList == null || suppressOnlyOnSelected == null){
-            throw new ArgumentException();
+            throw new CloneManagerArgumentException();
         }
     }
 

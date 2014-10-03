@@ -6,8 +6,6 @@
 
 package caillou.company.clonemanager.background.event;
 
-import caillou.company.clonemanager.background.event.FileTreatedEvent;
-
 /**
  *
  * @author pierre

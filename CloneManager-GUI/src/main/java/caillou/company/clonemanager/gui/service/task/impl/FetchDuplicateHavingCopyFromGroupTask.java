@@ -7,8 +7,8 @@
 package caillou.company.clonemanager.gui.service.task.impl;
 
 import caillou.company.clonemanager.background.bean.impl.Group;
-import caillou.company.clonemanager.background.exception.ArgumentException;
-import caillou.company.clonemanager.background.exception.OrganizerException;
+import caillou.company.clonemanager.background.exception.CloneManagerArgumentException;
+import caillou.company.clonemanager.background.exception.CloneManagerException;
 import caillou.company.clonemanager.gui.bean.applicationFileFX.contract.GUIApplicationFile;
 import caillou.company.clonemanager.gui.service.task.contract.ArgumentCheckable;
 import java.util.List;
@@ -30,7 +30,7 @@ public class FetchDuplicateHavingCopyFromGroupTask extends AbstractFetchTask imp
     @Override
     protected Set<GUIApplicationFile> call() throws Exception {
         if(this.targetGroup == null){
-            throw new OrganizerException("the fied 'targetGroup' has to be set");
+            throw new CloneManagerException("the fied 'targetGroup' has to be set");
         }
         Map<String, List<GUIApplicationFile>> listMyFilePerHash = hashUtil.sortPerMD5(guiApplicationFileListToDelete);
         return applicationFileUtil.detectDuplicateFilesHavingACopyInOtherGroup(listMyFilePerHash, this.targetGroup);
@@ -41,9 +41,9 @@ public class FetchDuplicateHavingCopyFromGroupTask extends AbstractFetchTask imp
     }
 
     @Override
-    public void checkArguments() throws ArgumentException {
+    public void checkArguments() throws CloneManagerArgumentException {
         if(guiApplicationFileListToDelete == null || targetGroup == null){
-            throw new ArgumentException();
+            throw new CloneManagerArgumentException();
         }
     }
     

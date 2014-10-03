@@ -7,7 +7,7 @@ package caillou.company.clonemanager.gui.service.task.impl;
 
 import caillou.company.clonemanager.background.bean.applicationFile.contract.ApplicationFile;
 import caillou.company.clonemanager.background.bean.filter.Filter;
-import caillou.company.clonemanager.background.exception.OrganizerException;
+import caillou.company.clonemanager.background.exception.CloneManagerException;
 import caillou.company.clonemanager.background.service.contract.Cancellable;
 import caillou.company.clonemanager.background.service.impl.FileVisitor;
 import caillou.company.clonemanager.gui.customComponent.common.MainModel;
@@ -60,7 +60,7 @@ public class VisitLocationTask extends Task<Long> implements Cancellable {
                     }
                 }
             }
-        } catch (OrganizerException | IOException e) {
+        } catch (CloneManagerException | IOException e) {
             System.out.println(e);
         }
         this.myFileProcessor.setMyFilesToTreat(myFileToTreat);        

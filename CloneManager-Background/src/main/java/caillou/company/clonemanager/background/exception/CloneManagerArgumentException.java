@@ -21,6 +21,14 @@ public class CloneManagerArgumentException extends CloneManagerException {
         super("Arguments are not set properly");
     }
     
+    public CloneManagerArgumentException(String ... arguments){
+        super("Arguments are not set properly");
+        for(String argument : arguments){
+            this.arguments.add(argument);
+        }
+    }
+    
+    
     public void addArgument(String argument){
         this.arguments.add(argument);
     }

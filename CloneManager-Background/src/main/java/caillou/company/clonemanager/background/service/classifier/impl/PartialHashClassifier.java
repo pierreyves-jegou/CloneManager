@@ -2,8 +2,8 @@ package caillou.company.clonemanager.background.service.classifier.impl;
 
 import caillou.company.clonemanager.background.bean.applicationFile.contract.ApplicationFile;
 import caillou.company.clonemanager.background.event.FilePartiallyHashedEvent;
-import caillou.company.clonemanager.background.service.impl.HashHandler;
-import java.io.FileNotFoundException;
+import caillou.company.clonemanager.background.exception.CloneManagerException;
+import caillou.company.clonemanager.background.service.impl.HashProcessor;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -21,13 +21,13 @@ public class PartialHashClassifier extends AbstractClassifier<String, Applicatio
     }
 
     @Override
-    public void classify(ApplicationFile fileToSort) throws FileNotFoundException{
+    public void classify(ApplicationFile fileToSort) throws CloneManagerException{
         String MD5Print;
 
         if (fileToSort.getPartialMD5Print() != null) {
             MD5Print = fileToSort.getPartialMD5Print();
         } else {
-            MD5Print = HashHandler.getHash(fileToSort, byteToRead);
+            MD5Print = HashProcessor.process(fileToSort, byteToRead);
             fileToSort.setPartialMD5Print(MD5Print);
         }
         

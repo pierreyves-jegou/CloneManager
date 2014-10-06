@@ -19,7 +19,7 @@ public class Navigation {
     public static String RESULTS_VIEW = "/caillou/company/clonemanager/gui/customComponent/results/ResultView.fxml";
     public static String LOCATION_VIEW = "/caillou/company/clonemanager/gui/customComponent/location/LocationView.fxml";
     public static String EXCLUDE_TREE = "/caillou/company/clonemanager/gui/customComponent/excludeTree/ExcludeTree.fxml";
-    public static String SUPPRESSION_POPUP = "/caillou/company/clonemanager/gui/customComponent/results/ConfirmSuppressionView.fxml";
+    public static String CONFIRM_POPUP = "/caillou/company/clonemanager/gui/customComponent/results/ConfirmActionForFilesView.fxml";
     public static String TRANSITION_POPUP = "/caillou/company/clonemanager/gui/customComponent/transition/Transition.fxml";
     public static String STATISTIC_COMPONENT = "/caillou/company/clonemanager/gui/customComponent/statistic/Statistic.fxml";
     public static String SETTINGS_VIEW = "/caillou/company/clonemanager/gui/customComponent/settings/Settings.fxml";

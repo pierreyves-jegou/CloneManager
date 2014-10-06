@@ -28,23 +28,35 @@ public class SpringFxmlLoader {
     private static ResourceBundle resourceBundle;
     private static Locale currentLocale = Locale.ENGLISH;
     private static String lastLoadedURL = null;
-        
-    public SpringFxmlLoader(){
+
+    public SpringFxmlLoader() {
         resourceBundle = ResourceBundle.getBundle("bundle.Main", SpringFxmlLoader.currentLocale);
         changeLocale(currentLocale);
     }
-    
-    public static LoadingMojo load(String url) {           
+
+    public static LoadingMojo load(String url) {
+        return load(url, null);
+    }
+
+    public static LoadingMojo load(String url, final String controllerClassName) {
+
         lastLoadedURL = url;
         FXMLLoader loader = new FXMLLoader(MainApp.class.getResource(url), resourceBundle);
-            loader.setControllerFactory(new Callback<Class<?>, Object>() {
-                @Override
-                public Object call(Class<?> clazz) {
-                    return applicationContext.getBean(clazz);
+        loader.setControllerFactory(new Callback<Class<?>, Object>() {
+            @Override
+            public Object call(Class<?> clazz) {
+                if (controllerClassName != null) {
+                    try {
+                        return applicationContext.getBean(Class.forName(controllerClassName));
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(SpringFxmlLoader.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-            });
+                return applicationContext.getBean(clazz);
+            }
+        });
+
         try {
-            
             Parent parent = loader.load();
             LoadingMojo loadingMojo = new LoadingMojo();
             loadingMojo.setController(loader.getController());
@@ -52,41 +64,41 @@ public class SpringFxmlLoader {
             return loadingMojo;
         } catch (IOException ex) {
             Logger.getLogger(SpringFxmlLoader.class.getName()).log(Level.SEVERE, null, ex);
+        } catch(Exception exMain){
+            System.out.println("Error");
         }
         return null;
     }
-    
-    public static <T> T getBean(Class<T> requiredType){
-         return applicationContext.getBean(requiredType);
+
+    public static <T> T getBean(Class<T> requiredType) {
+        return applicationContext.getBean(requiredType);
     }
-    
-    public static <T> T getBean(String name, Class<T> requiredType){
-        if(name == null){
+
+    public static <T> T getBean(String name, Class<T> requiredType) {
+        if (name == null) {
             return applicationContext.getBean(requiredType);
-        }else{
+        } else {
             return applicationContext.getBean(name, requiredType);
         }
     }
-    
-    public static void changeLocale(Locale locale){
+
+    public static void changeLocale(Locale locale) {
         SpringFxmlLoader.currentLocale = locale;
         Group.GROUPA.setGuiValue(resourceBundle.getString("group1"));
         Group.GROUPB.setGuiValue(resourceBundle.getString("group2"));
         resourceBundle = ResourceBundle.getBundle("bundle.Main", SpringFxmlLoader.currentLocale);
     }
-    
-    public static ResourceBundle getResourceBundle(){
+
+    public static ResourceBundle getResourceBundle() {
         return resourceBundle;
     }
-    
-    public static Locale getLocale(){
+
+    public static Locale getLocale() {
         return currentLocale;
     }
 
     public static String getLastLoadedURL() {
         return lastLoadedURL;
     }
-    
-    
-    
+
 }

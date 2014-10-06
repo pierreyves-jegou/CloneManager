@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package caillou.company.clonemanager.background.bean.applicationFile.contract;
+package caillou.company.clonemanager.background.log;
 
 /**
  *
  * @author pierre
  */
-public interface ApplicationFile extends HashProvider, FileURIProvider, GroupProvider, SizeProvider, FileProvider{
+public class DebugMessage {
+ 
+     public static String CANCEL_BY_USER = "Cancel by the user";
+    
 }

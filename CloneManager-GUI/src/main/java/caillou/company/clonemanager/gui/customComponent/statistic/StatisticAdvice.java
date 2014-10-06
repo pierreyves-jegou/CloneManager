@@ -22,7 +22,7 @@ public class StatisticAdvice {
 
     private StatisticToCompute statisticToCompute;
 
-    @AfterReturning("execution(public void caillou.company.clonemanager.gui.service.task.impl.EnqueueMyFilesService.setMyFilesToTreat(..)) && args(myFilesToTreat)")
+    @AfterReturning("execution(public void caillou.company.clonemanager.gui.service.task.impl.EnqueueImplTask.setMyFilesToTreat(..)) && args(myFilesToTreat)")
     public void handleFileToTreat(JoinPoint jp, Set<ApplicationFile> myFilesToTreat) {
         statisticToCompute.setMyFilesToTreat(myFilesToTreat);
     }

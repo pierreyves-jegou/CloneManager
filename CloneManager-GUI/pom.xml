@@ -86,11 +86,11 @@
                                 <argument>-outfile</argument>
                                 <argument>${project.build.finalName}.jar</argument>
                                 <argument>-classpath</argument>
-                                <argument>CloneManager-Background-${com.mycompany.version}.jar aspectjrt-1.8.2.jar aspectjweaver-1.8.2.jar controlsfx-8.0.6.jar guava-14.0.1.jar junit-4.11.jar spring-beans-4.0.6.RELEASE.jar spring-context-4.0.6.RELEASE.jar spring-context-support-4.0.6.RELEASE.jar spring-core-4.0.6.RELEASE.jar aopalliance-1.0.jar commons-logging-1.1.3.jar hamcrest-core-1.3.jar spring-aop-4.0.6.RELEASE.jar spring-expression-4.0.6.RELEASE.jar</argument>
+                                <argument>CloneManager-Background-${com.mycompany.version}.jar aspectjrt-1.8.2.jar aspectjweaver-1.8.2.jar controlsfx-8.0.6.jar guava-14.0.1.jar log4j-1.2.16.jar spring-beans-4.0.6.RELEASE.jar spring-context-4.0.6.RELEASE.jar spring-context-support-4.0.6.RELEASE.jar spring-core-4.0.6.RELEASE.jar aopalliance-1.0.jar commons-logging-1.1.3.jar hamcrest-core-1.3.jar spring-aop-4.0.6.RELEASE.jar spring-expression-4.0.6.RELEASE.jar</argument>
                             </arguments>
                         </configuration>
                     </execution>
-                    <execution>
+<!--                    <execution>
                         <id>deploy</id>
                         <phase>package</phase>
                         <goals>
@@ -115,7 +115,7 @@
                                 <argument>-native</argument>
                             </arguments>
                         </configuration>
-                    </execution>
+                    </execution>-->
                     <execution>
                         <id>default-cli</id>
                         <goals>
@@ -151,6 +151,12 @@
                     <source>1.7</source>
                     <target>1.7</target>
                     <bootclasspath>${sun.boot.class.path}${path.separator}${java.home}/lib/jfxrt.jar</bootclasspath>
+                    <weaveDependencies>
+                        <weaveDependency>
+                          <groupId>caillou.company</groupId>
+                          <artifactId>CloneManager-Background</artifactId>
+                        </weaveDependency>
+                    </weaveDependencies>
                 </configuration>
                 <executions>
                     <execution>

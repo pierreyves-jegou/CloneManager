@@ -7,11 +7,10 @@ package caillou.company.clonemanager.gui.service.task.impl;
 
 import caillou.company.clonemanager.background.bean.applicationFile.contract.ApplicationFile;
 import caillou.company.clonemanager.background.event.FilePartiallyHashedEvent;
-import caillou.company.clonemanager.background.exception.OrganizerException;
+import caillou.company.clonemanager.background.exception.CloneManagerException;
 import caillou.company.clonemanager.background.service.classifier.impl.Analyse;
 import caillou.company.clonemanager.background.service.classifier.impl.PartialHashClassifier;
 import caillou.company.clonemanager.background.service.classifier.strategy.FilterStrategy;
-import caillou.company.clonemanager.gui.bean.applicationFileFX.contract.GUIApplicationFile;
 import caillou.company.clonemanager.gui.service.task.contract.PartialHashTask;
 import com.google.common.eventbus.Subscribe;
 
@@ -20,6 +19,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.concurrent.Task;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -38,21 +38,24 @@ public class PartialHashTaskImpl extends Task<Analyse<String, ApplicationFile>> 
     private Long bytesRead = (long) 0;
     
     private FilterStrategy<String, ApplicationFile> filterStrategy;
+    
+    private WorkerMonitor workerMonitor;
          
     @Override
-    protected Analyse<String, ApplicationFile> call() {
+    protected Analyse<String, ApplicationFile> call() throws CloneManagerException{
+        workerMonitor.addWorker(WorkerMonitor.HASH_WORKER, this);
         if(filesToTreat == null){
             try {
-                throw new OrganizerException("Error while reading arguments : filesToTreat is null");
-            } catch (OrganizerException ex) {
+                throw new CloneManagerException("Error while reading arguments : filesToTreat is null");
+            } catch (CloneManagerException ex) {
                 Logger.getLogger(PartialHashTaskImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         
         if(bytesToTreat == null){
             try {
-                throw new OrganizerException("Error while reading arguments : bytesToTreat is null");
-            } catch (OrganizerException ex) {
+                throw new CloneManagerException("Error while reading arguments : bytesToTreat is null");
+            } catch (CloneManagerException ex) {
                 Logger.getLogger(PartialHashTaskImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -61,7 +64,11 @@ public class PartialHashTaskImpl extends Task<Analyse<String, ApplicationFile>> 
         partialHashClassifier.setCallingThread(this);
         partialHashClassifier.setFilterStrategy(filterStrategy);
         partialHashClassifier.getEventBus().register(this);
-        Analyse<String, ApplicationFile> results = partialHashClassifier.classify(filesToTreat);
+        
+        Analyse<String, ApplicationFile> input = new Analyse<>();
+        input.setFilesNotTreated(filesToTreat);
+        Analyse<String, ApplicationFile> results = partialHashClassifier.process(input);
+        workerMonitor.removeWorker(WorkerMonitor.HASH_WORKER, this);
         return results;
     }
 
@@ -92,5 +99,10 @@ public class PartialHashTaskImpl extends Task<Analyse<String, ApplicationFile>> 
     @Override
     public void setMyFilesToTreat(Set<ApplicationFile> myFilesToTreat) {
         this.filesToTreat = myFilesToTreat;
+    }
+
+    @Autowired
+    public void setWorkerMonitor(WorkerMonitor workerMonitor) {
+        this.workerMonitor = workerMonitor;
     }
 }

@@ -9,6 +9,7 @@ import caillou.company.clonemanager.background.bean.contract.EventBusProvider;
 import caillou.company.clonemanager.gui.MainApp;
 import caillou.company.clonemanager.gui.bean.applicationFileFX.contract.GUIApplicationFile;
 import caillou.company.clonemanager.gui.event.MouseEnteredRowEvent;
+import caillou.company.clonemanager.gui.handler.CopyFilesHandler;
 import caillou.company.clonemanager.gui.handler.PreSuppressionEventHandler;
 import caillou.company.clonemanager.gui.service.task.impl.CopyToTask;
 import caillou.company.clonemanager.gui.spring.SpringFxmlLoader;
@@ -116,30 +117,11 @@ public class MyRowFactory implements Callback<TableView<GUIApplicationFile>, Tab
             }
         });
 
-        copyTo.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                DirectoryChooser directoryChooser = new DirectoryChooser();
-                directoryChooser.setTitle("Sélectionner le répertoire");
-                File targetDirectory = directoryChooser.showDialog(null);
-                if (targetDirectory != null && targetDirectory.exists() && targetDirectory.isDirectory()) {
-
-                    Action response = Dialogs.create()
-                            .owner(MainApp.getInstance().getStage())
-                            .title("Confirmation")
-                            .masthead(null)
-                            .message("Voulez vous copier les éléments séléctionnés vers : \"" + targetDirectory.getAbsolutePath() + "\" ?")
-                            .actions(Dialog.Actions.CANCEL, Dialog.Actions.OK)
-                            .showConfirm();
-                    if (response == Dialog.Actions.OK) {
-                        CopyToTask copyToTask = new CopyToTask();
-                        copyToTask.setTargetDirectory(targetDirectory);
-                        copyToTask.setFilesToCopy(resultView.getSelectionModel().getSelectedItems());
-                        new Thread(copyToTask).start();
-                    }
-                }
-            }
-        });
+        CopyFilesHandler copyFilesHandler = SpringFxmlLoader.getBean(CopyFilesHandler.class);
+        copyFilesHandler.setFileToShow(resultView.getSelectionModel().getSelectedItems());
+        copyFilesHandler.setGuiApplicationFileList(guiApplicationFileList);
+        copyFilesHandler.setTableView(tableView);
+        copyTo.setOnAction(copyFilesHandler);
 
         clearItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override

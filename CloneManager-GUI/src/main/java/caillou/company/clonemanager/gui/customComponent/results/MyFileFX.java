@@ -9,6 +9,7 @@ package caillou.company.clonemanager.gui.customComponent.results;
 import caillou.company.clonemanager.background.bean.applicationFile.contract.ApplicationFile;
 import caillou.company.clonemanager.background.bean.impl.Group;
 import caillou.company.clonemanager.gui.bean.applicationFileFX.contract.GUIApplicationFile;
+import java.io.File;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -144,6 +145,11 @@ public class MyFileFX implements GUIApplicationFile{
     @Override
     public void setCurrentPostion(POSITION currentPostion) {
         this.currentPostion = currentPostion;
+    }
+
+    @Override
+    public File getEnclosingFile() {
+        return this.getMyFile().getEnclosingFile();
     }
     
     

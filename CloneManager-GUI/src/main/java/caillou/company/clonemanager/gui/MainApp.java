@@ -19,6 +19,7 @@ public class MainApp extends Application {
 
     private static MainApp instance;
     
+    // TODO : Strange problem when using 'SpringFxmlLoader' statically here
     private SpringFxmlLoader springFxmlLoader;
 
     private Double posX;
@@ -49,7 +50,7 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         try {            
 //            Font.loadFont(ClassLoader.getSystemResource("fonts/Assassin.ttf").toExternalForm(), 10);
-            
+                        
             stage = primaryStage;
             stage.setTitle("Clone Manager");
             
@@ -83,7 +84,7 @@ public class MainApp extends Application {
         return page;
     }
 
-    public Parent replaceSceneContent(String fxml, Double width, Double heigth) throws Exception {
+    public Parent replaceSceneContent(String fxml, Double width, Double heigth) {
         LoadingMojo loadingMojo = springFxmlLoader.load(fxml);
         return buildScene(loadingMojo.getParent(), width, heigth);
     }

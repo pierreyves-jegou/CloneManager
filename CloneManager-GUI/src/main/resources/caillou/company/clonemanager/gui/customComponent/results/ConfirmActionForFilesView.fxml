@@ -14,13 +14,13 @@
    <children>
       <VBox fx:id="listViewContainerId" styleClass="mainBox" VBox.vgrow="ALWAYS">
          <children>
-            <ListView fx:id="filesToDeleteViewId" VBox.vgrow="ALWAYS" />
+            <ListView fx:id="filesToShowViewId" VBox.vgrow="ALWAYS" />
          </children>
       </VBox>
       <HBox alignment="TOP_RIGHT" spacing="20.0" styleClass="boxButton">
          <children>
-            <Button minHeight="27.0" minWidth="140.0" mnemonicParsing="false" onAction="#cancelSuppressionAction" prefHeight="27.0" prefWidth="140.0" styleClass="commonButton" stylesheets="@../../../../../../styles/main.css" text="%button.cancel" />
-            <Button minHeight="27.0" minWidth="140.0" mnemonicParsing="false" onAction="#confirmSuppressionAction" prefHeight="27.0" prefWidth="140.0" styleClass="commonButton" stylesheets="@../../../../../../styles/main.css" text="OK" />
+            <Button minHeight="27.0" minWidth="140.0" mnemonicParsing="false" onAction="#cancelAction" prefHeight="27.0" prefWidth="140.0" styleClass="commonButton" stylesheets="@../../../../../../styles/main.css" text="%button.cancel" />
+            <Button minHeight="27.0" minWidth="140.0" mnemonicParsing="false" onAction="#confirmAction" prefHeight="27.0" prefWidth="140.0" styleClass="commonButton" stylesheets="@../../../../../../styles/main.css" text="OK" />
          </children>
          <VBox.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

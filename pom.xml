@@ -15,6 +15,7 @@
         <junit.version>4.11</junit.version>
         <org.mockito.version>1.9.5</org.mockito.version>
         <org.aspectj.version>1.8.2</org.aspectj.version>
+        <log4j.log4j.version>1.2.16</log4j.log4j.version>
     </properties>
     
     <modules>
@@ -23,7 +24,7 @@
     </modules>
     
     <dependencies>
-            <dependency>
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
             <version>${org.springframework.version}</version>
@@ -36,9 +37,9 @@
         </dependency>
 
         <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-context</artifactId>
-                <version>${org.springframework.version}</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${org.springframework.version}</version>
         </dependency>
 
         <dependency>
@@ -54,10 +55,10 @@
         </dependency>
         
         <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit.version}</version>
-                <scope>test</scope>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
         </dependency>
         
         <dependency>     
@@ -73,10 +74,18 @@
             <version>${org.aspectj.version}</version>
         </dependency>           
         <dependency>
-                <groupId>org.aspectj</groupId>
-                <artifactId>aspectjweaver</artifactId>
-                <version>${org.aspectj.version}</version>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${org.aspectj.version}</version>
         </dependency>
+        
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.log4j.version}</version>
+        </dependency>
+
+
         
     </dependencies>
     

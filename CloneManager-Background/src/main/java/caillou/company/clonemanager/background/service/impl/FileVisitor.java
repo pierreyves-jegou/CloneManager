@@ -6,6 +6,9 @@ import caillou.company.clonemanager.background.bean.filter.FilterGroup;
 import caillou.company.clonemanager.background.bean.impl.Group;
 import caillou.company.clonemanager.background.bean.impl.MyFile;
 import caillou.company.clonemanager.background.exception.CloneManagerException;
+import caillou.company.clonemanager.background.exception.CloneManagerIOException;
+import caillou.company.clonemanager.background.log.DebugMessage;
+import caillou.company.clonemanager.background.log.ErrorMessage;
 import caillou.company.clonemanager.background.service.contract.Cancellable;
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
@@ -15,6 +18,7 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.HashSet;
 import java.util.Set;
+import org.apache.log4j.Logger;
 
 /**
  * Class which visit the file system from a starting point and add to the set
@@ -32,14 +36,19 @@ public class FileVisitor extends SimpleFileVisitor<Path> {
     Filter<ApplicationFile> filter;
     Set<ApplicationFile> filesToTreat = new HashSet<>();
     private Group.VALUE currentGroup;
-    private Long bytesToTreat = new Long(0);
+    private Long bytesToTreat = (long) 0;
     private Cancellable callingThread;
+    
+    private static final Logger log = Logger.getLogger(FileVisitor.class.getName());
     
     @Override
     public FileVisitResult visitFileFailed(Path file, IOException e)
             throws IOException {
-        System.err.printf("Visiting failed for %s\n", file);
+        
+        log.error(ErrorMessage.VISIT_FILE_FAILED + file);
+        
         if(this.callingThread.isCancelled()){
+            log.debug(DebugMessage.CANCEL_BY_USER);
             return FileVisitResult.TERMINATE;
         }
         return FileVisitResult.SKIP_SUBTREE;
@@ -47,14 +56,19 @@ public class FileVisitor extends SimpleFileVisitor<Path> {
 
     /**
      * Invoked for a file in a directory.
+     * @param path
+     * @param attrs
+     * @return 
+     * @throws java.io.IOException
      */
     @Override
     public FileVisitResult visitFile(Path path, BasicFileAttributes attrs)
             throws IOException {
         if(this.callingThread.isCancelled()){
-            System.out.println("Jarrete dans enqueue");
+            log.debug(DebugMessage.CANCEL_BY_USER);
             return FileVisitResult.TERMINATE;
         }
+         
         MyFile myFile = new MyFile(path);
         if (!myFile.isDirectory()) {
             if (filter == null || filter.accept(myFile)) {
@@ -74,10 +88,11 @@ public class FileVisitor extends SimpleFileVisitor<Path> {
 
         setCurrentGroup(groupValue);
         this.callingThread = object;
-
+        
         if (!path.toFile().exists()) {
-            throw new CloneManagerException(
-                    "The file specified by the given path doesn't exist");
+            log.error(ErrorMessage.FILE_MATCHING_PATH_DOESNT_EXIST + path);
+            throw new CloneManagerIOException(
+                    ErrorMessage.FILE_MATCHING_PATH_DOESNT_EXIST + path, path.toString());
         }
 
         Files.walkFileTree(path, this);

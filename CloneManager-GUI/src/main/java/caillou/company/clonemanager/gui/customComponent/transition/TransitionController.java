@@ -7,16 +7,11 @@
 package caillou.company.clonemanager.gui.customComponent.transition;
 
 import caillou.company.clonemanager.background.bean.contract.EventBusProvider;
-import caillou.company.clonemanager.gui.MainApp;
-import caillou.company.clonemanager.gui.Navigation;
-import caillou.company.clonemanager.gui.WindowsPreferredDimensions;
 import caillou.company.clonemanager.gui.customComponent.common.contract.DialogWrapper;
-import caillou.company.clonemanager.gui.event.CancelTaskEvent;
+import caillou.company.clonemanager.gui.service.task.impl.WorkerMonitor;
 import com.google.common.eventbus.EventBus;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -24,6 +19,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ProgressIndicator;
 import org.controlsfx.dialog.Dialog;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
@@ -32,6 +29,7 @@ import org.springframework.stereotype.Component;
  * @author pierre
  */
 @Component
+@Scope(value = "prototype")
 public class TransitionController implements Initializable, EventBusProvider, DialogWrapper {
 
     @FXML
@@ -47,23 +45,20 @@ public class TransitionController implements Initializable, EventBusProvider, Di
     
     protected EventBus cancelBus = new EventBus("CANCEL_BUS");
     
+    private WorkerMonitor workerMonitor;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         progressBarFullHashId.progressProperty().addListener(new ChangeListener<Number>(){
 
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue){
                 if(newValue.equals((double) 1)){
-                    try {
-                        wrappingDialog.hide();
-                        MainApp app = MainApp.getInstance();
-                        app.replaceSceneContent(Navigation.RESULTS_VIEW, WindowsPreferredDimensions.RESULT_VIEW_WIDTH, WindowsPreferredDimensions.RESULT_VIEW_HEIGHT);
-                    } catch (Exception ex) {
-                        Logger.getLogger(TransitionController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    wrappingDialog.hide();
                 }
             }
             
@@ -73,6 +68,7 @@ public class TransitionController implements Initializable, EventBusProvider, Di
     @Override
     public void setWrappingDialog(Dialog wrappingDialog) {
         this.wrappingDialog = wrappingDialog;
+        wrappingDialog.setClosable(false);
     }
     
     @Override
@@ -94,7 +90,7 @@ public class TransitionController implements Initializable, EventBusProvider, Di
     
     @FXML
     private void stopAction(ActionEvent event) throws Exception {
-        cancelBus.post(new CancelTaskEvent());
+        this.workerMonitor.stop(WorkerMonitor.HASH_WORKER);
         this.wrappingDialog.hide();
     }
     
@@ -102,4 +98,11 @@ public class TransitionController implements Initializable, EventBusProvider, Di
     public EventBus getEventBus() {
         return cancelBus;
     }
+
+    @Autowired
+    public void setWorkerMonitor(WorkerMonitor workerMonitor) {
+        this.workerMonitor = workerMonitor;
+    }
+    
+    
 }

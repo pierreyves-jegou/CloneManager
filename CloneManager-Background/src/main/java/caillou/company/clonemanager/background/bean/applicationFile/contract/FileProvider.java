@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package caillou.company.clonemanager.background.bean.applicationFile.contract;
+
+import java.io.File;
 
 /**
  *
  * @author pierre
  */
-public interface ApplicationFile extends HashProvider, FileURIProvider, GroupProvider, SizeProvider, FileProvider{
+public interface FileProvider {
+    
+    public File getEnclosingFile();
+    
 }

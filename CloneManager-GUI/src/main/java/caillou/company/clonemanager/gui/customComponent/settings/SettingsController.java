@@ -12,26 +12,21 @@ import caillou.company.clonemanager.gui.WindowsPreferredDimensions;
 import caillou.company.clonemanager.gui.bean.Language;
 import caillou.company.clonemanager.gui.customComponent.common.contract.DialogWrapper;
 import caillou.company.clonemanager.gui.customComponent.taskchoice.LanguageListCell;
-import caillou.company.clonemanager.gui.event.LanguageEvent;
 import caillou.company.clonemanager.gui.spring.SpringFxmlLoader;
 import com.google.common.eventbus.EventBus;
 import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import org.controlsfx.dialog.Dialog;
 import org.springframework.stereotype.Component;
@@ -101,11 +96,7 @@ public class SettingsController implements Initializable, DialogWrapper, EventBu
     
     @FXML
     protected void onCloseAction(ActionEvent event) {
-        try {
-            MainApp.getInstance().replaceSceneContent(Navigation.TASK_CHOICE_VIEW, WindowsPreferredDimensions.TASKCHOICE_VIEW_WIDTH, WindowsPreferredDimensions.TASKCHOICE_VIEW_HEIGHT);
-        } catch (Exception ex) {
-            Logger.getLogger(SettingsController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        MainApp.getInstance().replaceSceneContent(Navigation.TASK_CHOICE_VIEW, WindowsPreferredDimensions.TASKCHOICE_VIEW_WIDTH, WindowsPreferredDimensions.TASKCHOICE_VIEW_HEIGHT);
     }
     
 

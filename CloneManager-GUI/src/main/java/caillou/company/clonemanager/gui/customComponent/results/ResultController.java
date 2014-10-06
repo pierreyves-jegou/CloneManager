@@ -7,11 +7,12 @@ package caillou.company.clonemanager.gui.customComponent.results;
 
 import caillou.company.clonemanager.background.bean.applicationFile.contract.ApplicationFile;
 import caillou.company.clonemanager.background.bean.impl.Group;
+import caillou.company.clonemanager.background.exception.CloneManagerIOException;
 import caillou.company.clonemanager.gui.MainApp;
 import caillou.company.clonemanager.gui.Navigation;
 import caillou.company.clonemanager.gui.WindowsPreferredDimensions;
 import caillou.company.clonemanager.gui.bean.applicationFileFX.contract.GUIApplicationFile;
-import caillou.company.clonemanager.gui.bean.impl.IntegerField;
+import caillou.company.clonemanager.background.log.ErrorMessage;
 import caillou.company.clonemanager.gui.customComponent.common.MainModel;
 import caillou.company.clonemanager.gui.customComponent.statistic.StatisticHelper;
 import caillou.company.clonemanager.gui.customComponent.taskchoice.TaskModel;
@@ -21,6 +22,7 @@ import caillou.company.clonemanager.gui.predicate.AlonePredicate;
 import caillou.company.clonemanager.gui.predicate.GroupPredicate;
 import caillou.company.clonemanager.gui.predicate.PathPredicate;
 import caillou.company.clonemanager.gui.service.task.impl.AbstractFetchTask;
+import caillou.company.clonemanager.gui.service.task.impl.CloneManagerIOExceptionBean;
 import caillou.company.clonemanager.gui.service.task.impl.FetchAllDuplicateHavingACopyTask;
 import caillou.company.clonemanager.gui.service.task.impl.FetchDuplicateHavingCopyFromGroupTask;
 import caillou.company.clonemanager.gui.spring.SpringFxmlLoader;
@@ -32,8 +34,6 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.value.ChangeListener;
@@ -50,7 +50,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
@@ -60,10 +59,10 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
+import org.apache.log4j.Logger;
+import org.controlsfx.control.Notifications;
 import org.controlsfx.control.PopOver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -75,6 +74,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class ResultController implements Initializable {
 
+    private static final Logger log = Logger.getLogger(ResultController.class.getName());
+    
     @FXML
     private TableColumn<GUIApplicationFile, String> columnFile;
 
@@ -83,16 +84,16 @@ public class ResultController implements Initializable {
 
     @FXML
     private TableColumn<GUIApplicationFile, String> md5PrintId;
-    
+
     @FXML
     private TableColumn<GUIApplicationFile, Long> columnSize;
 
     @FXML
     private TableColumn<GUIApplicationFile, String> columnHashPosition;
-    
+
     @FXML
     private TableView<GUIApplicationFile> resultViewId;
-    
+
     @FXML
     private CheckBox hideSingleFileId;
 
@@ -110,10 +111,10 @@ public class ResultController implements Initializable {
 
     @FXML
     private HBox hideSingleFileContainerId;
-    
+
     @FXML
     private VBox deleteDoublonsActionBoxId;
-    
+
     @FXML
     private VBox deleteDoublonsActionFromGroupId;
 
@@ -137,7 +138,7 @@ public class ResultController implements Initializable {
 
     @FXML
     private VBox mainContainerPanelID;
-   
+
     private final ListProperty<GUIApplicationFile> guiApplicationFileList = new SimpleListProperty<>();
 
     private FilteredList<GUIApplicationFile> guiApplicationFileListFiltered;
@@ -149,7 +150,9 @@ public class ResultController implements Initializable {
     private PopOver popOver;
 
     private final GroupPredicate mainPredicate = new GroupPredicate();
-    
+
+    private CloneManagerIOExceptionBean cloneManagerIOExceptionBean;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.guiApplicationFileListFiltered = new FilteredList<>(guiApplicationFileList);
@@ -174,7 +177,7 @@ public class ResultController implements Initializable {
         groupId.getItems().add(Group.GROUPA);
         groupId.getItems().add(Group.GROUPB);
         groupId.setValue(Group.GROUPA);
-        
+
         /**
          * Due to the bug
          * "https://bitbucket.org/controlsfx/controlsfx/issue/185/nullpointerexception-when-using-popover"
@@ -199,15 +202,14 @@ public class ResultController implements Initializable {
         resultViewId.setRowFactory(myRowFactory);
     }
 
-    private void initializeStatistic(){
-        int i=0;
+    private void initializeStatistic() {
+        int i = 0;
         List<Node> children = StatisticHelper.createStaticList();
         for (Node child : children) {
             staticContainer.getChildren().add(child);
         }
     }
-   
-    
+
     private void initializeFilter() {
         if (mainModel.getTaskModel().getCurrentTask().equals(TaskModel.TASK.DETECT_DOUBLONS)) {
             hideSingleFileId.selectedProperty().addListener(new ChangeListener<Boolean>() {
@@ -275,7 +277,7 @@ public class ResultController implements Initializable {
         }
     }
 
-    private void initializePhaseAutomaticResizing() {     
+    private void initializePhaseAutomaticResizing() {
         splittedPanelId.prefHeightProperty().bind(mainContainerPanelID.heightProperty());
         splittedPanelId.prefWidthProperty().bind(mainContainerPanelID.widthProperty());
         resultViewId.prefHeightProperty().bind(splittedPanelId.heightProperty().subtract(2));
@@ -315,6 +317,21 @@ public class ResultController implements Initializable {
                 }
             }
         });
+    }
+
+    public void displayErrors() {
+        if (!this.cloneManagerIOExceptionBean.getReadingErrors().isEmpty()) {
+            StringBuilder stringBuilder = new StringBuilder();
+            for (CloneManagerIOException cloneManagerIOException : this.cloneManagerIOExceptionBean.getReadingErrors()) {
+                stringBuilder.append(cloneManagerIOException.getMessage());
+                stringBuilder.append("\n");
+            }
+
+            Notifications.create()
+                    .title("Errors encountered while scanning the files")
+                    .text(stringBuilder.toString()).hideAfter(Duration.INDEFINITE)
+                    .showError();
+        }
     }
 
     @FXML
@@ -376,7 +393,7 @@ public class ResultController implements Initializable {
         try {
             mimeType = Files.probeContentType(new File(myFileFX.getAbsolutePath()).toPath());
         } catch (IOException ex) {
-            Logger.getLogger(ResultController.class.getName()).log(Level.SEVERE, null, ex);
+            log.error(ErrorMessage.IOEXCEPTION_WHILE_MIMETYPE + myFileFX.getAbsolutePath());
         }
 
         if (mimeType != null && mimeType.startsWith("image/")) {
@@ -388,7 +405,7 @@ public class ResultController implements Initializable {
                 popOver.setContentNode(imageView);
                 popOver.show(mouseEnteredRowEvent.getRow());
             } catch (MalformedURLException ex) {
-                Logger.getLogger(ResultController.class.getName()).log(Level.SEVERE, null, ex);
+                log.error(ErrorMessage.MALFORMEDURLEXCEPTION_WHILE_CREATINGIMAGE + myFileFX.getAbsolutePath());
             }
         }
 
@@ -426,5 +443,12 @@ public class ResultController implements Initializable {
     public void setResultViewId(TableView<GUIApplicationFile> resultViewId) {
         this.resultViewId = resultViewId;
     }
+
+    @Autowired
+    public void setCloneManagerIOExceptionBean(CloneManagerIOExceptionBean cloneManagerIOExceptionBean) {
+        this.cloneManagerIOExceptionBean = cloneManagerIOExceptionBean;
+    }
+
+
 
 }

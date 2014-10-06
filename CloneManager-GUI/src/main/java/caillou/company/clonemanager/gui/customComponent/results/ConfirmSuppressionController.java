@@ -35,54 +35,14 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Scope(value = "prototype")
-public class ConfirmSuppressionController implements Initializable, ArgumentCheckable {
-
-    @FXML
-    private ListView<GUIApplicationFile> filesToDeleteViewId;
-
-    @FXML
-    private VBox listViewContainerId;
-    
-    private boolean suppressionAction = false;
-
-    private Dialog dialog;
-
-    private ObservableList<GUIApplicationFile> guiApplicationFileList;
-
-    private TableView<GUIApplicationFile> tableView;
-    
+public class ConfirmSuppressionController extends AbstractConfirmController {
+        
     private Boolean suppressOnlyOnSelected = null;
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
         
-        initializePhaseAutomaticResizing();
-        
-        filesToDeleteViewId.setCellFactory(new Callback<ListView<GUIApplicationFile>, ListCell<GUIApplicationFile>>() {
-            @Override
-            public ListCell<GUIApplicationFile> call(ListView<GUIApplicationFile> list) {
-                return new MyListViewCellFactory();
-            }
-        }
-        );
-    }
-
-    private void initializePhaseAutomaticResizing() {
-        filesToDeleteViewId.prefHeightProperty().bind(listViewContainerId.heightProperty());
-        filesToDeleteViewId.prefWidthProperty().bind(listViewContainerId.widthProperty());
-    }
-    
-    @Override
-    public void checkArguments() throws CloneManagerArgumentException {
-        if(this.dialog == null || guiApplicationFileList == null || tableView == null || suppressOnlyOnSelected == null){
-            throw new CloneManagerArgumentException();
-        }
-    }
-    
     @FXML
-    private void confirmSuppressionAction(ActionEvent event) throws Exception {       
+    private void confirmAction(ActionEvent event) throws Exception {       
         DeleteFilesTask deleteFilesTask = SpringFxmlLoader.getBean(DeleteFilesTask.class);
-        deleteFilesTask.setFilesToDelete(filesToDeleteViewId.getItems());
+        deleteFilesTask.setFilesToDelete(filesToShowViewId.getItems());
         RemoveFromViewHandler removeFromViewHandler = SpringFxmlLoader.getBean(RemoveFromViewHandler.class);
         removeFromViewHandler.setGUIApplicationFileList(guiApplicationFileList);
         removeFromViewHandler.setTableView(tableView);
@@ -90,51 +50,27 @@ public class ConfirmSuppressionController implements Initializable, ArgumentChec
         removeFromViewHandler.checkArguments();
         deleteFilesTask.setOnSucceeded(removeFromViewHandler);
         new Thread(deleteFilesTask).start();
-        suppressionAction = true;
+        confirmAction = true;
         dialog.hide();
     }
 
     @FXML
-    private void cancelSuppressionAction(ActionEvent event) throws Exception {
-        suppressionAction = false;
+    private void cancelAction(ActionEvent event) throws Exception {
+        confirmAction = false;
         dialog.hide();
     }
 
-    public void setMyFilesToDelete(List<GUIApplicationFile> myFileFXs) {
-        ObservableList<GUIApplicationFile> list = FXCollections.observableArrayList();
-        for (GUIApplicationFile applicationFile : myFileFXs) {
-            list.add(applicationFile);
-        }
-        filesToDeleteViewId.setItems(list);
+    @Override
+    protected void initializeChild() {
     }
-    
-    class MyListViewCellFactory extends ListCell<GUIApplicationFile> {
 
-        @Override
-        public void updateItem(GUIApplicationFile item, boolean empty) {
-            super.updateItem(item, empty);
-            if (item != null) {
-                setText(item.getAbsolutePath());
-            }
+    @Override
+    protected void checkArgumentsChild() throws CloneManagerArgumentException{
+        if(suppressOnlyOnSelected == null){
+            throw new CloneManagerArgumentException();
         }
     }
-
-    public boolean isSuppressionAction() {
-        return suppressionAction;
-    }
-
-    public void setDialog(Dialog dialog) {
-        this.dialog = dialog;
-    }
-
-    public void setGUIApplicationFileList(ObservableList<GUIApplicationFile> guiApplicationFileList) {
-        this.guiApplicationFileList = guiApplicationFileList;
-    }
-
-    public void setTableView(TableView<GUIApplicationFile> tableView) {
-        this.tableView = tableView;
-    }
-
+ 
     public void setSuppressOnlyOnSelected(Boolean suppressOnlyOnSelected) {
         this.suppressOnlyOnSelected = suppressOnlyOnSelected;
     }

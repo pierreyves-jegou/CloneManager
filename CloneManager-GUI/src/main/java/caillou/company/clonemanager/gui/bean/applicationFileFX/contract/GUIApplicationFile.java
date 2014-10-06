@@ -27,4 +27,5 @@ public interface GUIApplicationFile extends ApplicationFile {
     public POSITION getCurrentPostion();
 
     public void setCurrentPostion(POSITION currentPostion);
+    
 }

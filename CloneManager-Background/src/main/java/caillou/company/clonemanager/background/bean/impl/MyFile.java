@@ -53,14 +53,17 @@ public class MyFile extends File implements ApplicationFile{
         return MD5Print;
     }
 
+    @Override
     public void setMD5Print(String mD5Print) {
         MD5Print = mD5Print;
     }
 
+    @Override
     public String getPartialMD5Print() {
         return partialMD5Print;
     }
 
+    @Override
     public void setPartialMD5Print(String partialMD5Print) {
         this.partialMD5Print = partialMD5Print;
     }
@@ -106,5 +109,10 @@ public class MyFile extends File implements ApplicationFile{
 
     public MyFile(String pathname) {
         super(pathname);
+    }
+
+    @Override
+    public File getEnclosingFile() {
+        return this;
     }
 }

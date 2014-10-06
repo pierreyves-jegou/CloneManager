@@ -25,6 +25,13 @@
         <property name="statisticToCompute" ref="statisticToCompute" />        
     </bean>
     
+    <bean id="cloneManagerIOExceptionBean" class="caillou.company.clonemanager.gui.service.task.impl.CloneManagerIOExceptionBean"/>
+    
+    <bean class="caillou.company.clonemanager.gui.service.task.impl.CloneManagerIOExceptionAdvice" factory-method="aspectOf">
+        <property name="cloneManagerIOExceptionBean" ref="cloneManagerIOExceptionBean" />        
+    </bean>
+    
+    
     <!--   <bean id="critereControllerId" class="fileOrganizer.customComponents.criteres.CritereController" >
        
    </bean>

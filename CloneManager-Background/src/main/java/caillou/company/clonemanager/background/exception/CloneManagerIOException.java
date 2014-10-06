@@ -5,7 +5,7 @@
  */
 package caillou.company.clonemanager.background.exception;
 
-import caillou.company.clonemanager.background.bean.applicationFile.contract.ApplicationFile;
+import java.io.File;
 
 /**
  *
@@ -13,19 +13,19 @@ import caillou.company.clonemanager.background.bean.applicationFile.contract.App
  */
 public class CloneManagerIOException extends CloneManagerException{
     
-    private final ApplicationFile applicationFile;
+    private final String path;
            
-    public CloneManagerIOException(String message, ApplicationFile applicationFile){
+    public CloneManagerIOException(String message, String path){
         super(message);
-        this.applicationFile = applicationFile;
+        this.path = path;
     }
 
-    public CloneManagerIOException(String message, String technicalMessageException, ApplicationFile applicationFile){
+    public CloneManagerIOException(String message, String technicalMessageException, String path){
         super(message, technicalMessageException);
-        this.applicationFile = applicationFile;
+        this.path = path;
     }
     
-    public ApplicationFile getApplicationFile() {
-        return applicationFile;
+    public String getPath() {
+        return path;
     }
 }

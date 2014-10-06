@@ -68,7 +68,8 @@ public class TaskChoiceController extends HBox implements Initializable {
 
     @FXML
     protected void onSettingsAction(ActionEvent event) {
-        LoadingMojo loadingMojo = SpringFxmlLoader.load(Navigation.SETTINGS_VIEW);
+        try{
+            LoadingMojo loadingMojo = SpringFxmlLoader.load(Navigation.SETTINGS_VIEW);
         SettingsController settingsController = (SettingsController) loadingMojo.getController();
         String dialogTitle = SpringFxmlLoader.getResourceBundle().getString("link.settings");
         final Dialog dialogSettings = new Dialog(MainApp.getInstance().getStage(), dialogTitle);
@@ -77,6 +78,10 @@ public class TaskChoiceController extends HBox implements Initializable {
         dialogSettings.setClosable(false);
         dialogSettings.setContent(loadingMojo.getParent());
         dialogSettings.show();
+        }catch(Exception e){
+            System.out.println("YEP");
+        }
+        
     }
 
     @Autowired

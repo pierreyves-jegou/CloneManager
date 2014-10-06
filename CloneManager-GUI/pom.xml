@@ -5,13 +5,13 @@
     <parent>
         <groupId>com.mycompany</groupId>
         <artifactId>CloneManager</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.1</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>caillou.company</groupId>
     <artifactId>CloneManager-GUI</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -19,7 +19,7 @@
         <packageTargetDirectoryName>CloneManager</packageTargetDirectoryName>
         <deployTargetDirectoryName>Deployed</deployTargetDirectoryName>
         <org.controlsfx.version>8.0.6</org.controlsfx.version>
-        <com.mycompany.version>1.0-SNAPSHOT</com.mycompany.version>
+        <com.mycompany.version>1.1</com.mycompany.version>
     </properties>
 
     <dependencies>

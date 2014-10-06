@@ -1,9 +1,10 @@
 Goal
-============
+=========================================================
 Two goals : Allow to find duplicate files on computer / find files which haven't been backed up
 
-Installation
-============
+
+Installation (only for CloneManager-X.X_without-JRE.zip )
+=========================================================
 Requirements : At least Java 1.8 (can be downloaded here 'http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html')
 
 - Extract the archive content

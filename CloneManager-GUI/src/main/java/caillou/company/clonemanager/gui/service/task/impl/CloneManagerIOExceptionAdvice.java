@@ -7,7 +7,6 @@ package caillou.company.clonemanager.gui.service.task.impl;
 
 import caillou.company.clonemanager.background.exception.CloneManagerIOException;
 import caillou.company.clonemanager.background.log.ErrorMessage;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import org.aspectj.lang.annotation.After;

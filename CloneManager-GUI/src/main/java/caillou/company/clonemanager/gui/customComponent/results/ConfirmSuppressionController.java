@@ -6,26 +6,14 @@
 package caillou.company.clonemanager.gui.customComponent.results;
 
 import caillou.company.clonemanager.background.exception.CloneManagerArgumentException;
-import caillou.company.clonemanager.background.exception.CloneManagerException;
 import caillou.company.clonemanager.gui.bean.applicationFileFX.contract.GUIApplicationFile;
 import caillou.company.clonemanager.gui.handler.RemoveFromViewHandler;
-import caillou.company.clonemanager.gui.service.task.contract.ArgumentCheckable;
 import caillou.company.clonemanager.gui.service.task.impl.DeleteFilesTask;
 import caillou.company.clonemanager.gui.spring.SpringFxmlLoader;
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableView;
-import javafx.scene.layout.VBox;
-import javafx.util.Callback;
-import org.controlsfx.dialog.Dialog;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -52,6 +40,17 @@ public class ConfirmSuppressionController extends AbstractConfirmController {
         new Thread(deleteFilesTask).start();
         confirmAction = true;
         dialog.hide();
+        if(!deleteFilesTask.getFilesNotDeleted().isEmpty()){
+            StringBuilder stringBuilder = new StringBuilder();
+            for(GUIApplicationFile guiApplicationFile : deleteFilesTask.getFilesNotDeleted()){
+                stringBuilder.append(guiApplicationFile.getAbsolutePath());
+                stringBuilder.append("\n");
+            }
+            Notifications.create()
+                    .title("Errors encountered while deleting the files")
+                    .text(stringBuilder.toString()).hideAfter(Duration.INDEFINITE)
+                    .showError();
+        }
     }
 
     @FXML
